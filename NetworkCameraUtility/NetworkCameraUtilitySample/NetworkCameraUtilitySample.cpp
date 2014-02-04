@@ -23,17 +23,20 @@ int main(int argc, char* argv[])
 {
   try
   {
-    if (argc != 3)
+    if (argc < 3)
     {
-      std::cout << "Usage: sync_client <server> <path>\n";
+      std::cout << "Usage: sync_client <server> <path> [id] [password]\n";
       std::cout << "Example:\n";
-      std::cout << "  sync_client www.boost.org /LICENSE_1_0.txt\n";
+      std::cout << "  sync_client www.boost.org /LICENSE_1_0.txt user password\n";
       return 1;
     }
 
     openrtm_network_camera::utility::HttpClient client;
 
-//    client.setBasicAuthenticationParameter("openrtm", "openrtm-aist");
+    // Basic”FØ‚ª•K—v‚Èê‡
+    if (argc == 5) {
+      client.setBasicAuthenticationParameter(argv[3], argv[4]);
+    }
 
     client.doGet(argv[1], argv[2]);
 
@@ -62,11 +65,17 @@ int main(int argc, char* argv[])
     std::cout << "Contents\n";
     const char* contents = client.getContents();
 
+    if (0 >= client.getContentLength()) {
+      std::cout << "(no contents)\n";
+      return 0;
+    }
+
     std::string type = client.getContentType();
     if (std::string::npos != type.find("text")) {
-      std::cout << contents;
+      std::string str(contents, contents + client.getContentLength());
+      std::cout << str;
     } else if (std::string::npos != type.find("image")) {
-      std::ofstream outfile("test.png", std::ios::out|std::ios::binary|std::ios::trunc);
+      std::ofstream outfile("test.jpg", std::ios::out|std::ios::binary|std::ios::trunc);
       outfile.write(contents, client.getContentLength());
     }
   }

@@ -80,6 +80,7 @@ void HttpClient::doGet(const std::string& host_name, const std::string& path_nam
     request_stream << "GET " << path_name << " HTTP/1.0" << CRLF;
     request_stream << "Host: " << host_name << CRLF;
     request_stream << "Accept: */*" << CRLF;
+    request_stream << "User-Agent: " << "OpenRTM-NetworkCamera-HttpClient" << CRLF;
 
     // Basic認証
     if (0 != user_.size() && 0 != password_.size()) {
@@ -212,19 +213,16 @@ void HttpClient::processContents(boost::asio::ip::tcp::socket* p_socket, boost::
   // コンテンツサイズの確認
   const size_t length = getContentLength();
   if (0 == length) {
-    std::cout << "Content Length is 0.\n";
-    //status_code_ = ERROR_CODE; // コンテンツなしの場合もあるのでエラーではない
-    return;
+    std::cout << "Maybe no Content-Length header.\n";
   }
 
-  // コンテンツ保存領域の確保
-  contents_ = new char [length];
-
-  // バッファに読み込み済みデータの出力
+  // 一時バッファに読み込み済みデータを出力
+  char * buf_pre = NULL;
   size_t pre_readed = p_response->size();
   if (pre_readed > 0) {
+    buf_pre = new char [pre_readed];
     p_response->commit(pre_readed);
-    memcpy(contents_, boost::asio::buffer_cast<const char*>(p_response->data()), pre_readed);
+    memcpy(buf_pre, boost::asio::buffer_cast<const char*>(p_response->data()), pre_readed);
     p_response->consume(pre_readed);
   }
 
@@ -232,19 +230,37 @@ void HttpClient::processContents(boost::asio::ip::tcp::socket* p_socket, boost::
   boost::system::error_code error;
   size_t bytes = boost::asio::read(*p_socket, *p_response, boost::asio::transfer_all(), error);
   if (error != boost::asio::error::eof) {
+    if (NULL != buf_pre) {
+      delete [] buf_pre;
+      buf_pre = NULL;
+    }
+
     status_code_ = ERROR_CODE;
     return;
   }
 
   // メッセージボディ長のチェック
-  if ((pre_readed + bytes) != length) {
+  if (0 == length) {
+    content_length_ = pre_readed + bytes;
+  } else if ((pre_readed + bytes) != length) {
+    if (NULL != buf_pre) {
+      delete [] buf_pre;
+      buf_pre = NULL;
+    }
+
     std::cout << "Content Length maybe invalid.\n";
     status_code_ = ERROR_CODE;
     return;
   }
 
+  // コンテンツ保存領域の確保
+  contents_ = new char [pre_readed + bytes];
+
   // コンテンツの保存
-  if (0 > bytes) {
+  memcpy(contents_, buf_pre, pre_readed);
+  delete [] buf_pre;
+
+  if (0 >= bytes) {
     return;
   }
 
