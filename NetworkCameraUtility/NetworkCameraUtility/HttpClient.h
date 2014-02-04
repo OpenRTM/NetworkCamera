@@ -43,7 +43,7 @@ public:
 	HttpClient(void);
 	~HttpClient(void);
 
-	void doGet(const std::string& host_name, const std::string& path_name);
+	void doGet(const std::string& host_name, const std::string& path_name, const std::string& port);
 
   int getStatusCode() const { return status_code_; }
 

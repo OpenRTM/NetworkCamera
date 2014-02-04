@@ -23,9 +23,9 @@ int main(int argc, char* argv[])
 {
   try
   {
-    if (argc < 3)
+    if (argc < 4)
     {
-      std::cout << "Usage: sync_client <server> <path> [id] [password]\n";
+      std::cout << "Usage: sync_client <server> <port> <path> [id] [password]\n";
       std::cout << "Example:\n";
       std::cout << "  sync_client www.boost.org /LICENSE_1_0.txt user password\n";
       return 1;
@@ -34,11 +34,11 @@ int main(int argc, char* argv[])
     openrtm_network_camera::utility::HttpClient client;
 
     // Basic”FØ‚ª•K—v‚Èê‡
-    if (argc == 5) {
-      client.setBasicAuthenticationParameter(argv[3], argv[4]);
+    if (argc == 6) {
+      client.setBasicAuthenticationParameter(argv[4], argv[5]);
     }
 
-    client.doGet(argv[1], argv[2]);
+    client.doGet(argv[1], argv[3], argv[2]);
 
     std::cout << "Http response status:" << client.getStatusCode() << "\n\n";
     if (0 > client.getStatusCode()) {

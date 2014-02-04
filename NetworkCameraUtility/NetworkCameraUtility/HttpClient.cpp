@@ -53,7 +53,7 @@ HttpClient::~HttpClient(void) {
   }
 }
 
-void HttpClient::doGet(const std::string& host_name, const std::string& path_name) {
+void HttpClient::doGet(const std::string& host_name, const std::string& path_name, const std::string& port) {
   using boost::asio::ip::tcp;
 
   // レスポンス用のメンバー変数の初期化
@@ -65,7 +65,7 @@ void HttpClient::doGet(const std::string& host_name, const std::string& path_nam
 
     // Get a list of endpoints corresponding to the server name.
     tcp::resolver resolver(io_service);
-    tcp::resolver::query query(host_name, "http");
+    tcp::resolver::query query(host_name, port);
     tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
 
     // Try each endpoint until we successfully establish a connection.
@@ -78,7 +78,7 @@ void HttpClient::doGet(const std::string& host_name, const std::string& path_nam
     boost::asio::streambuf request;
     std::ostream request_stream(&request);
     request_stream << "GET " << path_name << " HTTP/1.0" << CRLF;
-    request_stream << "Host: " << host_name << CRLF;
+    request_stream << "Host: " << host_name << ":" << port << CRLF;
     request_stream << "Accept: */*" << CRLF;
     request_stream << "User-Agent: " << "OpenRTM-NetworkCamera-HttpClient" << CRLF;
 
