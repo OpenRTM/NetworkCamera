@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkCameraUtility", "NetworkCameraUtility\NetworkCameraUtility.vcxproj", "{D79FE3A2-1E22-4D6B-978D-624C0ADF46F9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkCameraUtilitySample", "NetworkCameraUtilitySample\NetworkCameraUtilitySample.vcxproj", "{9DED514D-1737-4EAF-AEDC-E0D8BEC660F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D79FE3A2-1E22-4D6B-978D-624C0ADF46F9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D79FE3A2-1E22-4D6B-978D-624C0ADF46F9}.Debug|Win32.Build.0 = Debug|Win32
+		{D79FE3A2-1E22-4D6B-978D-624C0ADF46F9}.Release|Win32.ActiveCfg = Release|Win32
+		{D79FE3A2-1E22-4D6B-978D-624C0ADF46F9}.Release|Win32.Build.0 = Release|Win32
+		{9DED514D-1737-4EAF-AEDC-E0D8BEC660F4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9DED514D-1737-4EAF-AEDC-E0D8BEC660F4}.Debug|Win32.Build.0 = Debug|Win32
+		{9DED514D-1737-4EAF-AEDC-E0D8BEC660F4}.Release|Win32.ActiveCfg = Release|Win32
+		{9DED514D-1737-4EAF-AEDC-E0D8BEC660F4}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
