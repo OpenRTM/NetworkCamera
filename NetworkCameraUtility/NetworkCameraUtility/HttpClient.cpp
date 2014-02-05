@@ -114,10 +114,10 @@ void HttpClient::doGet(const std::string& host_name, const std::string& path_nam
       status_code_ = ERROR_CODE;
       return;
     }
-    if (status_code_ != 200)
+    if ((status_code_ != 200) && (status_code_ != 204))
     {
       std::cout << "Response returned with status code " << status_code_ << "\n";
-      // ステータスコード OK 以外は、ヘッダも解析しない
+      // ステータスコード OKまたはNo Content 以外は、ヘッダも解析しない
       return;
     }
 
@@ -242,6 +242,13 @@ void HttpClient::processContents(boost::asio::ip::tcp::socket* p_socket, boost::
   // メッセージボディ長のチェック
   if (0 == length) {
     content_length_ = pre_readed + bytes;
+
+    // メッセージボディに何もなかった場合
+    if (0 == content_length_) {
+      std::cout << "Content Length is 0.\n";
+      return;
+    }
+
   } else if ((pre_readed + bytes) != length) {
     if (NULL != buf_pre) {
       delete [] buf_pre;
@@ -257,8 +264,11 @@ void HttpClient::processContents(boost::asio::ip::tcp::socket* p_socket, boost::
   contents_ = new char [pre_readed + bytes];
 
   // コンテンツの保存
-  memcpy(contents_, buf_pre, pre_readed);
-  delete [] buf_pre;
+  if (NULL != buf_pre) {
+    memcpy(contents_, buf_pre, pre_readed);
+    delete [] buf_pre;
+    buf_pre = NULL;
+  }
 
   if (0 >= bytes) {
     return;

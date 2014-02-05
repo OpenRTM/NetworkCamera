@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
       std::cout << "error occured\n";
       return 1;
     }
-    if (200 != client.getStatusCode()) {
+    if ((200 != client.getStatusCode()) && (204 != client.getStatusCode())) {
       std::cout << "invalid status code: " << client.getStatusCode() << "\n";
       return 1;
     }
