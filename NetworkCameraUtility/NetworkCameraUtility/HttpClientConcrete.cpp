@@ -217,6 +217,8 @@ void HttpClientConcrete::setContentLength() {
  * @breif コンテンツの処理。
  *
  * レスポンスデータを処理して、コンテンツを取り出す。
+ * streambuf に先行して読み込み済みのデータがあるので、
+ * それも含めてコンテンツとして取得する。
  *
  * @caution
  * コンテンツ長が0の場合でも、実際のデータがあればそちらに従い、
@@ -237,13 +239,14 @@ void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket,
     std::cout << "Maybe no Content-Length header.\n";
   }
 
-  // 一時バッファに読み込み済みデータを出力
-  char * buf_pre = NULL;
+  // バッファに読み込み済みデータを出力
+  std::vector<char> buf_pre(0);
   size_t pre_readed = p_response->size();
   if (pre_readed > 0) {
-    buf_pre = new char [pre_readed];
+    buf_pre.reserve(pre_readed);
     p_response->commit(pre_readed);
-    memcpy(buf_pre, boost::asio::buffer_cast<const char*>(p_response->data()), pre_readed);
+    const char * st = boost::asio::buffer_cast<const char*>(p_response->data());
+    std::copy(st, st + pre_readed, std::back_inserter(buf_pre));
     p_response->consume(pre_readed);
   }
 
@@ -251,18 +254,13 @@ void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket,
   boost::system::error_code error;
   size_t bytes = boost::asio::read(*p_socket, *p_response, boost::asio::transfer_all(), error);
   if (error != boost::asio::error::eof) {
-    if (NULL != buf_pre) {
-      delete [] buf_pre;
-      buf_pre = NULL;
-    }
-
     status_code_ = ERROR_CODE;
     return;
   }
 
   // メッセージボディ長のチェック
   if (0 == length) {
-    content_length_ = pre_readed + bytes;
+    content_length_ = pre_readed + bytes;  // 更新
 
     // メッセージボディに何もなかった場合
     if (0 == content_length_) {
@@ -271,32 +269,25 @@ void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket,
     }
 
   } else if ((pre_readed + bytes) != length) {
-    if (NULL != buf_pre) {
-      delete [] buf_pre;
-      buf_pre = NULL;
-    }
-
     std::cout << "Content Length maybe invalid.\n";
     status_code_ = ERROR_CODE;
     return;
   }
 
-  // コンテンツ保存領域の確保
-  contents_ = new char [pre_readed + bytes];
-
-  // コンテンツの保存
-  if (NULL != buf_pre) {
-    memcpy(contents_, buf_pre, pre_readed);
-    delete [] buf_pre;
-    buf_pre = NULL;
+  // 2つ目のバッファに残りデータを読み込み
+  std::vector<char> buf_second(0);
+  if (0 < bytes) {
+    buf_second.reserve(bytes);
+    p_response->commit(bytes);
+    const char * st = boost::asio::buffer_cast<const char*>(p_response->data());
+    std::copy(st, st + bytes, std::back_inserter(buf_second));
   }
 
-  if (0 >= bytes) {
-    return;
-  }
+  // コンテンツを保存
+  contents_ = new char [pre_readed + bytes];  // 領域の確保
 
-  p_response->commit(bytes);
-  memcpy(contents_ + pre_readed, boost::asio::buffer_cast<const char*>(p_response->data()), bytes);
+  std::copy(buf_pre.begin(), buf_pre.end(),  contents_);
+  std::copy(buf_second.begin(), buf_second.end(), contents_ + buf_pre.size());
 
 }
 
