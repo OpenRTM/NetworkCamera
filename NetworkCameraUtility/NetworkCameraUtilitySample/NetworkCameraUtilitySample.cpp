@@ -14,10 +14,9 @@
 #include "HttpClient.h"
 
 #include <iostream>
-#include <istream>
-#include <ostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 int main(int argc, char* argv[])
 {
@@ -51,10 +50,17 @@ int main(int argc, char* argv[])
     }
 
     std::cout << "Headers\n";
-    std::vector<std::string> headers = client.getHeaders();
+    int num;
+    const char* const* p_headers = client.getHeaders(&num);
 
-    for(std::vector<std::string>::iterator iter = headers.begin(); iter != headers.end(); ++iter) {
-      std::cout << *iter << std::endl;
+    // ‹l‚ß‘Ö‚¦‚ÌƒTƒ“ƒvƒ‹
+    std::vector<std::string> headers(0);
+    for(int i = 0; i < num; ++i) {
+      headers.push_back(std::string(p_headers[i]));
+    }
+
+    for(size_t i = 0; i < headers.size(); ++i) {
+      std::cout << headers[i] << std::endl;
     }
 
     std::cout << "\n";

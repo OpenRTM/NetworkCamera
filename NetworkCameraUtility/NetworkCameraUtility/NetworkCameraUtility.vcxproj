@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HttpClient.h" />
+    <ClInclude Include="HttpClientConcrete.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="string_utility.h" />
     <ClInclude Include="targetver.h" />
@@ -93,6 +94,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="HttpClient.cpp" />
+    <ClCompile Include="HttpClientConcrete.cpp" />
     <ClCompile Include="string_utility.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
