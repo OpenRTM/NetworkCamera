@@ -1,16 +1,12 @@
-//
-// http_client.cpp
-// ~~~~~~~~~~~~~~~
-//
-// Copyright (c) 2003-2013 Christopher M. Kohlhoff (chris at kohlhoff dot com)
-//
-// Distributed under the Boost Software License, Version 1.0. (See accompanying
-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-//
-//
-// Boost.Asio のサンプルを元に記述 http://www.boost.org/doc/libs/1_55_0/doc/html/boost_asio/example/cpp03/http/client/sync_client.cpp
-//
-
+/*!
+ * @file  HttpClientConcrete.cpp
+ * @brief Http client using Boost.Asio
+ *
+ * Distributed under the Boost Software License, Version 1.0. (See accompanying
+ * file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ * 
+ * @date  2014-02-06
+ */
 #include "HttpClientConcrete.h"
 
 #include <iostream>
@@ -32,6 +28,7 @@ namespace {
   const char * CRLF = "\r\n";
   const char * CRLF2 = "\r\n\r\n";
 
+  // ヘッダ名は小文字で処理する
   const std::string ContentTypeHeader = "content-type";
   const std::string ContentLengthHeader = "content-length";
 }
@@ -188,6 +185,18 @@ void HttpClientConcrete::setContentType() {
     }
   }
 }
+
+/*!
+ * @brief コンテンツ長を設定する。
+ *
+ * ヘッダの Content-Length に記載のコンテンツ長を取得する。
+ *
+ * @caution
+ * Content-Length 0またはない場合にかかわらず、コンテンツデータがあれば、
+ * HttpClientConcrete#processContents の処理時に正しいコンテンツ長が設定される。
+ * 
+ * @return コンテンツ長
+ */
 void HttpClientConcrete::setContentLength() {
   content_length_ = 0;
 
@@ -204,6 +213,18 @@ void HttpClientConcrete::setContentLength() {
   }
 }
 
+/*!
+ * @breif コンテンツの処理。
+ *
+ * レスポンスデータを処理して、コンテンツを取り出す。
+ *
+ * @caution
+ * コンテンツ長が0の場合でも、実際のデータがあればそちらに従い、
+ * コンテンツ長を再設定する。
+ *
+ * @param p_socket    socketへのポインタ
+ * @param p_response  レスポンス処理用のstreambuf
+ */
 void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket, boost::asio::streambuf* p_response) {
   if (contents_ != NULL) {
     delete [] contents_;

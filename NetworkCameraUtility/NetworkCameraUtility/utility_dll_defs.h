@@ -1,4 +1,8 @@
-
+/*!
+ * @file  utility_dll_defs.h
+ * @brief dll export declarations
+ * @date  2014-02-06
+ */
 #ifndef UTILITY_DLL_DEFS_H
 #define UTILITY_DLL_DEFS_H
 

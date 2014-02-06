@@ -1,15 +1,8 @@
-//
-// NetworkCameraUtilitySample.cpp
-//
-//
-// sync_client.cpp
-// ~~~~~~~~~~~~~~~
-//
-// Copyright (c) 2003-2013 Christopher M. Kohlhoff (chris at kohlhoff dot com)
-//
-// Distributed under the Boost Software License, Version 1.0. (See accompanying
-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-//
+/*!
+ * @file  NetworkCameraUtilitySample.cpp
+ * @brief sample program to use NetworkCameraUtility dll
+ * @date  2014-02-06
+ */
 
 #include "HttpClient.h"
 
@@ -53,7 +46,7 @@ int main(int argc, char* argv[])
     int num;
     const char* const* p_headers = client.getHeaders(&num);
 
-    // 詰め替えのサンプル
+    // ヘッダ詰め替えのサンプル
     std::vector<std::string> headers(0);
     for(int i = 0; i < num; ++i) {
       headers.push_back(std::string(p_headers[i]));
@@ -76,8 +69,13 @@ int main(int argc, char* argv[])
       return 0;
     }
 
+    // このサンプルでは、コンテンツタイプに応じて処理を変える
+    //   text/*  : 標準出力へ出力
+    //   image/* : 画像ファイルとして保存（サンプルなので、拡張子は固定で扱う）
+    //   その他  : なにもしない
     std::string type = client.getContentType();
     if (std::string::npos != type.find("text")) {
+      // 文字列の終端文字を持っていないので、std::stringを利用して付加する
       std::string str(contents, contents + client.getContentLength());
       std::cout << str;
     } else if (std::string::npos != type.find("image")) {

@@ -1,5 +1,7 @@
-/**
- *
+/*!
+ * @file  HttpClient.cpp
+ * @brief Http client for dll export
+ * @date  2014-02-06
  */
 #include "HttpClient.h"
 
@@ -32,6 +34,17 @@ int HttpClient::getStatusCode() const {
   return p_client_->getStatusCode();
 }
 
+/*!
+ * @brief ヘッダの取得
+ *
+ * ヘッダ情報は、HttpClientConcreteインスタンスが保持しており、
+ * vector<string> の形式となっている。
+ * 外部に公開する場合、STLクラスを使わないので、const char * へのポインタ
+ * として戻り値を生成する。
+ *
+ * @param p_size ヘッダ数
+ * @return ヘッダの配列へのポインタ
+ */
 const char* const* HttpClient::getHeaders(int* p_size) {
   deleteHeaderContainer();
 
@@ -50,7 +63,8 @@ const char* HttpClient::getContents() const {
 }
 
 const char* HttpClient::getContentType() const {
-  return p_client_->getContentType().c_str(); // TODO 空文字列もこれでよいか？NULLポインタのほうがよいか？
+  // 空文字列の場合も空文字列へのポインタを返す
+  return p_client_->getContentType().c_str();
 }
 
 size_t HttpClient::getContentLength() const {

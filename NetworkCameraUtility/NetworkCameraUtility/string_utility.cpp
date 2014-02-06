@@ -1,7 +1,9 @@
-
+/*!
+ * @file  string_utility.cpp
+ * @brief some string utility functions.
+ * @date  2014-02-06
+ */
 #include "string_utility.h"
-
-//#include <ctype.h>
 
 #include <algorithm>
 #include <string>
@@ -35,15 +37,27 @@ std::string trim(const std::string& target, const char* trimCharacters) {
   return result;
 }
 
+/*!
+ * @brief base64エンコーディングに用いる定数定義
+ */
 namespace {
   const std::string base64_padding[] = {"", "==", "="};
 }
-// Base64エンコーディングについて
-// @see http://ja.wikipedia.org/wiki/Base64
-// BoostでのBase64エンコーディング実装方法について
-// @see http://stackoverflow.com/questions/7053538/how-do-i-encode-a-string-to-base64-using-only-boost
-// @see http://d.hatena.ne.jp/amachang/20090325/1237960531
-// @see http://www.boost.org/doc/libs/1_55_0/libs/serialization/doc/dataflow.html
+
+/*!
+ * @brief base64エンコード後の文字列を取得する。
+ *
+ * Base64エンコーディングについて
+ * @see http://ja.wikipedia.org/wiki/Base64
+ *
+ * BoostでのBase64エンコーディング実装方法について
+ * @see http://stackoverflow.com/questions/7053538/how-do-i-encode-a-string-to-base64-using-only-boost
+ * @see http://d.hatena.ne.jp/amachang/20090325/1237960531
+ * @see http://www.boost.org/doc/libs/1_55_0/libs/serialization/doc/dataflow.html
+ *
+ * @param target  処理対象文字列
+ * @return base64エンコード後の文字列
+ */
 std::string base64encode(const std::string& target) {
   using boost::archive::iterators::base64_from_binary;
   using boost::archive::iterators::transform_width;
