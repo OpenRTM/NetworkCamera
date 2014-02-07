@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * @file  HttpClient.h
  * @brief Http client for dll export
  * @date  2014-02-06
@@ -10,14 +10,14 @@
 
 /*!
  * @namespace openrtm_network_camera
- * @brief OpenRTM NetworkCamera�p�R���|�[�l���g
+ * @brief OpenRTM NetworkCamera用コンポーネント
  *
  */
 namespace openrtm_network_camera {
 
 /*!
  * @namespace utility
- * @brief ���ʏ���
+ * @brief 共通処理
  *
  */
 namespace utility {
@@ -26,13 +26,13 @@ class HttpClientConcrete;
 
 /*!
  * @class HttpClient
- * @brief HttpClient �N���X
+ * @brief HttpClient クラス
  * 
- * Http��p���ăA�N�Z�X���邽�߂̃N���X�B
- * ���ۂ̏����́AHttpClientConcrete�N���X�ֈϏ�����B
- * DLL�쐬���ɃG�N�X�|�[�g����N���X������STL���g���Ă���ꍇ�A
- * ��肪���������̂ŁA�O���փG�N�X�|�[�g����N���X�i�{�N���X�j�ł�
- * STL����菜�����B
+ * Httpを用いてアクセスするためのクラス。
+ * 実際の処理は、HttpClientConcreteクラスへ委譲する。
+ * DLL作成時にエクスポートするクラス内部でSTLを使っている場合、
+ * 問題が発生したので、外部へエクスポートするクラス（本クラス）では
+ * STLを取り除いた。
  *
  * @see http://support.microsoft.com/default.aspx?scid=kb;ja-jp;168958
  * @see http://stackoverflow.com/questions/8976617/when-exporting-stl-stdbasic-string-template-from-dll-i-get-a-lnk2005-error
@@ -44,97 +44,97 @@ public:
 	~HttpClient(void);
 
   /*!
-   * @brief GET���N�G�X�g�̎��s
+   * @brief GETリクエストの実行
    *
-   * �w��z�X�g�ɑ΂���GET���N�G�X�g�����s����B�����͓����ōs����B
-   * ���N�G�X�g���ɁAHttpClient#setBasicAuthenticationParameter ���\�b�h�ɂ��F�؏��
-   * ���^�����Ă���ꍇ�́ABasic�F�ؗp�̏��������{����B
-   * Http���X�|���X�R�[�h���A200�A204�ȊO�͕s���ȃ��X�|���X�Ɣ��f���A
-   * �K�v�ȃw�b�_��R���e���c��ݒ肵�Ȃ��B
-   * �܂��A�G���[�������ɂ́A�X�e�[�^�X�R�[�h��-1��ݒ肷��B
+   * 指定ホストに対してGETリクエストを実行する。処理は同期で行われる。
+   * リクエスト時に、HttpClient#setBasicAuthenticationParameter メソッドにより認証情報
+   * が与えられている場合は、Basic認証用の処理も実施する。
+   * Httpレスポンスコードが、200、204以外は不正なレスポンスと判断し、
+   * 必要なヘッダやコンテンツを設定しない。
+   * また、エラー発生時には、ステータスコードに-1を設定する。
    *
-   * @param p_host_name  �z�X�g���iIP�A�h���X��OK�j
-   * @param p_path_name  �ΏۂƂȂ��΃p�X��
-   * @param p_port       �|�[�g�ԍ�
+   * @param p_host_name  ホスト名（IPアドレスもOK）
+   * @param p_path_name  対象となる絶対パス名
+   * @param p_port       ポート番号
    */
 	void doGet(const char* p_host_name, const char* p_path_name, const char* p_port);
 
   /*!
-   * @brief http���X�|���X�̃X�e�[�^�X�R�[�h���擾����B
+   * @brief httpレスポンスのステータスコードを取得する。
    *
-   * http���N�G�X�g�ɑ΂���X�e�[�^�X�R�[�h��Ԃ��B
+   * httpリクエストに対するステータスコードを返す。
    *
-   * @return �X�e�[�^�X�R�[�h
-   *         -1:�G���[����
+   * @return ステータスコード
+   *         -1:エラー発生
    */
   int getStatusCode() const;
 
   /*!
-   * @brief http���X�|���X�̃w�b�_���擾����B
+   * @brief httpレスポンスのヘッダを取得する。
    *
-   * http���N�G�X�g�ɑ΂���w�b�_�̔z����擾����B
-   * �e�w�b�_�́@�w�b�_���F�p�����[�^�@�̌`���̕����񂪂��̂܂܊i�[����Ă���B
+   * httpリクエストに対するヘッダの配列を取得する。
+   * 各ヘッダは　ヘッダ名：パラメータ　の形式の文字列がそのまま格納されている。
    *
-   * @param p_size �w�b�_��
-   * @return �w�b�_�̔z��ւ̃|�C���^
-   * @caution �߂�l�͌Ăяo�����ŊJ�����Ȃ�
+   * @param p_size ヘッダ数
+   * @return ヘッダの配列へのポインタ
+   * @caution 戻り値は呼び出し側で開放しない
    */
   const char* const* getHeaders(int* p_size);
 
   /*!
-   * @brief http���X�|���X�̃R���e���c���擾����B
+   * @brief httpレスポンスのコンテンツを取得する。
    *
-   * http���N�G�X�g�ɑ΂���R���e���c���擾����B
-   * �X�e�[�^�X�R�[�h��204�iNo Contents�j�̏ꍇ��A200�iOK�j�̏ꍇ�ł��A
-   * �R���e���c���܂܂�Ă��Ȃ��ꍇ������B
-   * �R���e���c�̓e�L�X�g�̏ꍇ���o�C�i���f�[�^�̏ꍇ������̂ŁA
-   * �擾�����f�[�^�́AgetContentType �� getContentLength �ɉ����ēK�؂�
-   * �������s�����ƁB
+   * httpリクエストに対するコンテンツを取得する。
+   * ステータスコードが204（No Contents）の場合や、200（OK）の場合でも、
+   * コンテンツが含まれていない場合がある。
+   * コンテンツはテキストの場合もバイナリデータの場合もあるので、
+   * 取得したデータは、getContentType と getContentLength に応じて適切に
+   * 処理を行うこと。
    *
-   * @return �R���e���c�f�[�^�ւ̃|�C���^
-   * @caution �߂�l�͌Ăяo�����ŊJ�����Ȃ�
+   * @return コンテンツデータへのポインタ
+   * @caution 戻り値は呼び出し側で開放しない
    */
   const char* getContents() const;
 
   /*!
-   * @brief http���X�|���X�̃R���e���c�^�C�v���擾����B
+   * @brief httpレスポンスのコンテンツタイプを取得する。
    *
-   * http���N�G�X�g�ɑ΂���R���e���c�^�C�v���擾����B
+   * httpリクエストに対するコンテンツタイプを取得する。
    *
-   * @return �R���e���c�^�C�v������ւ̃|�C���^�A������\0
-   * @caution �߂�l�͌Ăяo�����ŊJ�����Ȃ�
+   * @return コンテンツタイプ文字列へのポインタ、末尾は\0
+   * @caution 戻り値は呼び出し側で開放しない
    */
   const char* getContentType() const;
 
   /*!
-   * @brief http���X�|���X�̃R���e���c�����擾����B
+   * @brief httpレスポンスのコンテンツ長を取得する。
    *
-   * http���N�G�X�g�ɑ΂���R���e���c�����擾����B
+   * httpリクエストに対するコンテンツ長を取得する。
    *
-   * @return �R���e���c���A�f�[�^���Ȃ��ꍇ��0
+   * @return コンテンツ長、データがない場合は0
    */
   size_t getContentLength() const;
 
   /*!
-   * @brief http���N�G�X�g���̔F�؏���ݒ肷��B
+   * @brief httpリクエスト時の認証情報を設定する。
    *
-   * http���N�G�X�g����Basic�F�ؗp�̔F�؏���ݒ肷��B
-   * �w�肳�ꂽ�ꍇ�́A��ɔF�؏���t�����ă��N�G�X�g���s���B
+   * httpリクエスト時のBasic認証用の認証情報を設定する。
+   * 指定された場合は、常に認証情報を付加してリクエストを行う。
    *
-   * @param p_user      ���[�U�[��
-   * @param p_password  �p�X���[�h
+   * @param p_user      ユーザー名
+   * @param p_password  パスワード
    */
   void setBasicAuthenticationParameter(const char* p_user, const char* p_password);
 
 protected:
 private:
   /*!
-   * @brief �w�b�_�i�[�p�R���e�i�̍폜
+   * @brief ヘッダ格納用コンテナの削除
    */
   void deleteHeaderContainer();
 
-  HttpClientConcrete* p_client_;     //!< ���ۂ�http�������s���N���X�̃C���X�^���X
-  const char** p_header_container_;  //!< �w�b�_�i�[�p�R���e�i
+  HttpClientConcrete* p_client_;     //!< 実際のhttp処理を行うクラスのインスタンス
+  const char** p_header_container_;  //!< ヘッダ格納用コンテナ
 
 
   HttpClient(const HttpClient&);

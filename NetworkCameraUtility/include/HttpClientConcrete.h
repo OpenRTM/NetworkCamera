@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * @file  HttpClientConcrete.h
  * @brief Http client using Boost.Asio
  *
@@ -18,26 +18,26 @@
 
 /*!
  * @namespace openrtm_network_camera
- * @brief OpenRTM NetworkCamera—pƒRƒ“ƒ|[ƒlƒ“ƒg
+ * @brief OpenRTM NetworkCameraç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
  *
  */
 namespace openrtm_network_camera {
 
 /*!
  * @namespace utility
- * @brief ‹¤’Êˆ—
+ * @brief å…±é€šå‡¦ç†
  *
  */
 namespace utility {
 
 /*!
  * @class HttpClientConcrete
- * @brief Boost.Asio ‚ğ—p‚¢‚½ HttpClient ƒNƒ‰ƒX
+ * @brief Boost.Asio ã‚’ç”¨ã„ãŸ HttpClient ã‚¯ãƒ©ã‚¹
  * 
- * Http‚ğ—p‚¢‚ÄƒAƒNƒZƒX‚·‚é‚½‚ß‚ÌƒNƒ‰ƒXB
- * ˆ—‚ÍABoost.Asio ‚ğŒ³‚ÉÀ‘•‚·‚éB
+ * Httpã‚’ç”¨ã„ã¦ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã€‚
+ * å‡¦ç†ã¯ã€Boost.Asio ã‚’å…ƒã«å®Ÿè£…ã™ã‚‹ã€‚
  *
- * Boost.Asio ‚ÌƒTƒ“ƒvƒ‹‚ğŒ³‚É‹Lq
+ * Boost.Asio ã®ã‚µãƒ³ãƒ—ãƒ«ã‚’å…ƒã«è¨˜è¿°
  * @see http://www.boost.org/doc/libs/1_55_0/doc/html/boost_asio/example/cpp03/http/client/sync_client.cpp
  */
 class HttpClientConcrete
@@ -47,145 +47,145 @@ public:
 	~HttpClientConcrete(void);
 
   /*!
-   * @brief GETƒŠƒNƒGƒXƒg‚ÌÀs
+   * @brief GETãƒªã‚¯ã‚¨ã‚¹ãƒˆã®å®Ÿè¡Œ
    *
-   * w’èƒzƒXƒg‚É‘Î‚µ‚ÄGETƒŠƒNƒGƒXƒg‚ğÀs‚·‚éBˆ—‚Í“¯Šú‚Ås‚í‚ê‚éB
-   * ƒŠƒNƒGƒXƒg‚ÉAHttpClientConcrete#setBasicAuthenticationParameter ƒƒ\ƒbƒh‚É‚æ‚è”FØî•ñ
-   * ‚ª—^‚¦‚ç‚ê‚Ä‚¢‚éê‡‚ÍABasic”FØ—p‚Ìˆ—‚àÀ{‚·‚éB
-   * HttpƒŒƒXƒ|ƒ“ƒXƒR[ƒh‚ªA200A204ˆÈŠO‚Í•s³‚ÈƒŒƒXƒ|ƒ“ƒX‚Æ”»’f‚µA
-   * •K—v‚Èƒwƒbƒ_‚âƒRƒ“ƒeƒ“ƒc‚ğİ’è‚µ‚È‚¢B
-   * ‚Ü‚½AƒGƒ‰[”­¶‚É‚ÍAƒXƒe[ƒ^ƒXƒR[ƒh‚É-1‚ğİ’è‚·‚éB
+   * æŒ‡å®šãƒ›ã‚¹ãƒˆã«å¯¾ã—ã¦GETãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’å®Ÿè¡Œã™ã‚‹ã€‚å‡¦ç†ã¯åŒæœŸã§è¡Œã‚ã‚Œã‚‹ã€‚
+   * ãƒªã‚¯ã‚¨ã‚¹ãƒˆæ™‚ã«ã€HttpClientConcrete#setBasicAuthenticationParameter ãƒ¡ã‚½ãƒƒãƒ‰ã«ã‚ˆã‚Šèªè¨¼æƒ…å ±
+   * ãŒä¸ãˆã‚‰ã‚Œã¦ã„ã‚‹å ´åˆã¯ã€Basicèªè¨¼ç”¨ã®å‡¦ç†ã‚‚å®Ÿæ–½ã™ã‚‹ã€‚
+   * Httpãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚³ãƒ¼ãƒ‰ãŒã€200ã€204ä»¥å¤–ã¯ä¸æ­£ãªãƒ¬ã‚¹ãƒãƒ³ã‚¹ã¨åˆ¤æ–­ã—ã€
+   * å¿…è¦ãªãƒ˜ãƒƒãƒ€ã‚„ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’è¨­å®šã—ãªã„ã€‚
+   * ã¾ãŸã€ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿæ™‚ã«ã¯ã€ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã«-1ã‚’è¨­å®šã™ã‚‹ã€‚
    *
-   * @param host_name  ƒzƒXƒg–¼iIPƒAƒhƒŒƒX‚àOKj
-   * @param path_name  ‘ÎÛ‚Æ‚È‚éâ‘ÎƒpƒX–¼
-   * @param port       ƒ|[ƒg”Ô†
+   * @param host_name  ãƒ›ã‚¹ãƒˆåï¼ˆIPã‚¢ãƒ‰ãƒ¬ã‚¹ã‚‚OKï¼‰
+   * @param path_name  å¯¾è±¡ã¨ãªã‚‹çµ¶å¯¾ãƒ‘ã‚¹å
+   * @param port       ãƒãƒ¼ãƒˆç•ªå·
    */
 	void doGet(const std::string& host_name, const std::string& path_name, const std::string& port);
 
   /*!
-   * @brief httpƒŒƒXƒ|ƒ“ƒX‚ÌƒXƒe[ƒ^ƒXƒR[ƒh‚ğæ“¾‚·‚éB
+   * @brief httpãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹ã€‚
    *
-   * httpƒŠƒNƒGƒXƒg‚É‘Î‚·‚éƒXƒe[ƒ^ƒXƒR[ƒh‚ğ•Ô‚·B
+   * httpãƒªã‚¯ã‚¨ã‚¹ãƒˆã«å¯¾ã™ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¿”ã™ã€‚
    *
-   * @return ƒXƒe[ƒ^ƒXƒR[ƒh
-   *         -1:ƒGƒ‰[”­¶
+   * @return ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰
+   *         -1:ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿ
    */
   int getStatusCode() const { return status_code_; }
 
   /*!
-   * @brief httpƒŒƒXƒ|ƒ“ƒX‚Ìƒwƒbƒ_‚ğæ“¾‚·‚éB
+   * @brief httpãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®ãƒ˜ãƒƒãƒ€ã‚’å–å¾—ã™ã‚‹ã€‚
    *
-   * httpƒŠƒNƒGƒXƒg‚É‘Î‚·‚éƒwƒbƒ_‚Ì”z—ñ‚ğæ“¾‚·‚éB
-   * Šeƒwƒbƒ_‚Í@ƒwƒbƒ_–¼Fƒpƒ‰ƒ[ƒ^@‚ÌŒ`®‚Ì•¶š—ñ‚ª‚»‚Ì‚Ü‚ÜŠi”[‚³‚ê‚Ä‚¢‚éB
+   * httpãƒªã‚¯ã‚¨ã‚¹ãƒˆã«å¯¾ã™ã‚‹ãƒ˜ãƒƒãƒ€ã®é…åˆ—ã‚’å–å¾—ã™ã‚‹ã€‚
+   * å„ãƒ˜ãƒƒãƒ€ã¯ã€€ãƒ˜ãƒƒãƒ€åï¼šãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã€€ã®å½¢å¼ã®æ–‡å­—åˆ—ãŒãã®ã¾ã¾æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ã€‚
    *
-   * @return ƒwƒbƒ_
+   * @return ãƒ˜ãƒƒãƒ€
    */
   const std::vector<std::string>& getHeaders() const { return headers_; }
 
   /*!
-   * @brief httpƒŒƒXƒ|ƒ“ƒX‚ÌƒRƒ“ƒeƒ“ƒc‚ğæ“¾‚·‚éB
+   * @brief httpãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’å–å¾—ã™ã‚‹ã€‚
    *
-   * httpƒŠƒNƒGƒXƒg‚É‘Î‚·‚éƒRƒ“ƒeƒ“ƒc‚ğæ“¾‚·‚éB
-   * ƒXƒe[ƒ^ƒXƒR[ƒh‚ª204iNo Contentsj‚Ìê‡‚âA200iOKj‚Ìê‡‚Å‚àA
-   * ƒRƒ“ƒeƒ“ƒc‚ªŠÜ‚Ü‚ê‚Ä‚¢‚È‚¢ê‡‚ª‚ ‚éB
-   * ƒRƒ“ƒeƒ“ƒc‚ÍƒeƒLƒXƒg‚Ìê‡‚àƒoƒCƒiƒŠƒf[ƒ^‚Ìê‡‚à‚ ‚é‚Ì‚ÅA
-   * æ“¾‚µ‚½ƒf[ƒ^‚ÍAgetContentType ‚Æ getContentLength ‚É‰‚¶‚Ä“KØ‚É
-   * ˆ—‚ğs‚¤‚±‚ÆB
+   * httpãƒªã‚¯ã‚¨ã‚¹ãƒˆã«å¯¾ã™ã‚‹ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’å–å¾—ã™ã‚‹ã€‚
+   * ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ãŒ204ï¼ˆNo Contentsï¼‰ã®å ´åˆã‚„ã€200ï¼ˆOKï¼‰ã®å ´åˆã§ã‚‚ã€
+   * ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ãŒå«ã¾ã‚Œã¦ã„ãªã„å ´åˆãŒã‚ã‚‹ã€‚
+   * ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã¯ãƒ†ã‚­ã‚¹ãƒˆã®å ´åˆã‚‚ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã®å ´åˆã‚‚ã‚ã‚‹ã®ã§ã€
+   * å–å¾—ã—ãŸãƒ‡ãƒ¼ã‚¿ã¯ã€getContentType ã¨ getContentLength ã«å¿œã˜ã¦é©åˆ‡ã«
+   * å‡¦ç†ã‚’è¡Œã†ã“ã¨ã€‚
    *
-   * @return ƒRƒ“ƒeƒ“ƒcƒf[ƒ^‚Ö‚Ìƒ|ƒCƒ“ƒ^
-   * @caution –ß‚è’l‚ÍŒÄ‚Ño‚µ‘¤‚ÅŠJ•ú‚µ‚È‚¢
+   * @return ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ãƒ‡ãƒ¼ã‚¿ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+   * @caution æˆ»ã‚Šå€¤ã¯å‘¼ã³å‡ºã—å´ã§é–‹æ”¾ã—ãªã„
    */
   const char* getContents() const { return contents_; }
 
   /*!
-   * @brief httpƒŒƒXƒ|ƒ“ƒX‚ÌƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv‚ğæ“¾‚·‚éB
+   * @brief httpãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ã‚’å–å¾—ã™ã‚‹ã€‚
    *
-   * httpƒŠƒNƒGƒXƒg‚É‘Î‚·‚éƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv‚ğæ“¾‚·‚éB
+   * httpãƒªã‚¯ã‚¨ã‚¹ãƒˆã«å¯¾ã™ã‚‹ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ã‚’å–å¾—ã™ã‚‹ã€‚
    *
-   * @return ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv
+   * @return ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—
    */
   const std::string& getContentType() const { return content_type_; }
 
   /*!
-   * @brief httpƒŒƒXƒ|ƒ“ƒX‚ÌƒRƒ“ƒeƒ“ƒc’·‚ğæ“¾‚·‚éB
+   * @brief httpãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ã‚’å–å¾—ã™ã‚‹ã€‚
    *
-   * httpƒŠƒNƒGƒXƒg‚É‘Î‚·‚éƒRƒ“ƒeƒ“ƒc’·‚ğæ“¾‚·‚éB
+   * httpãƒªã‚¯ã‚¨ã‚¹ãƒˆã«å¯¾ã™ã‚‹ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ã‚’å–å¾—ã™ã‚‹ã€‚
    *
-   * @return ƒRƒ“ƒeƒ“ƒc’·Aƒf[ƒ^‚ª‚È‚¢ê‡‚Í0
+   * @return ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ã€ãƒ‡ãƒ¼ã‚¿ãŒãªã„å ´åˆã¯0
    */
   size_t getContentLength() const { return content_length_; }
 
   /*!
-   * @brief httpƒŠƒNƒGƒXƒg‚Ì”FØî•ñ‚ğİ’è‚·‚éB
+   * @brief httpãƒªã‚¯ã‚¨ã‚¹ãƒˆæ™‚ã®èªè¨¼æƒ…å ±ã‚’è¨­å®šã™ã‚‹ã€‚
    *
-   * httpƒŠƒNƒGƒXƒg‚ÌBasic”FØ—p‚Ì”FØî•ñ‚ğİ’è‚·‚éB
-   * w’è‚³‚ê‚½ê‡‚ÍAí‚É”FØî•ñ‚ğ•t‰Á‚µ‚ÄƒŠƒNƒGƒXƒg‚ğs‚¤B
+   * httpãƒªã‚¯ã‚¨ã‚¹ãƒˆæ™‚ã®Basicèªè¨¼ç”¨ã®èªè¨¼æƒ…å ±ã‚’è¨­å®šã™ã‚‹ã€‚
+   * æŒ‡å®šã•ã‚ŒãŸå ´åˆã¯ã€å¸¸ã«èªè¨¼æƒ…å ±ã‚’ä»˜åŠ ã—ã¦ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
    *
-   * @param p_user      ƒ†[ƒU[–¼
-   * @param p_password  ƒpƒXƒ[ƒh
+   * @param p_user      ãƒ¦ãƒ¼ã‚¶ãƒ¼å
+   * @param p_password  ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
    */
   void setBasicAuthenticationParameter(const std::string& user, const std::string& password);
 
 protected:
 private:
   /*!
-   * @brief httpƒŒƒXƒ|ƒ“ƒX‚ÉŠÖ˜A‚·‚éƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
+   * @brief httpãƒ¬ã‚¹ãƒãƒ³ã‚¹ã«é–¢é€£ã™ã‚‹ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°ã®åˆæœŸåŒ–
    */
   void response_member_init();
 
   /*!
-   * @brief ƒwƒbƒ_‚Ìˆ—
+   * @brief ãƒ˜ãƒƒãƒ€ã®å‡¦ç†
    *
-   * ƒŒƒXƒ|ƒ“ƒXƒf[ƒ^‚ğˆ—‚µ‚ÄAƒwƒbƒ_‚ğæ‚èo‚·B
+   * ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã—ã¦ã€ãƒ˜ãƒƒãƒ€ã‚’å–ã‚Šå‡ºã™ã€‚
    *
-   * @param p_socket    socket‚Ö‚Ìƒ|ƒCƒ“ƒ^
-   * @param p_response  ƒŒƒXƒ|ƒ“ƒXˆ——p‚Ìstreambuf
+   * @param p_socket    socketã¸ã®ãƒã‚¤ãƒ³ã‚¿
+   * @param p_response  ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ç”¨ã®streambuf
    */
   void processHeaders(boost::asio::ip::tcp::socket* p_socket, boost::asio::streambuf* p_response);
 
   /*!
-   * @breif ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv‚ğİ’è‚·‚éB
+   * @breif ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ã‚’è¨­å®šã™ã‚‹ã€‚
    */
   void setContentType();
 
   /*!
-   * @breif ƒRƒ“ƒeƒ“ƒc’·‚ğİ’è‚·‚éB
+   * @breif ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ã‚’è¨­å®šã™ã‚‹ã€‚
    */
   void setContentLength();
 
   /*!
-   * @breif ƒRƒ“ƒeƒ“ƒc‚Ìˆ—B
+   * @breif ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã®å‡¦ç†ã€‚
    *
-   * ƒŒƒXƒ|ƒ“ƒXƒf[ƒ^‚ğˆ—‚µ‚ÄAƒRƒ“ƒeƒ“ƒc‚ğæ‚èo‚·B
+   * ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã—ã¦ã€ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’å–ã‚Šå‡ºã™ã€‚
    *
-   * @param p_socket    socket‚Ö‚Ìƒ|ƒCƒ“ƒ^
-   * @param p_response  ƒŒƒXƒ|ƒ“ƒXˆ——p‚Ìstreambuf
+   * @param p_socket    socketã¸ã®ãƒã‚¤ãƒ³ã‚¿
+   * @param p_response  ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ç”¨ã®streambuf
    */
   void processContents(boost::asio::ip::tcp::socket* p_socket, boost::asio::streambuf* p_response);
 
   /*!
-   * @breif ƒwƒbƒ_’l‚Ìæ“¾B
+   * @breif ãƒ˜ãƒƒãƒ€å€¤ã®å–å¾—ã€‚
    *
-   * ƒwƒbƒ_•¶š—ñ‚ğ‰ğÍ‚µA‚»‚Ì’l‚ğæ‚èo‚·B
+   * ãƒ˜ãƒƒãƒ€æ–‡å­—åˆ—ã‚’è§£æã—ã€ãã®å€¤ã‚’å–ã‚Šå‡ºã™ã€‚
    *
-   * @param target ƒwƒbƒ_•¶š—ñ
-   * @return ƒwƒbƒ_’liƒRƒƒ“ˆÈ~‚Ì’lj
+   * @param target ãƒ˜ãƒƒãƒ€æ–‡å­—åˆ—
+   * @return ãƒ˜ãƒƒãƒ€å€¤ï¼ˆã‚³ãƒ­ãƒ³ä»¥é™ã®å€¤ï¼‰
    */
   std::string getHeaderValue(const std::string& target);
 
 
-  const static int ERROR_CODE = -1; //!< ƒGƒ‰[”­¶‚ÌƒXƒe[ƒ^ƒXƒR[ƒh
+  const static int ERROR_CODE = -1; //!< ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿæ™‚ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰
 
-  // ƒŠƒNƒGƒXƒg—p•Ï”
-  std::string user_;      //!< ƒ†[ƒU[–¼
-  std::string password_;  //!< ƒpƒXƒ[ƒh
+  // ãƒªã‚¯ã‚¨ã‚¹ãƒˆç”¨å¤‰æ•°
+  std::string user_;      //!< ãƒ¦ãƒ¼ã‚¶ãƒ¼å
+  std::string password_;  //!< ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
 
-  // ƒŒƒXƒ|ƒ“ƒX—p•Ï”
-	int status_code_;                   //!< HTTP–â‚¢‡‚í‚¹‚Ì–ß‚è’lAƒGƒ‰[”­¶‚Í-1‚Æ‚·‚é
-	std::vector<std::string> headers_;  //!< ƒwƒbƒ_
-  std::string content_type_;          //!< ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv
-  size_t content_length_;             //!< ƒRƒ“ƒeƒ“ƒc’·
-  char* contents_;                    //!< ƒRƒ“ƒeƒ“ƒc
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ç”¨å¤‰æ•°
+	int status_code_;                   //!< HTTPå•ã„åˆã‚ã›ã®æˆ»ã‚Šå€¤ã€ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿæ™‚ã¯-1ã¨ã™ã‚‹
+	std::vector<std::string> headers_;  //!< ãƒ˜ãƒƒãƒ€
+  std::string content_type_;          //!< ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—
+  size_t content_length_;             //!< ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·
+  char* contents_;                    //!< ã‚³ãƒ³ãƒ†ãƒ³ãƒ„
 
 
 	HttpClientConcrete(const HttpClientConcrete&);

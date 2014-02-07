@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * @file  string_utility.cpp
  * @brief some string utility functions.
  * @date  2014-02-06
@@ -25,11 +25,11 @@ std::string convertToLower(const std::string& target) {
 std::string trim(const std::string& target, const char* trimCharacters) {
   std::string result("");
 
-  // ¶‘¤‚Ì‹ó”’ˆÈŠO‚Ì•¶šˆÊ’u
+  // å·¦å´ã®ç©ºç™½ä»¥å¤–ã®æ–‡å­—ä½ç½®
   std::string::size_type left = target.find_first_not_of(trimCharacters);
 
   if (std::string::npos != left) {
-    // ‰E‘¤‚Ì‹ó”’ˆÈŠO‚Ì•¶šˆÊ’u
+    // å³å´ã®ç©ºç™½ä»¥å¤–ã®æ–‡å­—ä½ç½®
     std::string::size_type right = target.find_last_not_of(trimCharacters);
 
     result = target.substr(left, right - left + 1);
@@ -38,25 +38,25 @@ std::string trim(const std::string& target, const char* trimCharacters) {
 }
 
 /*!
- * @brief base64ƒGƒ“ƒR[ƒfƒBƒ“ƒO‚É—p‚¢‚é’è”’è‹`
+ * @brief base64ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã«ç”¨ã„ã‚‹å®šæ•°å®šç¾©
  */
 namespace {
   const std::string base64_padding[] = {"", "==", "="};
 }
 
 /*!
- * @brief base64ƒGƒ“ƒR[ƒhŒã‚Ì•¶š—ñ‚ğæ“¾‚·‚éB
+ * @brief base64ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰å¾Œã®æ–‡å­—åˆ—ã‚’å–å¾—ã™ã‚‹ã€‚
  *
- * Base64ƒGƒ“ƒR[ƒfƒBƒ“ƒO‚É‚Â‚¢‚Ä
+ * Base64ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã«ã¤ã„ã¦
  * @see http://ja.wikipedia.org/wiki/Base64
  *
- * Boost‚Å‚ÌBase64ƒGƒ“ƒR[ƒfƒBƒ“ƒOÀ‘••û–@‚É‚Â‚¢‚Ä
+ * Boostã§ã®Base64ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°å®Ÿè£…æ–¹æ³•ã«ã¤ã„ã¦
  * @see http://stackoverflow.com/questions/7053538/how-do-i-encode-a-string-to-base64-using-only-boost
  * @see http://d.hatena.ne.jp/amachang/20090325/1237960531
  * @see http://www.boost.org/doc/libs/1_55_0/libs/serialization/doc/dataflow.html
  *
- * @param target  ˆ—‘ÎÛ•¶š—ñ
- * @return base64ƒGƒ“ƒR[ƒhŒã‚Ì•¶š—ñ
+ * @param target  å‡¦ç†å¯¾è±¡æ–‡å­—åˆ—
+ * @return base64ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰å¾Œã®æ–‡å­—åˆ—
  */
 std::string base64encode(const std::string& target) {
   using boost::archive::iterators::base64_from_binary;
@@ -71,14 +71,14 @@ std::string base64encode(const std::string& target) {
     std::ostream_iterator<char>(ss)
     );
 
-  // Base64ƒR[ƒfƒBƒ“ƒO‚É‚ ‚í‚¹‚Ä‚S•¶š’PˆÊ‚É‚È‚é‚æ‚¤‚ÉƒpƒfƒBƒ“ƒO‚ğs‚¤
-  // ƒpƒfƒBƒ“ƒO•¶š”‚ÌŒˆ‚ß•û‚Í‰º‹L‚Ì‚Æ‚¨‚èl‚¦‚ê‚Î‚æ‚¢
+  // Base64ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã«ã‚ã‚ã›ã¦ï¼”æ–‡å­—å˜ä½ã«ãªã‚‹ã‚ˆã†ã«ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°ã‚’è¡Œã†
+  // ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°æ–‡å­—æ•°ã®æ±ºã‚æ–¹ã¯ä¸‹è¨˜ã®ã¨ãŠã‚Šè€ƒãˆã‚Œã°ã‚ˆã„
   //
-  // ‘ÎÛ•¶š—ñ‚Ì•¶š”‚ğn‚Æ‚·‚é‚Æ
-  //   8n/6 = 4n/3    : 6bit’PˆÊ‚É•ªŠ„‚µ‚½Û‚Ì•¶š”i—vØ‚èã‚°j
-  //   (4n/3)/4 = n/3 : 4•¶š’PˆÊ‚É‚Ü‚Æ‚ß‚½ƒOƒ‹[ƒv‚Ì”i—vØ‚èã‚°j
-  //   4*1/3 = 1.33.. : ƒOƒ‹[ƒv”‚Ì—]‚è‚ª‚P‚Ìê‡‚Ì•¶š”i—vØ‚èã‚°A‘¦‚¿‚Q•¶šj
-  //   4*2/3 = 2.66.. : ƒOƒ‹[ƒv”‚Ì—]‚è‚ª‚Q‚Ìê‡‚Ì•¶š”i—vØ‚èã‚°A‘¦‚¿‚P•¶šj
+  // å¯¾è±¡æ–‡å­—åˆ—ã®æ–‡å­—æ•°ã‚’nã¨ã™ã‚‹ã¨
+  //   8n/6 = 4n/3    : 6bitå˜ä½ã«åˆ†å‰²ã—ãŸéš›ã®æ–‡å­—æ•°ï¼ˆè¦åˆ‡ã‚Šä¸Šã’ï¼‰
+  //   (4n/3)/4 = n/3 : 4æ–‡å­—å˜ä½ã«ã¾ã¨ã‚ãŸã‚°ãƒ«ãƒ¼ãƒ—ã®æ•°ï¼ˆè¦åˆ‡ã‚Šä¸Šã’ï¼‰
+  //   4*1/3 = 1.33.. : ã‚°ãƒ«ãƒ¼ãƒ—æ•°ã®ä½™ã‚ŠãŒï¼‘ã®å ´åˆã®æ–‡å­—æ•°ï¼ˆè¦åˆ‡ã‚Šä¸Šã’ã€å³ã¡ï¼’æ–‡å­—ï¼‰
+  //   4*2/3 = 2.66.. : ã‚°ãƒ«ãƒ¼ãƒ—æ•°ã®ä½™ã‚ŠãŒï¼’ã®å ´åˆã®æ–‡å­—æ•°ï¼ˆè¦åˆ‡ã‚Šä¸Šã’ã€å³ã¡ï¼‘æ–‡å­—ï¼‰
   ss << base64_padding[target.size() % 3];
 
   return ss.str();

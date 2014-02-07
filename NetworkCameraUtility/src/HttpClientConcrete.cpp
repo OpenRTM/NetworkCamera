@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * @file  HttpClientConcrete.cpp
  * @brief Http client using Boost.Asio
  *
@@ -23,12 +23,12 @@
 namespace openrtm_network_camera {
 namespace utility {
 
-// ’è”’è‹`
+// å®šæ•°å®šç¾©
 namespace {
   const char * CRLF = "\r\n";
   const char * CRLF2 = "\r\n\r\n";
 
-  // ƒwƒbƒ_–¼‚Í¬•¶š‚Åˆ—‚·‚é
+  // ãƒ˜ãƒƒãƒ€åã¯å°æ–‡å­—ã§å‡¦ç†ã™ã‚‹
   const std::string ContentTypeHeader = "content-type";
   const std::string ContentLengthHeader = "content-length";
 }
@@ -53,7 +53,7 @@ HttpClientConcrete::~HttpClientConcrete(void) {
 void HttpClientConcrete::doGet(const std::string& host_name, const std::string& path_name, const std::string& port) {
   using boost::asio::ip::tcp;
 
-  // ƒŒƒXƒ|ƒ“ƒX—p‚Ìƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ç”¨ã®ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°ã®åˆæœŸåŒ–
   response_member_init();
 
   try
@@ -79,7 +79,7 @@ void HttpClientConcrete::doGet(const std::string& host_name, const std::string& 
     request_stream << "Accept: */*" << CRLF;
     request_stream << "User-Agent: " << "OpenRTM-NetworkCamera-HttpClient" << CRLF;
 
-    // Basic”FØ
+    // Basicèªè¨¼
     if (0 != user_.size() && 0 != password_.size()) {
       std::string auth = base64encode(user_ + ":" + password_);
       request_stream << "Authorization: Basic " << auth << CRLF;
@@ -87,7 +87,7 @@ void HttpClientConcrete::doGet(const std::string& host_name, const std::string& 
 
     request_stream << "Connection: close" << CRLF << CRLF;
 
-    // TODO ƒ^ƒCƒ€ƒAƒEƒg‚Íİ’è‚Å‚«‚éH
+    // TODO ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã¯è¨­å®šã§ãã‚‹ï¼Ÿ
 
     // Send the request.
     boost::asio::write(socket, request);
@@ -114,17 +114,17 @@ void HttpClientConcrete::doGet(const std::string& host_name, const std::string& 
     if ((status_code_ != 200) && (status_code_ != 204))
     {
       std::cout << "Response returned with status code " << status_code_ << "\n";
-      // ƒXƒe[ƒ^ƒXƒR[ƒh OK‚Ü‚½‚ÍNo Content ˆÈŠO‚ÍAƒwƒbƒ_‚à‰ğÍ‚µ‚È‚¢
+      // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ OKã¾ãŸã¯No Content ä»¥å¤–ã¯ã€ãƒ˜ãƒƒãƒ€ã‚‚è§£æã—ãªã„
       return;
     }
 
-    // ƒwƒbƒ_‚Ì‰ğÍ
+    // ãƒ˜ãƒƒãƒ€ã®è§£æ
     processHeaders(&socket, &response);
 
     setContentType();
     setContentLength();
 
-    // ƒRƒ“ƒeƒ“ƒc‚Ìæ“¾
+    // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã®å–å¾—
     processContents(&socket, &response);
   }
   catch (std::exception& e)
@@ -174,7 +174,7 @@ void HttpClientConcrete::processHeaders(boost::asio::ip::tcp::socket* p_socket, 
 void HttpClientConcrete::setContentType() {
   content_type_.clear();
 
-  // Content-Type ƒwƒbƒ_‚Ìæ“¾
+  // Content-Type ãƒ˜ãƒƒãƒ€ã®å–å¾—
   for(std::vector<std::string>::iterator iter = headers_.begin(); iter != headers_.end(); ++iter) {
     std::string t = convertToLower((*iter).substr(0, ContentTypeHeader.size()));
     if (t == ContentTypeHeader) {
@@ -187,20 +187,20 @@ void HttpClientConcrete::setContentType() {
 }
 
 /*!
- * @brief ƒRƒ“ƒeƒ“ƒc’·‚ğİ’è‚·‚éB
+ * @brief ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ã‚’è¨­å®šã™ã‚‹ã€‚
  *
- * ƒwƒbƒ_‚Ì Content-Length ‚É‹LÚ‚ÌƒRƒ“ƒeƒ“ƒc’·‚ğæ“¾‚·‚éB
+ * ãƒ˜ãƒƒãƒ€ã® Content-Length ã«è¨˜è¼‰ã®ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ã‚’å–å¾—ã™ã‚‹ã€‚
  *
  * @caution
- * Content-Length 0‚Ü‚½‚Í‚È‚¢ê‡‚É‚©‚©‚í‚ç‚¸AƒRƒ“ƒeƒ“ƒcƒf[ƒ^‚ª‚ ‚ê‚ÎA
- * HttpClientConcrete#processContents ‚Ìˆ—‚É³‚µ‚¢ƒRƒ“ƒeƒ“ƒc’·‚ªİ’è‚³‚ê‚éB
+ * Content-Length 0ã¾ãŸã¯ãªã„å ´åˆã«ã‹ã‹ã‚ã‚‰ãšã€ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚Œã°ã€
+ * HttpClientConcrete#processContents ã®å‡¦ç†æ™‚ã«æ­£ã—ã„ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ãŒè¨­å®šã•ã‚Œã‚‹ã€‚
  * 
- * @return ƒRƒ“ƒeƒ“ƒc’·
+ * @return ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·
  */
 void HttpClientConcrete::setContentLength() {
   content_length_ = 0;
 
-  // Content-Length ƒwƒbƒ_‚Ìæ“¾
+  // Content-Length ãƒ˜ãƒƒãƒ€ã®å–å¾—
   for(std::vector<std::string>::iterator iter = headers_.begin(); iter != headers_.end(); ++iter) {
     std::string t = convertToLower((*iter).substr(0, ContentLengthHeader.size()));
     if (t == ContentLengthHeader) {
@@ -214,18 +214,18 @@ void HttpClientConcrete::setContentLength() {
 }
 
 /*!
- * @breif ƒRƒ“ƒeƒ“ƒc‚Ìˆ—B
+ * @breif ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã®å‡¦ç†ã€‚
  *
- * ƒŒƒXƒ|ƒ“ƒXƒf[ƒ^‚ğˆ—‚µ‚ÄAƒRƒ“ƒeƒ“ƒc‚ğæ‚èo‚·B
- * streambuf ‚Éæs‚µ‚Ä“Ç‚İ‚İÏ‚İ‚Ìƒf[ƒ^‚ª‚ ‚é‚Ì‚ÅA
- * ‚»‚ê‚àŠÜ‚ß‚ÄƒRƒ“ƒeƒ“ƒc‚Æ‚µ‚Äæ“¾‚·‚éB
+ * ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã—ã¦ã€ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’å–ã‚Šå‡ºã™ã€‚
+ * streambuf ã«å…ˆè¡Œã—ã¦èª­ã¿è¾¼ã¿æ¸ˆã¿ã®ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚‹ã®ã§ã€
+ * ãã‚Œã‚‚å«ã‚ã¦ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã¨ã—ã¦å–å¾—ã™ã‚‹ã€‚
  *
  * @caution
- * ƒRƒ“ƒeƒ“ƒc’·‚ª0‚Ìê‡‚Å‚àAÀÛ‚Ìƒf[ƒ^‚ª‚ ‚ê‚Î‚»‚¿‚ç‚É]‚¢A
- * ƒRƒ“ƒeƒ“ƒc’·‚ğÄİ’è‚·‚éB
+ * ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ãŒ0ã®å ´åˆã§ã‚‚ã€å®Ÿéš›ã®ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚Œã°ãã¡ã‚‰ã«å¾“ã„ã€
+ * ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ã‚’å†è¨­å®šã™ã‚‹ã€‚
  *
- * @param p_socket    socket‚Ö‚Ìƒ|ƒCƒ“ƒ^
- * @param p_response  ƒŒƒXƒ|ƒ“ƒXˆ——p‚Ìstreambuf
+ * @param p_socket    socketã¸ã®ãƒã‚¤ãƒ³ã‚¿
+ * @param p_response  ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ç”¨ã®streambuf
  */
 void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket, boost::asio::streambuf* p_response) {
   if (contents_ != NULL) {
@@ -233,13 +233,13 @@ void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket,
     contents_ = NULL;
   }
 
-  // ƒRƒ“ƒeƒ“ƒcƒTƒCƒY‚ÌŠm”F
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚µã‚¤ã‚ºã®ç¢ºèª
   const size_t length = getContentLength();
   if (0 == length) {
     std::cout << "Maybe no Content-Length header.\n";
   }
 
-  // ƒoƒbƒtƒ@‚É“Ç‚İ‚İÏ‚İƒf[ƒ^‚ğo—Í
+  // ãƒãƒƒãƒ•ã‚¡ã«èª­ã¿è¾¼ã¿æ¸ˆã¿ãƒ‡ãƒ¼ã‚¿ã‚’å‡ºåŠ›
   std::vector<char> buf_pre(0);
   size_t pre_readed = p_response->size();
   if (pre_readed > 0) {
@@ -258,11 +258,11 @@ void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket,
     return;
   }
 
-  // ƒƒbƒZ[ƒWƒ{ƒfƒB’·‚Ìƒ`ƒFƒbƒN
+  // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒ‡ã‚£é•·ã®ãƒã‚§ãƒƒã‚¯
   if (0 == length) {
-    content_length_ = pre_readed + bytes;  // XV
+    content_length_ = pre_readed + bytes;  // æ›´æ–°
 
-    // ƒƒbƒZ[ƒWƒ{ƒfƒB‚É‰½‚à‚È‚©‚Á‚½ê‡
+    // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒ‡ã‚£ã«ä½•ã‚‚ãªã‹ã£ãŸå ´åˆ
     if (0 == content_length_) {
       std::cout << "Content Length is 0.\n";
       return;
@@ -274,7 +274,7 @@ void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket,
     return;
   }
 
-  // 2‚Â–Ú‚Ìƒoƒbƒtƒ@‚Éc‚èƒf[ƒ^‚ğ“Ç‚İ‚İ
+  // 2ã¤ç›®ã®ãƒãƒƒãƒ•ã‚¡ã«æ®‹ã‚Šãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã¿
   std::vector<char> buf_second(0);
   if (0 < bytes) {
     buf_second.reserve(bytes);
@@ -283,8 +283,8 @@ void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket,
     std::copy(st, st + bytes, std::back_inserter(buf_second));
   }
 
-  // ƒRƒ“ƒeƒ“ƒc‚ğ•Û‘¶
-  contents_ = new char [pre_readed + bytes];  // —Ìˆæ‚ÌŠm•Û
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’ä¿å­˜
+  contents_ = new char [pre_readed + bytes];  // é ˜åŸŸã®ç¢ºä¿
 
   std::copy(buf_pre.begin(), buf_pre.end(),  contents_);
   std::copy(buf_second.begin(), buf_second.end(), contents_ + buf_pre.size());

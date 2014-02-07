@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * @file  HttpClient.cpp
  * @brief Http client for dll export
  * @date  2014-02-06
@@ -35,15 +35,15 @@ int HttpClient::getStatusCode() const {
 }
 
 /*!
- * @brief ƒwƒbƒ_‚Ìæ“¾
+ * @brief ãƒ˜ãƒƒãƒ€ã®å–å¾—
  *
- * ƒwƒbƒ_î•ñ‚ÍAHttpClientConcreteƒCƒ“ƒXƒ^ƒ“ƒX‚ª•Û‚µ‚Ä‚¨‚èA
- * vector<string> ‚ÌŒ`®‚Æ‚È‚Á‚Ä‚¢‚éB
- * ŠO•”‚ÉŒöŠJ‚·‚éê‡ASTLƒNƒ‰ƒX‚ğg‚í‚È‚¢‚Ì‚ÅAconst char * ‚Ö‚Ìƒ|ƒCƒ“ƒ^
- * ‚Æ‚µ‚Ä–ß‚è’l‚ğ¶¬‚·‚éB
+ * ãƒ˜ãƒƒãƒ€æƒ…å ±ã¯ã€HttpClientConcreteã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒä¿æŒã—ã¦ãŠã‚Šã€
+ * vector<string> ã®å½¢å¼ã¨ãªã£ã¦ã„ã‚‹ã€‚
+ * å¤–éƒ¨ã«å…¬é–‹ã™ã‚‹å ´åˆã€STLã‚¯ãƒ©ã‚¹ã‚’ä½¿ã‚ãªã„ã®ã§ã€const char * ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+ * ã¨ã—ã¦æˆ»ã‚Šå€¤ã‚’ç”Ÿæˆã™ã‚‹ã€‚
  *
- * @param p_size ƒwƒbƒ_”
- * @return ƒwƒbƒ_‚Ì”z—ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+ * @param p_size ãƒ˜ãƒƒãƒ€æ•°
+ * @return ãƒ˜ãƒƒãƒ€ã®é…åˆ—ã¸ã®ãƒã‚¤ãƒ³ã‚¿
  */
 const char* const* HttpClient::getHeaders(int* p_size) {
   deleteHeaderContainer();
@@ -63,7 +63,7 @@ const char* HttpClient::getContents() const {
 }
 
 const char* HttpClient::getContentType() const {
-  // ‹ó•¶š—ñ‚Ìê‡‚à‹ó•¶š—ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğ•Ô‚·
+  // ç©ºæ–‡å­—åˆ—ã®å ´åˆã‚‚ç©ºæ–‡å­—åˆ—ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’è¿”ã™
   return p_client_->getContentType().c_str();
 }
 

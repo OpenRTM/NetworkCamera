@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * @file  string_utility.h
  * @brief some string utility functions.
  * @date  2014-02-06
@@ -10,40 +10,40 @@
 
 /*!
  * @namespace openrtm_network_camera
- * @brief OpenRTM NetworkCamera—pƒRƒ“ƒ|[ƒlƒ“ƒg
+ * @brief OpenRTM NetworkCameraç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
  *
  */
 namespace openrtm_network_camera {
 
 /*!
  * @namespace utility
- * @brief ‹¤’Êˆ—
+ * @brief å…±é€šå‡¦ç†
  *
  */
 namespace utility {
 
 /*!
- * @brief •¶š—ñ‚ğ¬•¶š‚É•ÏŠ·‚·‚éB
+ * @brief æ–‡å­—åˆ—ã‚’å°æ–‡å­—ã«å¤‰æ›ã™ã‚‹ã€‚
  *
- * @param target  ˆ—‘ÎÛ•¶š—ñ
- * @return ¬•¶š‚É•ÏŠ·‚µ‚½•¶š—ñ
+ * @param target  å‡¦ç†å¯¾è±¡æ–‡å­—åˆ—
+ * @return å°æ–‡å­—ã«å¤‰æ›ã—ãŸæ–‡å­—åˆ—
  */
 std::string convertToLower(const std::string& target);
 
 /*!
- * @brief •¶š—ñ‚Ì‘OŒã‚æ‚è‹ó”’‚ğíœ‚·‚éB
+ * @brief æ–‡å­—åˆ—ã®å‰å¾Œã‚ˆã‚Šç©ºç™½ã‚’å‰Šé™¤ã™ã‚‹ã€‚
  *
- * @param target  ˆ—‘ÎÛ•¶š—ñ
- * @param trimCharacters íœ‘ÎÛ‚Ì‹ó”’•¶š
- * @return ‹ó”’íœŒã‚Ì•¶š—ñ
+ * @param target  å‡¦ç†å¯¾è±¡æ–‡å­—åˆ—
+ * @param trimCharacters å‰Šé™¤å¯¾è±¡ã®ç©ºç™½æ–‡å­—
+ * @return ç©ºç™½å‰Šé™¤å¾Œã®æ–‡å­—åˆ—
  */
 std::string trim(const std::string& target, const char* trimCharacters = " \t\v\r\n");
 
 /*!
- * @brief base64ƒGƒ“ƒR[ƒhŒã‚Ì•¶š—ñ‚ğæ“¾‚·‚éB
+ * @brief base64ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰å¾Œã®æ–‡å­—åˆ—ã‚’å–å¾—ã™ã‚‹ã€‚
  *
- * @param target  ˆ—‘ÎÛ•¶š—ñ
- * @return base64ƒGƒ“ƒR[ƒhŒã‚Ì•¶š—ñ
+ * @param target  å‡¦ç†å¯¾è±¡æ–‡å­—åˆ—
+ * @return base64ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰å¾Œã®æ–‡å­—åˆ—
  */
 std::string base64encode(const std::string& target);
 
