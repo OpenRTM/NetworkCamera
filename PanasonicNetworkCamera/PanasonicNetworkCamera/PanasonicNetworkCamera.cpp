@@ -9,6 +9,8 @@
 #include <iostream>
 #include <string>
 
+#include <boost/regex.hpp>
+
 #include "HttpClient.h"
 
 /*!
@@ -30,7 +32,8 @@ PanasonicNetworkCamera::PanasonicNetworkCamera()
       host_(""),
       port_(""),
       user_(""),
-      password_("") {
+      password_(""),
+      lastResult(false) {
 }
 
 PanasonicNetworkCamera::~PanasonicNetworkCamera() {
@@ -50,15 +53,12 @@ void PanasonicNetworkCamera::setAuthenticateUser(const std::string& user, const 
   password_ = password;
 }
 
-  /*!
-   * @brief 画像の取得
-   *
-   * @caution 戻り値は呼び出し側で削除しない
-   * @caution 次のAPI呼び出し（画像以外も含むすべて）によりデータが消去される。
-   * したがって、次の呼び出し前に（必要があれば）戻り値をコピーすること
-   *
-   */
-const unsigned char* PanasonicNetworkCamera::getImage(const Resolution resolution, const Quality quality, int* p_length) {
+/*!
+ * @brief 画像の取得
+ *
+ * @caution パラメータが不正の場合は、640x480, Standard でリクエストを行う。
+ */
+const char* PanasonicNetworkCamera::getImage(const Resolution resolution, const Quality quality, int* p_length) {
   const char* API_PATH = "/SnapshotJPEG?Resolution=";
   const char* QUALITY = "&Quality=";
 
@@ -104,8 +104,9 @@ const unsigned char* PanasonicNetworkCamera::getImage(const Resolution resolutio
     break;
   }
 
-  const unsigned char* buf = doRequest(path, p_length);
-  return processContents(buf, *p_length);
+  const char* buf = doRequest(path, p_length);
+  analyzeContents(buf, *p_length);
+  return buf;
 }
 
 namespace {
@@ -119,8 +120,8 @@ void PanasonicNetworkCamera::movePanLeft() {
   path += "4";
 
   int length;
-  const unsigned char* buf = doRequest(path, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
 }
 
 void PanasonicNetworkCamera::movePanRight() {
@@ -128,8 +129,8 @@ void PanasonicNetworkCamera::movePanRight() {
   path += "6";
 
   int length;
-  const unsigned char* buf = doRequest(path, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
 }
 
 void PanasonicNetworkCamera::moveTiltUp() {
@@ -137,8 +138,8 @@ void PanasonicNetworkCamera::moveTiltUp() {
   path += "8";
 
   int length;
-  const unsigned char* buf = doRequest(path, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
 }
 
 void PanasonicNetworkCamera::moveTiltDown() {
@@ -146,8 +147,8 @@ void PanasonicNetworkCamera::moveTiltDown() {
   path += "2";
 
   int length;
-  const unsigned char* buf = doRequest(path, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
 }
 
 void PanasonicNetworkCamera::zoomTele() {
@@ -155,8 +156,8 @@ void PanasonicNetworkCamera::zoomTele() {
   path += "4";
 
   int length;
-  const unsigned char* buf = doRequest(path, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
 }
 
 void PanasonicNetworkCamera::zoomWide() {
@@ -164,10 +165,15 @@ void PanasonicNetworkCamera::zoomWide() {
   path += "6";
 
   int length;
-  const unsigned char* buf = doRequest(path, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
 }
 
+/*!
+ * @brief フォーカスの調整
+ *
+ * @caution パラメータが不正の場合は、autoでリクエストを行う。
+ */
 void PanasonicNetworkCamera::adjustFocus(const FocusType type) {
   const char* API_PATH = "/Set?Func=Focus&Kind=0&FocusMode=";
 
@@ -189,10 +195,15 @@ void PanasonicNetworkCamera::adjustFocus(const FocusType type) {
   }
 
   int length;
-  const unsigned char* buf = doRequest(path, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
 }
 
+/*!
+ * @brief ホワイトバランスの設定
+ *
+ * @caution パラメータが不正の場合は、holdでリクエストを行う。
+ */
 void PanasonicNetworkCamera::setWhiteBalance(const WhiteBalance type) {
   const char* API_PATH = "/Set?Func=CameraWB&Kind=1&Data=";
 
@@ -223,12 +234,17 @@ void PanasonicNetworkCamera::setWhiteBalance(const WhiteBalance type) {
   }
 
   int length;
-  const unsigned char* buf = doRequest(path, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
 }
 
+/*!
+ * @brief 明るさの調整
+ *
+ * @caution パラメータが不正の場合は、DefaultBrightnessでリクエストを行う。
+ */
 void PanasonicNetworkCamera::adjustBrightness(const BrightnessType type) {
-  const char* API_PATH = "/Set?Func=CameraWB&Kind=1&Data=";
+  const char* API_PATH = "/nphControlCamera?Direction=";
 
   std::string path(API_PATH);
   switch(type) {
@@ -248,18 +264,23 @@ void PanasonicNetworkCamera::adjustBrightness(const BrightnessType type) {
   }
 
   int length;
-  const unsigned char* buf = doRequest(path, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
 }
 
 void PanasonicNetworkCamera::moveToHomePosition() {
   const char* API_PATH = "/Set?Func=PresetCnt&Kind=0";
 
   int length;
-  const unsigned char* buf = doRequest(API_PATH, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(API_PATH, &length);
+  analyzeContents(buf, length);
 }
 
+/*!
+ * @brief 設置場所の設定
+ *
+ * @caution パラメータが不正の場合は、Ceilingでリクエストを行う。
+ */
 void PanasonicNetworkCamera::setSetupType(const SetupType type) {
   const char* API_PATH = "/Set?Func=Tilt&Kind=1&SetupType=";
 
@@ -278,8 +299,8 @@ void PanasonicNetworkCamera::setSetupType(const SetupType type) {
   }
 
   int length;
-  const unsigned char* buf = doRequest(path, &length);
-  processContents(buf, length);
+  const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
 }
 
 namespace {
@@ -289,14 +310,22 @@ const int STATUS_UNAUTHORIZED = 401;
 }
 
 /*!
- * @brief ネットワークカメラへAPIを送信
+ * @brief リクエストの実行
  *
  * PanasonicNetworkCamera::setCamera で設定したカメラに、
  * 引数で指定されたAPIリクエストを投げる。
  * 実行時は常に、Basic認証付き。
  *
+ * @caution 戻り値は呼び出し側で削除しない
+ * @caution 次のAPI呼び出しによりレスポンスボディが消去される。
+ *
+ * @param path  APIのパス
+ * @param p_length  レスポンスデータ長（出力）
+ * @return コンテンツ（レスポンスボディ）へのポインタ
  */
-const unsigned char* PanasonicNetworkCamera::doRequest(const std::string& path, int* p_length) {
+const char* PanasonicNetworkCamera::doRequest(const std::string& path, int* p_length) {
+  lastResult = false;
+
   // Basic認証付きリクエスト
   p_client_->setBasicAuthenticationParameter(user_.c_str(), password_.c_str());
   p_client_->doGet(host_.c_str(), path.c_str(), port_.c_str());
@@ -315,14 +344,17 @@ const unsigned char* PanasonicNetworkCamera::doRequest(const std::string& path, 
     return NULL;
     break;
   case -1:
-    std::cout << "エラー発生\n";
+    std::cout << "カメラとの通信に失敗しました。ホスト名・ポート番号などを確認してください。\n";
     return NULL;
     break;
   default:
-    std::cout << "不正なステータスコード：" << status << "\n";
+    std::cout << "成功以外のhttpステータスコード：" << status << "\n";
     return NULL;
     break;
   }
+
+  // httpステータスコードでの判定結果
+  lastResult = true;
 
   // コンテンツ長の確認
   *p_length = p_client_->getContentLength();
@@ -330,42 +362,49 @@ const unsigned char* PanasonicNetworkCamera::doRequest(const std::string& path, 
     return NULL;
   }
 
-  return (unsigned char*)p_client_->getContents(); // TODO 戻り値を修正
+  return p_client_->getContents();
 }
 
 /*!
- * @brief レスポンス結果の処理
+ * @brief コンテンツの解析
  *
- * Content-Typeに応じて処理を行う。
- *   image/*    ：取得したデータを戻り値として戻す。
- *   text/plain ：結果を標準出力へ出す（エラーコードが含まれるため）
- *   text/その他：なにもしない
- *   その他     ：なにもしない
+ * doRequest 呼び出しのあと呼ばれることを想定。
+ * Panasonicのネットワークカメラの多くのAPIはコンテンツに実行結果
+ * を含めて返す。このため、コンテンツを解析してエラーが含まれて
+ * いればその情報をログへ出力する。
+ * 本メソッドによりコンテンツを解析して処理する。
+ *
+ * 実際の処理はContent-Typeがtext/plainの場合のみ行われる。
+ * エラーコードが検出された場合は、lastResult をfalseに設定する。
+ *
+ * @param p_contents  コンテンツ（doRequestの戻り値）
+ * @param length      コンテンツ長
  */
-const unsigned char* PanasonicNetworkCamera::processContents(const unsigned char* contents, int length) {
-  if (NULL == contents) {
-    return NULL;
+void PanasonicNetworkCamera::analyzeContents(const char* p_contents, int length) {
+  if (NULL == p_contents) {
+    return;
   }
 
+  // text/plain であることの確認
   const std::string type = p_client_->getContentType();
-
-  // image/*     : 画像データを戻す
-  if (std::string::npos != type.find("image")) {
-    return contents;
+  if (std::string::npos == type.find("text/plain")) {
+    return;
   }
 
-  // text/plain  : 結果を出力
-  // text/その他 : なにもしない
-  // その他      : なにもしない
-  if (std::string::npos != type.find("text")) {
-    if (std::string::npos != type.find("text/plain")) {
-      // 本来は、Return: 以降を調べてエラーコードのみを表示させたい
-      // ホームポジション復帰時の戻り値が名称のため、処理が複雑になるので対応しない
-      std::cout << contents << "\n";
+  // Return結果があり、エラー（負の値）ならログへ出力
+  const std::string target(p_contents, p_contents+length);
+
+  static const boost::regex reg("^Return:\\s*(-?\\d+)"); // Return:0, Return:-10, Return: 10 etc
+  boost::smatch result;
+  if (boost::regex_search(target, result, reg)) {
+    const int return_code = ::atoi(result.str(1).c_str());
+    if (0 > return_code) {
+      std::cout << "error: return code is " << return_code << std::endl;
+      lastResult = false;  // エラーが見つかったので、falseに変更
     }
   }
-  return NULL;
 }
+
 
 } // panasonic
 } // openrtm_network_camera
