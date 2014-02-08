@@ -108,24 +108,17 @@ public:
    * @brief 画像の取得
    *
    * カメラからの画像を取得する。フォーマットはJPEG。
+   * 呼び出し時に解像度をパラメータとして与える。
    *
    * @caution 戻り値は呼び出し側で削除しない
    * @caution 次のAPI呼び出し（画像以外も含むすべて）によりデータが消去される。
    * したがって、次の呼び出し前に（必要があれば）戻り値をコピーすること
    *
+   * @parma resolution  解像度
    * @param p_length    データ長（出力）
    * @return 画像データ配列へのポインタ
    */
-  const char* getImage(int* p_length);
-
-  /*!
-   * @brief 解像度の設定
-   *
-   * カメラ画像の解像度を設定する。
-   *
-   * @param resolution  解像度
-   */
-  void setResolution(const Resolution resolution);
+  const char* getImage(const Resolution resolution, int* p_length);
 
   /*!
    * @brief 画質の設定

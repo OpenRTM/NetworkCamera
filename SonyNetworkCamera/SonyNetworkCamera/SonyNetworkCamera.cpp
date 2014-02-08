@@ -65,41 +65,44 @@ void SonyNetworkCamera::setAuthenticateUser(const std::string& user, const std::
 
 /*!
  * @brief 画像の取得
+ *
+ * @caution 画像の取得には、/oneshotimage.jpg を使い、解像度は、camera.cgi?jpimagesize
+ * で変更する方法もある。しかし、この方法の場合、解像度変更がすぐに反映されず、
+ * 取得した画像のサイズが指定外のものになる場合があった。
+ * このため、/jpegのAPIを使うこととした。
+ *
+ * @parma resolution  解像度
+ * @param p_length    データ長（出力）
+ * @return 画像データ配列へのポインタ
  */
-const char* SonyNetworkCamera::getImage(int* p_length) {
-  const char* API_PATH = "/oneshotimage.jpg";
-
-  const char* buf = doRequest(API_PATH, p_length);
-  if (false == isValidContentsType(CONTENTS_TYPE_IMAGE)) {
-    return NULL;
-  }
-  return buf;
-}
-
-void SonyNetworkCamera::setResolution(const Resolution resolution) {
-  const char* API_PATH = "/command/camera.cgi?jpimagesize=";
-  const char* IMG_MODE = ",0";
+const char* SonyNetworkCamera::getImage(const Resolution resolution, int* p_length) {
+  const char* API_PATH = "/jpeg/";
+  const char* POST_STR = ".jpg";
 
   std::string path(API_PATH);
 
   switch(resolution) {
   case w160x120:
-    path += "160";
+    path += "qqvga";
     break;
   case w320x240:
-    path += "320";
+    path += "qvga";
     break;
   case w640x480:
-    path += "640";
+    path += "vga";
     break;
   default:
     std::cout << "getImage: invalid resolution. try 640x480 value.\n";
-    path += "640";
+    path += "vga";
     break;
   }
-  path += IMG_MODE;
+  path += POST_STR;
 
-  callTextTypeAPI(path);
+  const char* buf = doRequest(path, p_length);
+  if (false == isValidContentsType(CONTENTS_TYPE_IMAGE)) {
+    return NULL;
+  }
+  return buf;
 }
 
 void SonyNetworkCamera::setQuality(const int quality) {

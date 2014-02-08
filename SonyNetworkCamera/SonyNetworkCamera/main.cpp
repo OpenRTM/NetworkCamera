@@ -117,41 +117,43 @@ int main(int argc, char* argv[])
       std::cout << "error occured!\n";
     }
 
-    std::cout << "set resolution\n";
-    cam.setResolution(openrtm_network_camera::sony::SonyNetworkCamera::w160x120);
-    if (!cam.isLastApiSuccess()) {
-      std::cout << "error occured!\n";
+    // ‰æ‘œ‚P
+    {
+      std::cout << "set quality\n";
+      cam.setQuality(10);
+      if (!cam.isLastApiSuccess()) {
+        std::cout << "error occured!\n";
+      }
+
+      std::cout << "get image\n";
+      int length;
+      const char* img = cam.getImage(openrtm_network_camera::sony::SonyNetworkCamera::w160x120, &length);
+      if (!cam.isLastApiSuccess()) {
+        std::cout << "error occured!\n";
+      }
+
+      std::ofstream outfile("test.jpg", std::ios::out|std::ios::binary|std::ios::trunc);
+      outfile.write(img, length);
     }
 
-    std::cout << "get image\n";
-    int length;
-    const char* img = cam.getImage(&length);
-    if (!cam.isLastApiSuccess()) {
-      std::cout << "error occured!\n";
-    }
+    // ‰æ‘œ‚Q
+    {
+      std::cout << "set quality\n";
+      cam.setQuality(1);
+      if (!cam.isLastApiSuccess()) {
+        std::cout << "error occured!\n";
+      }
 
-    std::ofstream outfile("test.jpg", std::ios::out|std::ios::binary|std::ios::trunc);
-    outfile.write(img, length);
+      std::cout << "get image\n";
+      int length;
+      const char* img2 = cam.getImage(openrtm_network_camera::sony::SonyNetworkCamera::w640x480, &length);
+      if (!cam.isLastApiSuccess()) {
+        std::cout << "error occured!\n";
+      }
 
-    std::cout << "set resolution\n";
-    cam.setResolution(openrtm_network_camera::sony::SonyNetworkCamera::w640x480);
-    if (!cam.isLastApiSuccess()) {
-      std::cout << "error occured!\n";
+      std::ofstream outfile2("test2.jpg", std::ios::out|std::ios::binary|std::ios::trunc);
+      outfile2.write(img2, length);
     }
-    std::cout << "set quality\n";
-    cam.setQuality(1);
-    if (!cam.isLastApiSuccess()) {
-      std::cout << "error occured!\n";
-    }
-
-    std::cout << "get image\n";
-    const char* img2 = cam.getImage(&length);
-    if (!cam.isLastApiSuccess()) {
-      std::cout << "error occured!\n";
-    }
-
-    std::ofstream outfile2("test2.jpg", std::ios::out|std::ios::binary|std::ios::trunc);
-    outfile2.write(img2, length);
 
     std::cout << "homeposition\n";
     cam.moveToHomePosition();
