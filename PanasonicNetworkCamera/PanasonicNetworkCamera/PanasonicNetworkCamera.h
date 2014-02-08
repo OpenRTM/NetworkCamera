@@ -220,6 +220,34 @@ public:
 
 protected:
 private:
+  /*!
+   * @brief パン動作
+   *
+   * @param parameter 左右
+   */
+  void movePan(const std::string& parameter);
+
+  /*!
+   * @brief チルト動作
+   *
+   * @param parameter 上下
+   */
+  void moveTilt(const std::string& parameter);
+
+  /*!
+   * @brief ズーム動作
+   *
+   * @param parameter インアウト
+   */
+  void moveZoom(const std::string& parameter);
+
+  /*!
+   * @brief パン・チルト・ズーム動作
+   *
+   * @param path      APIのパス
+   * @param parameter 動作パラメータ
+   */
+  void movePTZ(const std::string& path, const std::string& parameter);
 
   /*!
    * @brief リクエストの実行

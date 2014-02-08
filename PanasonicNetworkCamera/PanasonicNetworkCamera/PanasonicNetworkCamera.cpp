@@ -109,64 +109,26 @@ const char* PanasonicNetworkCamera::getImage(const Resolution resolution, const 
   return buf;
 }
 
-namespace {
-const char* API_PAN  = "/Set?Func=Pan&Kind=0&DegMode=";
-const char* API_TILT = "/Set?Func=Tilt&Kind=0&DegMode=";
-const char* API_ZOOM = "/Set?Func=Zoom&Kind=0&ZoomMode=";
-}
-
 void PanasonicNetworkCamera::movePanLeft() {
-  std::string path(API_PAN);
-  path += "4";
-
-  int length;
-  const char* buf = doRequest(path, &length);
-  analyzeContents(buf, length);
+  movePan("4");
 }
-
 void PanasonicNetworkCamera::movePanRight() {
-  std::string path(API_PAN);
-  path += "6";
-
-  int length;
-  const char* buf = doRequest(path, &length);
-  analyzeContents(buf, length);
+  movePan("6");
 }
 
 void PanasonicNetworkCamera::moveTiltUp() {
-  std::string path(API_TILT);
-  path += "8";
-
-  int length;
-  const char* buf = doRequest(path, &length);
-  analyzeContents(buf, length);
+  moveTilt("8");
 }
 
 void PanasonicNetworkCamera::moveTiltDown() {
-  std::string path(API_TILT);
-  path += "2";
-
-  int length;
-  const char* buf = doRequest(path, &length);
-  analyzeContents(buf, length);
+  moveTilt("2");
 }
 
 void PanasonicNetworkCamera::zoomTele() {
-  std::string path(API_ZOOM);
-  path += "4";
-
-  int length;
-  const char* buf = doRequest(path, &length);
-  analyzeContents(buf, length);
+  moveZoom("4");
 }
-
 void PanasonicNetworkCamera::zoomWide() {
-  std::string path(API_ZOOM);
-  path += "6";
-
-  int length;
-  const char* buf = doRequest(path, &length);
-  analyzeContents(buf, length);
+  moveZoom("6");
 }
 
 /*!
@@ -300,6 +262,24 @@ void PanasonicNetworkCamera::setSetupType(const SetupType type) {
 
   int length;
   const char* buf = doRequest(path, &length);
+  analyzeContents(buf, length);
+}
+
+void PanasonicNetworkCamera::movePan(const std::string& parameter) {
+  const char* API_PAN  = "/Set?Func=Pan&Kind=0&DegMode=";
+  movePTZ(API_PAN, parameter);
+}
+void PanasonicNetworkCamera::moveTilt(const std::string& parameter) {
+  const char* API_TILT = "/Set?Func=Tilt&Kind=0&DegMode=";
+  movePTZ(API_TILT, parameter);
+}
+void PanasonicNetworkCamera::moveZoom(const std::string& parameter) {
+  const char* API_ZOOM = "/Set?Func=Zoom&Kind=0&ZoomMode=";
+  movePTZ(API_ZOOM, parameter);
+}
+void PanasonicNetworkCamera::movePTZ(const std::string& path, const std::string& parameter) {
+  int length;
+  const char* buf = doRequest(path + parameter, &length);
   analyzeContents(buf, length);
 }
 
