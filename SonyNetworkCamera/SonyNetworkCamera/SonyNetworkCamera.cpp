@@ -160,11 +160,11 @@ void SonyNetworkCamera::adjustFocus(const FocusType type) {
     needStop = true;
     break;
   case OnePushFocus:
-    type_str = "onepush";
+    type_str = "onepushaf";
     break;
   default:
     std::cout << "adjustFocus: invalid focus type. try onepush value.\n";
-    type_str = "onepush";
+    type_str = "onepushaf";
     break;
   }
 
