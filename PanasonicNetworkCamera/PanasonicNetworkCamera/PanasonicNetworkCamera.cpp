@@ -27,6 +27,16 @@ namespace openrtm_network_camera {
  */
 namespace panasonic {
 
+namespace {
+const char* CONTENTS_TYPE_IMAGE       = "image";
+const char* CONTENTS_TYPE_TEXT        = "text";
+const char* CONTENTS_TYPE_TEXT_PLAIN  = "text/plain";
+
+const int STATUS_OK = 200;
+const int STATUS_NO_CONTENT = 204;
+const int STATUS_UNAUTHORIZED = 401;
+}
+
 PanasonicNetworkCamera::PanasonicNetworkCamera()
     : p_client_(new utility::HttpClient()),
       host_(""),
@@ -105,6 +115,9 @@ const char* PanasonicNetworkCamera::getImage(const Resolution resolution, const 
   }
 
   const char* buf = doRequest(path, p_length);
+  if (false == isValidContentsType(CONTENTS_TYPE_IMAGE)) {
+    return NULL;
+  }
   analyzeContents(buf, *p_length);
   return buf;
 }
@@ -156,9 +169,7 @@ void PanasonicNetworkCamera::adjustFocus(const FocusType type) {
     break;
   }
 
-  int length;
-  const char* buf = doRequest(path, &length);
-  analyzeContents(buf, length);
+  callTextTypeAPI(path);
 }
 
 /*!
@@ -195,9 +206,7 @@ void PanasonicNetworkCamera::setWhiteBalance(const WhiteBalance type) {
     break;
   }
 
-  int length;
-  const char* buf = doRequest(path, &length);
-  analyzeContents(buf, length);
+  callTextTypeAPI(path);
 }
 
 /*!
@@ -225,17 +234,13 @@ void PanasonicNetworkCamera::adjustBrightness(const BrightnessType type) {
     break;
   }
 
-  int length;
-  const char* buf = doRequest(path, &length);
-  analyzeContents(buf, length);
+  callTextTypeAPI(path);
 }
 
 void PanasonicNetworkCamera::moveToHomePosition() {
   const char* API_PATH = "/Set?Func=PresetCnt&Kind=0";
 
-  int length;
-  const char* buf = doRequest(API_PATH, &length);
-  analyzeContents(buf, length);
+  callTextTypeAPI(API_PATH);
 }
 
 /*!
@@ -260,9 +265,7 @@ void PanasonicNetworkCamera::setSetupType(const SetupType type) {
     break;
   }
 
-  int length;
-  const char* buf = doRequest(path, &length);
-  analyzeContents(buf, length);
+  callTextTypeAPI(path);
 }
 
 void PanasonicNetworkCamera::movePan(const std::string& parameter) {
@@ -278,15 +281,24 @@ void PanasonicNetworkCamera::moveZoom(const std::string& parameter) {
   movePTZ(API_ZOOM, parameter);
 }
 void PanasonicNetworkCamera::movePTZ(const std::string& path, const std::string& parameter) {
-  int length;
-  const char* buf = doRequest(path + parameter, &length);
-  analyzeContents(buf, length);
+  callTextTypeAPI(path + parameter);
 }
 
-namespace {
-const int STATUS_OK = 200;
-const int STATUS_NO_CONTENT = 204;
-const int STATUS_UNAUTHORIZED = 401;
+/*!
+ * @brief レスポンスのContent-TypeがテキストであるAPI呼び出し
+ *
+ * httpリクエストの発行、想定したコンテンツタイプの確認、コンテンツの解析
+ * をまとめて実行するためのメソッド。
+ *
+ * @param path APIのパス
+ */
+void PanasonicNetworkCamera::callTextTypeAPI(const std::string& path) {
+  int length;
+  const char* buf = doRequest(path, &length);
+  if (false == isValidContentsType(CONTENTS_TYPE_TEXT)) {
+    return;
+  }
+  analyzeContents(buf, length);
 }
 
 /*!
@@ -345,6 +357,20 @@ const char* PanasonicNetworkCamera::doRequest(const std::string& path, int* p_le
   return p_client_->getContents();
 }
 
+bool PanasonicNetworkCamera::isValidContentsType(const std::string& target_type) {
+  const std::string type = p_client_->getContentType();
+  if (0 == type.size()) {
+    // コンテンツタイプヘッダがない場合は判定できないのでtrueとする
+    return true;
+  }
+
+  if (std::string::npos == type.find(target_type)) {
+    lastResult = false;  // 想定したコンテンツタイプと異なるので、falseに変更
+    return false;
+  }
+  return true;
+}
+
 /*!
  * @brief コンテンツの解析
  *
@@ -367,7 +393,7 @@ void PanasonicNetworkCamera::analyzeContents(const char* p_contents, int length)
 
   // text/plain であることの確認
   const std::string type = p_client_->getContentType();
-  if (std::string::npos == type.find("text/plain")) {
+  if (std::string::npos == type.find(CONTENTS_TYPE_TEXT_PLAIN)) {
     return;
   }
 

@@ -250,6 +250,13 @@ private:
   void movePTZ(const std::string& path, const std::string& parameter);
 
   /*!
+   * @brief レスポンスのContent-TypeがテキストであるAPI呼び出し
+   *
+   * @param path APIのパス
+   */
+  void callTextTypeAPI(const std::string& path);
+
+  /*!
    * @brief リクエストの実行
    *
    * ネットワークカメラへのAPIリクエストを行う。
@@ -263,6 +270,18 @@ private:
    * @return コンテンツ（レスポンスボディ）へのポインタ
    */
   const char* doRequest(const std::string& path, int* p_length);
+
+  /*!
+   * @brief 想定したコンテンツか否か
+   *
+   * リクエストで想定したコンテンツか否かを判定する。
+   * 判定は、Contents-Typeヘッダの情報に基づく。
+   *
+   * @param target_type 想定しているコンテンツタイプ（MIME表記で与える）
+   * @return true : レスポンスは想定したコンテンツ またはContents-Typeヘッダがない
+   *         false: レスポンスは想定したコンテンツと異なる
+   */
+  bool isValidContentsType(const std::string& target_type);
 
   /*!
    * @brief コンテンツの解析
