@@ -1,4 +1,4 @@
-set(hdrs PanasonicNetworkCameraRt.h
+set(hdrs PanasonicNetworkCameraRt.h PanasonicNetworkCamera.h
     PARENT_SCOPE
     )
 
