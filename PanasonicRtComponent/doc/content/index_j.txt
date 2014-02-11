@@ -100,13 +100,13 @@ PanasonicNetworkCameraRtは ``PanasonicNetworkCameraRtComp`` を実行（ ``${pr
 ================ ================== ================ ====
 cameraHost       string             127.0.0.1        
 cameraPort       int                80               
-user             string             ""               
-password         string             ""               
-imageFormat      string             "JPEG"           
-imageQuality     string             "Standard"       
-imageSize        string             "w640"           
-whiteBalance     string             "auto"           
-setupType        string             "desktop"        
+user             string             user             
+password         string             password         
+imageFormat      string             JPEG             
+imageQuality     string             Standard         
+imageSize        string             w640             
+whiteBalance     string             auto             
+setupType        string             desktop          
 ================ ================== ================ ====
 
 ポート

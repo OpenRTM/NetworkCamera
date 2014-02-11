@@ -238,43 +238,43 @@ class PanasonicNetworkCameraRt
   /*!
    * 
    * - Name:  user
-   * - DefaultValue: ""
+   * - DefaultValue: user
    */
   std::string m_user;
   /*!
    * 
    * - Name:  password
-   * - DefaultValue: ""
+   * - DefaultValue: password
    */
   std::string m_password;
   /*!
    * 
    * - Name:  imageFormat
-   * - DefaultValue: "JPEG"
+   * - DefaultValue: JPEG
    */
   std::string m_imageFormat;
   /*!
    * 
    * - Name:  imageQuality
-   * - DefaultValue: "Standard"
+   * - DefaultValue: Standard
    */
   std::string m_imageQuality;
   /*!
    * 
    * - Name:  imageSize
-   * - DefaultValue: "w640"
+   * - DefaultValue: w640
    */
   std::string m_imageSize;
   /*!
    * 
    * - Name:  whiteBalance
-   * - DefaultValue: "auto"
+   * - DefaultValue: auto
    */
   std::string m_whiteBalance;
   /*!
    * 
    * - Name:  setupType
-   * - DefaultValue: "desktop"
+   * - DefaultValue: desktop
    */
   std::string m_setupType;
 

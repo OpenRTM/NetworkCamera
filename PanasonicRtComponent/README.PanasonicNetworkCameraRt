@@ -10,7 +10,7 @@
 #   --module-desc='Network camera component for Panasonic' --module-version=1.0.0 --module-vendor=aist 
 #   --module-category=Category --module-comp-type=STATIC 
 #   --module-act-type=PERIODIC --module-max-inst=0 
-#   --config=cameraHost:string:127.0.0.1 --config=cameraPort:int:80 --config=user:string:"" --config=password:string:"" --config=imageFormat:string:"JPEG" --config=imageQuality:string:"Standard" --config=imageSize:string:"w640" --config=whiteBalance:string:"auto" --config=setupType:string:"desktop" 
+#   --config=cameraHost:string:127.0.0.1 --config=cameraPort:int:80 --config=user:string:user --config=password:string:password --config=imageFormat:string:JPEG --config=imageQuality:string:Standard --config=imageSize:string:w640 --config=whiteBalance:string:auto --config=setupType:string:desktop 
 #   --inport=ptz:RTC::TimedShortSeq --inport=focus:RTC::TimedShort --inport=brightness:RTC::TimedShort --outport=image:RTC::CameraImage 
 
 
@@ -180,7 +180,7 @@ Lang Type:
 		Name:             user
 		Description:     
 		Type:            string
-		DefaultValue:     ""
+		DefaultValue:     user
 		Unit:            
 		Range:           
 		Constraint:      
@@ -188,7 +188,7 @@ Lang Type:
 		Name:             password
 		Description:     
 		Type:            string
-		DefaultValue:     ""
+		DefaultValue:     password
 		Unit:            
 		Range:           
 		Constraint:      
@@ -196,7 +196,7 @@ Lang Type:
 		Name:             imageFormat
 		Description:     
 		Type:            string
-		DefaultValue:     "JPEG"
+		DefaultValue:     JPEG
 		Unit:            
 		Range:           
 		Constraint:      
@@ -204,7 +204,7 @@ Lang Type:
 		Name:             imageQuality
 		Description:     
 		Type:            string
-		DefaultValue:     "Standard"
+		DefaultValue:     Standard
 		Unit:            
 		Range:           
 		Constraint:      
@@ -212,7 +212,7 @@ Lang Type:
 		Name:             imageSize
 		Description:     
 		Type:            string
-		DefaultValue:     "w640"
+		DefaultValue:     w640
 		Unit:            
 		Range:           
 		Constraint:      
@@ -220,7 +220,7 @@ Lang Type:
 		Name:             whiteBalance
 		Description:     
 		Type:            string
-		DefaultValue:     "auto"
+		DefaultValue:     auto
 		Unit:            
 		Range:           
 		Constraint:      
@@ -228,7 +228,7 @@ Lang Type:
 		Name:             setupType
 		Description:     
 		Type:            string
-		DefaultValue:     "desktop"
+		DefaultValue:     desktop
 		Unit:            
 		Range:           
 		Constraint:      

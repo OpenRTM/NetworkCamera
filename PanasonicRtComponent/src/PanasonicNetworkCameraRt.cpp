@@ -27,13 +27,13 @@ static const char* panasonicnetworkcamerart_spec[] =
     // Configuration variables
     "conf.default.cameraHost", "127.0.0.1",
     "conf.default.cameraPort", "80",
-    "conf.default.user", """",
-    "conf.default.password", """",
-    "conf.default.imageFormat", ""JPEG"",
-    "conf.default.imageQuality", ""Standard"",
-    "conf.default.imageSize", ""w640"",
-    "conf.default.whiteBalance", ""auto"",
-    "conf.default.setupType", ""desktop"",
+    "conf.default.user", "user",
+    "conf.default.password", "password",
+    "conf.default.imageFormat", "JPEG",
+    "conf.default.imageQuality", "Standard",
+    "conf.default.imageSize", "w640",
+    "conf.default.whiteBalance", "auto",
+    "conf.default.setupType", "desktop",
     // Widget
     "conf.__widget__.cameraHost", "text",
     "conf.__widget__.cameraPort", "text",
@@ -45,11 +45,11 @@ static const char* panasonicnetworkcamerart_spec[] =
     "conf.__widget__.whiteBalance", "radio",
     "conf.__widget__.setupType", "radio",
     // Constraints
-    "conf.__constraints__.imageFormat", "("JPEG", "RAW")",
-    "conf.__constraints__.imageQuality", "("Motion", "Standard", "Clarity")",
-    "conf.__constraints__.imageSize", "(w192", "w320", "w640", "w1280_43", "w1280_54")",
-    "conf.__constraints__.whiteBalance", "("auto", "indoor", "fluorescent_white", "fluorescent_day", "outdoor", "hold")",
-    "conf.__constraints__.setupType", "("ceiling", "desktop")",
+    "conf.__constraints__.imageFormat", "(JPEG, RAW)",
+    "conf.__constraints__.imageQuality", "(Motion, Standard, Clarity)",
+    "conf.__constraints__.imageSize", "(w192, w320, w640, w1280_43, w1280_54)",
+    "conf.__constraints__.whiteBalance", "(auto, indoor, fluorescent_white, fluorescent_day, outdoor, hold)",
+    "conf.__constraints__.setupType", "(ceiling, desktop)",
     ""
   };
 // </rtc-template>
@@ -103,13 +103,13 @@ RTC::ReturnCode_t PanasonicNetworkCameraRt::onInitialize()
   // Bind variables and configuration variable
   bindParameter("cameraHost", m_cameraHost, "127.0.0.1");
   bindParameter("cameraPort", m_cameraPort, "80");
-  bindParameter("user", m_user, """");
-  bindParameter("password", m_password, """");
-  bindParameter("imageFormat", m_imageFormat, ""JPEG"");
-  bindParameter("imageQuality", m_imageQuality, ""Standard"");
-  bindParameter("imageSize", m_imageSize, ""w640"");
-  bindParameter("whiteBalance", m_whiteBalance, ""auto"");
-  bindParameter("setupType", m_setupType, ""desktop"");
+  bindParameter("user", m_user, "user");
+  bindParameter("password", m_password, "password");
+  bindParameter("imageFormat", m_imageFormat, "JPEG");
+  bindParameter("imageQuality", m_imageQuality, "Standard");
+  bindParameter("imageSize", m_imageSize, "w640");
+  bindParameter("whiteBalance", m_whiteBalance, "auto");
+  bindParameter("setupType", m_setupType, "desktop");
   // </rtc-template>
   
   return RTC::RTC_OK;
