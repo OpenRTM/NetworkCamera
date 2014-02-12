@@ -29,6 +29,8 @@
 
 // </rtc-template>
 
+#include "PanasonicNetworkCamera.h"
+
 using namespace RTC;
 
 /*!
@@ -40,6 +42,21 @@ class PanasonicNetworkCameraRt
   : public RTC::DataFlowComponentBase
 {
  public:
+
+  /*!
+   * @brief configurations for setup using camera api
+   *
+   * This struct is assumed to remember for last configurations value.
+   */
+  struct ApiSetupConfigurations {
+    std::string cameraHost;
+    int         cameraPort;
+    std::string user;
+    std::string password;
+    std::string whiteBalance;
+    std::string setupType;
+  };
+
   /*!
    * @brief constructor
    * @param manager Maneger Object
@@ -331,6 +348,67 @@ class PanasonicNetworkCameraRt
   
   // </rtc-template>
 
+  /*!
+   * @brief 画像取得処理
+   */
+  void procImage();
+
+  /*!
+   * @brief 画像取得
+   */
+  const char* getCameraImage(int* p_length);
+
+  // データポートによる設定
+
+  /*!
+   * @brief パン・チルト・ズーム
+   */
+  void procPtz();
+
+  /*!
+   * @brief フォーカス設定
+   */
+  void procFocus();
+
+  /*!
+   * @brief 明るさ設定
+   */
+  void procBrightness();
+
+  /*!
+   * @brief コンフィギュレーションを用いた設定
+   */
+  void setupByConfigurations();
+
+  /*!
+   * @brief カメラ設定
+   *
+   * ホスト名とポート番号を設定する
+   */
+  void setupCamera();
+
+  /*!
+   * @brief 認証設定
+   *
+   * 認証で使うユーザー名とパスワードを設定する
+   */
+  void setupAuthenticate();
+
+  /*!
+   * @brief ホワイトバランス設定
+   */
+  void setupWhiteBalance();
+
+  /*!
+   * @brief 設置タイプ設定
+   *
+   * 設置タイプ（天井、卓上）を設定する
+   */
+  void setupSetupType();
+
+
+  ApiSetupConfigurations m_lastConfig;                                 //!< 以前のコンフィギュレーション値
+  openrtm_network_camera::panasonic::PanasonicNetworkCamera m_camera;  //!< Panasonicネットワークカメラクラス
 };
 
 
