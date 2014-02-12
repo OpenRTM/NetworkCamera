@@ -312,14 +312,16 @@ const char* PanasonicNetworkCameraRt::getCameraImage(int* p_length) {
   }
 
   PanasonicNetworkCamera::Quality quality;
-  if ("Motion" == m_imageQuality) {
+  if (1 <= m_imageQuality && m_imageQuality <= 4) {
     quality = PanasonicNetworkCamera::Motion;
-  } else if ("Standard" == m_imageQuality) {
+  } else if (5 == m_imageQuality) {
     quality = PanasonicNetworkCamera::Standard;
-  } else if ("Clarity" == m_imageQuality) {
+  } else if (6 <= m_imageQuality && m_imageQuality <= 10) {
     quality = PanasonicNetworkCamera::Clarity;
   } else {
-    RTC_WARN_STR("imageQuality in configuration is invalid, " + m_imageQuality + ". use Standard value.");
+    std::stringstream ss;
+    ss << m_imageQuality;
+    RTC_WARN_STR("imageQuality in configuration is invalid, " + ss.str() + ". use Standard value.");
     quality = PanasonicNetworkCamera::Standard;
   }
 
