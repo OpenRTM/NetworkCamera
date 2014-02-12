@@ -144,6 +144,8 @@ RTC::ReturnCode_t PanasonicNetworkCameraRt::onShutdown(RTC::UniqueId ec_id)
 
 RTC::ReturnCode_t PanasonicNetworkCameraRt::onActivated(RTC::UniqueId ec_id)
 {
+  RTC_DEBUG_STR("onActivated");
+
   // 初期設定
   setupCamera();
   setupAuthenticate();
@@ -170,6 +172,8 @@ RTC::ReturnCode_t PanasonicNetworkCameraRt::onDeactivated(RTC::UniqueId ec_id)
 
 RTC::ReturnCode_t PanasonicNetworkCameraRt::onExecute(RTC::UniqueId ec_id)
 {
+  RTC_DEBUG_STR("onExecute");
+
   // コンフィギュレーション確認
   setupByConfigurations();
 
