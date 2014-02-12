@@ -11,6 +11,8 @@
 
 #include <boost/regex.hpp>
 
+#include <rtm/SystemLogger.h>
+
 #include "HttpClient.h"
 
 /*!
@@ -44,6 +46,8 @@ PanasonicNetworkCamera::PanasonicNetworkCamera()
       user_(""),
       password_(""),
       lastResult(false) {
+  rtclog.setName("PanasonicNetworkCamera");
+  RTC_DEBUG_STR("PanasonicNetworkCamera ctor");
 }
 
 PanasonicNetworkCamera::~PanasonicNetworkCamera() {
@@ -91,7 +95,7 @@ const char* PanasonicNetworkCamera::getImage(const Resolution resolution, const 
     path += "1280x1024";
     break;
   default:
-    std::cout << "getImage: invalid resolution. try 640x480 value.\n";
+    RTC_WARN_STR("getImage: invalid resolution. try 640x480 value.");
     path += "640x480";
     break;
   }
@@ -109,7 +113,7 @@ const char* PanasonicNetworkCamera::getImage(const Resolution resolution, const 
     path += "Clarity";
     break;
   default:
-    std::cout << "getImage: invalid quality. try Standard value.\n";
+    RTC_WARN_STR("getImage: invalid quality. try Standard value.");
     path += "Standard";
     break;
   }
@@ -164,7 +168,7 @@ void PanasonicNetworkCamera::adjustFocus(const FocusType type) {
     path += "6";
     break;
   default:
-    std::cout << "adjustFocus: invalid focus type. try auto value.\n";
+    RTC_WARN_STR("adjustFocus: invalid focus type. try auto value.");
     path += "5";
     break;
   }
@@ -201,7 +205,7 @@ void PanasonicNetworkCamera::setWhiteBalance(const WhiteBalance type) {
     path += "16";
     break;
   default:
-    std::cout << "setWhiteBalance: invalid white balance type. try hold value. (hold means keep current while balance.)\n";
+    RTC_WARN_STR("setWhiteBalance: invalid white balance type. try hold value. (hold means keep current while balance.)");
     path += "16";
     break;
   }
@@ -229,7 +233,7 @@ void PanasonicNetworkCamera::adjustBrightness(const BrightnessType type) {
     path += "Brighter";
     break;
   default:
-    std::cout << "adjustBrightness: invalid brightness type. try default brightness value.\n";
+    RTC_WARN_STR("adjustBrightness: invalid brightness type. try default brightness value.");
     path += "DefaultBrightness";
     break;
   }
@@ -260,7 +264,7 @@ void PanasonicNetworkCamera::setSetupType(const SetupType type) {
     path += "1";
     break;
   default:
-    std::cout << "setSetupType: invalid setuptype value. try ceiling value.\n";
+    RTC_WARN_STR("setSetupType: invalid setuptype value. try ceiling value.");
     path += "0";
     break;
   }
@@ -332,15 +336,17 @@ const char* PanasonicNetworkCamera::doRequest(const std::string& path, int* p_le
   case STATUS_NO_CONTENT:
     break;
   case STATUS_UNAUTHORIZED:
-    std::cout << "401エラー。API操作権限がありません。認証情報を見直してください。\n";
+    RTC_WARN_STR("401 error. not permitted for this api. Please check your authenticate information.");
     return NULL;
     break;
   case -1:
-    std::cout << "カメラとの通信に失敗しました。ホスト名・ポート番号などを確認してください。\n";
+    RTC_WARN_STR("Failed to comunicate to a network camera. Please check host name and port number for a target network camera.");
     return NULL;
     break;
   default:
-    std::cout << "成功以外のhttpステータスコード：" << status << "\n";
+    std::stringstream ss;
+    ss << status;
+    RTC_WARN_STR("unexpected http status code: " + ss.str());
     return NULL;
     break;
   }
@@ -405,7 +411,10 @@ void PanasonicNetworkCamera::analyzeContents(const char* p_contents, int length)
   if (boost::regex_search(target, result, reg)) {
     const int return_code = ::atoi(result.str(1).c_str());
     if (0 > return_code) {
-      std::cout << "error: return code is " << return_code << std::endl;
+      std::stringstream ss;
+      ss << return_code;
+      RTC_WARN_STR("error: return code is " + ss.str());
+      RTC_WARN_STR("Check your setup parameters and your camera features.");
       lastResult = false;  // エラーが見つかったので、falseに変更
     }
   }

@@ -8,6 +8,8 @@
 
 #include <string>
 
+#include <rtm/SystemLogger.h>
+
 /*!
  * @namespace openrtm_network_camera
  * @brief OpenRTM NetworkCamera用コンポーネント
@@ -297,6 +299,8 @@ private:
    */
   void analyzeContents(const char* p_contents, int length);
 
+
+  RTC::Logger rtclog;              //!< ロガー
 
   utility::HttpClient* p_client_;  //!< HttpClientインスタンス
 
