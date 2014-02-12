@@ -1,4 +1,4 @@
-// -*- C++ -*-
+﻿// -*- C++ -*-
 /*!
  * @file PanasonicNetworkCameraRtComp.cpp
  * @brief Standalone component

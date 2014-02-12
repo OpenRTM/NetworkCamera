@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * @file  PanasonicNetworkCamera.cpp
  * @brief NetworkCamera access class for Panasonic camera.
  * @date  2014-02-07
@@ -17,14 +17,14 @@
 
 /*!
  * @namespace openrtm_network_camera
- * @brief OpenRTM NetworkCamera—pƒRƒ“ƒ|[ƒlƒ“ƒg
+ * @brief OpenRTM NetworkCameraç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
  *
  */
 namespace openrtm_network_camera {
 
 /*!
  * @namespace panasonic
- * @brief PanasonicƒJƒƒ‰
+ * @brief Panasonicã‚«ãƒ¡ãƒ©
  *
  */
 namespace panasonic {
@@ -68,9 +68,9 @@ void PanasonicNetworkCamera::setAuthenticateUser(const std::string& user, const 
 }
 
 /*!
- * @brief ‰æ‘œ‚Ìæ“¾
+ * @brief ç”»åƒã®å–å¾—
  *
- * @caution ƒpƒ‰ƒ[ƒ^‚ª•s³‚Ìê‡‚ÍA640x480, Standard ‚ÅƒŠƒNƒGƒXƒg‚ğs‚¤B
+ * @caution ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒä¸æ­£ã®å ´åˆã¯ã€640x480, Standard ã§ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
  */
 const char* PanasonicNetworkCamera::getImage(const Resolution resolution, const Quality quality, int* p_length) {
   const char* API_PATH = "/SnapshotJPEG?Resolution=";
@@ -149,9 +149,9 @@ void PanasonicNetworkCamera::zoomWide() {
 }
 
 /*!
- * @brief ƒtƒH[ƒJƒX‚Ì’²®
+ * @brief ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã®èª¿æ•´
  *
- * @caution ƒpƒ‰ƒ[ƒ^‚ª•s³‚Ìê‡‚ÍAauto‚ÅƒŠƒNƒGƒXƒg‚ğs‚¤B
+ * @caution ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒä¸æ­£ã®å ´åˆã¯ã€autoã§ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
  */
 void PanasonicNetworkCamera::adjustFocus(const FocusType type) {
   const char* API_PATH = "/Set?Func=Focus&Kind=0&FocusMode=";
@@ -177,9 +177,9 @@ void PanasonicNetworkCamera::adjustFocus(const FocusType type) {
 }
 
 /*!
- * @brief ƒzƒƒCƒgƒoƒ‰ƒ“ƒX‚Ìİ’è
+ * @brief ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹ã®è¨­å®š
  *
- * @caution ƒpƒ‰ƒ[ƒ^‚ª•s³‚Ìê‡‚ÍAhold‚ÅƒŠƒNƒGƒXƒg‚ğs‚¤B
+ * @caution ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒä¸æ­£ã®å ´åˆã¯ã€holdã§ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
  */
 void PanasonicNetworkCamera::setWhiteBalance(const WhiteBalance type) {
   const char* API_PATH = "/Set?Func=CameraWB&Kind=1&Data=";
@@ -214,9 +214,9 @@ void PanasonicNetworkCamera::setWhiteBalance(const WhiteBalance type) {
 }
 
 /*!
- * @brief –¾‚é‚³‚Ì’²®
+ * @brief æ˜ã‚‹ã•ã®èª¿æ•´
  *
- * @caution ƒpƒ‰ƒ[ƒ^‚ª•s³‚Ìê‡‚ÍADefaultBrightness‚ÅƒŠƒNƒGƒXƒg‚ğs‚¤B
+ * @caution ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒä¸æ­£ã®å ´åˆã¯ã€DefaultBrightnessã§ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
  */
 void PanasonicNetworkCamera::adjustBrightness(const BrightnessType type) {
   const char* API_PATH = "/nphControlCamera?Direction=";
@@ -248,9 +248,9 @@ void PanasonicNetworkCamera::moveToHomePosition() {
 }
 
 /*!
- * @brief İ’uêŠ‚Ìİ’è
+ * @brief è¨­ç½®å ´æ‰€ã®è¨­å®š
  *
- * @caution ƒpƒ‰ƒ[ƒ^‚ª•s³‚Ìê‡‚ÍACeiling‚ÅƒŠƒNƒGƒXƒg‚ğs‚¤B
+ * @caution ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒä¸æ­£ã®å ´åˆã¯ã€Ceilingã§ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
  */
 void PanasonicNetworkCamera::setSetupType(const SetupType type) {
   const char* API_PATH = "/Set?Func=Tilt&Kind=1&SetupType=";
@@ -289,12 +289,12 @@ void PanasonicNetworkCamera::movePTZ(const std::string& path, const std::string&
 }
 
 /*!
- * @brief ƒŒƒXƒ|ƒ“ƒX‚ÌContent-Type‚ªƒeƒLƒXƒg‚Å‚ ‚éAPIŒÄ‚Ño‚µ
+ * @brief ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®Content-TypeãŒãƒ†ã‚­ã‚¹ãƒˆã§ã‚ã‚‹APIå‘¼ã³å‡ºã—
  *
- * httpƒŠƒNƒGƒXƒg‚Ì”­sA‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv‚ÌŠm”FAƒRƒ“ƒeƒ“ƒc‚Ì‰ğÍ
- * ‚ğ‚Ü‚Æ‚ß‚ÄÀs‚·‚é‚½‚ß‚Ìƒƒ\ƒbƒhB
+ * httpãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ç™ºè¡Œã€æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ã®ç¢ºèªã€ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã®è§£æ
+ * ã‚’ã¾ã¨ã‚ã¦å®Ÿè¡Œã™ã‚‹ãŸã‚ã®ãƒ¡ã‚½ãƒƒãƒ‰ã€‚
  *
- * @param path API‚ÌƒpƒX
+ * @param path APIã®ãƒ‘ã‚¹
  */
 void PanasonicNetworkCamera::callTextTypeAPI(const std::string& path) {
   int length;
@@ -306,29 +306,29 @@ void PanasonicNetworkCamera::callTextTypeAPI(const std::string& path) {
 }
 
 /*!
- * @brief ƒŠƒNƒGƒXƒg‚ÌÀs
+ * @brief ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®å®Ÿè¡Œ
  *
- * PanasonicNetworkCamera::setCamera ‚Åİ’è‚µ‚½ƒJƒƒ‰‚ÉA
- * ˆø”‚Åw’è‚³‚ê‚½APIƒŠƒNƒGƒXƒg‚ğ“Š‚°‚éB
- * Às‚Íí‚ÉABasic”FØ•t‚«B
+ * PanasonicNetworkCamera::setCamera ã§è¨­å®šã—ãŸã‚«ãƒ¡ãƒ©ã«ã€
+ * å¼•æ•°ã§æŒ‡å®šã•ã‚ŒãŸAPIãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’æŠ•ã’ã‚‹ã€‚
+ * å®Ÿè¡Œæ™‚ã¯å¸¸ã«ã€Basicèªè¨¼ä»˜ãã€‚
  *
- * @caution –ß‚è’l‚ÍŒÄ‚Ño‚µ‘¤‚Åíœ‚µ‚È‚¢
- * @caution Ÿ‚ÌAPIŒÄ‚Ño‚µ‚É‚æ‚èƒŒƒXƒ|ƒ“ƒXƒ{ƒfƒB‚ªÁ‹‚³‚ê‚éB
+ * @caution æˆ»ã‚Šå€¤ã¯å‘¼ã³å‡ºã—å´ã§å‰Šé™¤ã—ãªã„
+ * @caution æ¬¡ã®APIå‘¼ã³å‡ºã—ã«ã‚ˆã‚Šãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒœãƒ‡ã‚£ãŒæ¶ˆå»ã•ã‚Œã‚‹ã€‚
  *
- * @param path  API‚ÌƒpƒX
- * @param p_length  ƒŒƒXƒ|ƒ“ƒXƒf[ƒ^’·io—Íj
- * @return ƒRƒ“ƒeƒ“ƒciƒŒƒXƒ|ƒ“ƒXƒ{ƒfƒBj‚Ö‚Ìƒ|ƒCƒ“ƒ^
+ * @param path  APIã®ãƒ‘ã‚¹
+ * @param p_length  ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿é•·ï¼ˆå‡ºåŠ›ï¼‰
+ * @return ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ï¼ˆãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒœãƒ‡ã‚£ï¼‰ã¸ã®ãƒã‚¤ãƒ³ã‚¿
  */
 const char* PanasonicNetworkCamera::doRequest(const std::string& path, int* p_length) {
   lastResult = false;
 
-  // Basic”FØ•t‚«ƒŠƒNƒGƒXƒg
+  // Basicèªè¨¼ä»˜ããƒªã‚¯ã‚¨ã‚¹ãƒˆ
   p_client_->setBasicAuthenticationParameter(user_.c_str(), password_.c_str());
   p_client_->doGet(host_.c_str(), path.c_str(), port_.c_str());
 
-  // Œ‹‰Êˆ—
+  // çµæœå‡¦ç†
 
-  // ƒXƒe[ƒ^ƒXƒR[ƒh
+  // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰
   *p_length = 0;
   const int status = p_client_->getStatusCode();
   switch(status) {
@@ -351,10 +351,10 @@ const char* PanasonicNetworkCamera::doRequest(const std::string& path, int* p_le
     break;
   }
 
-  // httpƒXƒe[ƒ^ƒXƒR[ƒh‚Å‚Ì”»’èŒ‹‰Ê
+  // httpã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã§ã®åˆ¤å®šçµæœ
   lastResult = true;
 
-  // ƒRƒ“ƒeƒ“ƒc’·‚ÌŠm”F
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ã®ç¢ºèª
   *p_length = p_client_->getContentLength();
   if (0 == *p_length) {
     return NULL;
@@ -366,44 +366,44 @@ const char* PanasonicNetworkCamera::doRequest(const std::string& path, int* p_le
 bool PanasonicNetworkCamera::isValidContentsType(const std::string& target_type) {
   const std::string type = p_client_->getContentType();
   if (0 == type.size()) {
-    // ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒvƒwƒbƒ_‚ª‚È‚¢ê‡‚Í”»’è‚Å‚«‚È‚¢‚Ì‚Åtrue‚Æ‚·‚é
+    // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ãƒ˜ãƒƒãƒ€ãŒãªã„å ´åˆã¯åˆ¤å®šã§ããªã„ã®ã§trueã¨ã™ã‚‹
     return true;
   }
 
   if (std::string::npos == type.find(target_type)) {
-    lastResult = false;  // ‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv‚ÆˆÙ‚È‚é‚Ì‚ÅAfalse‚É•ÏX
+    lastResult = false;  // æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ã¨ç•°ãªã‚‹ã®ã§ã€falseã«å¤‰æ›´
     return false;
   }
   return true;
 }
 
 /*!
- * @brief ƒRƒ“ƒeƒ“ƒc‚Ì‰ğÍ
+ * @brief ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã®è§£æ
  *
- * doRequest ŒÄ‚Ño‚µ‚Ì‚ ‚ÆŒÄ‚Î‚ê‚é‚±‚Æ‚ğ‘z’èB
- * Panasonic‚Ìƒlƒbƒgƒ[ƒNƒJƒƒ‰‚Ì‘½‚­‚ÌAPI‚ÍƒRƒ“ƒeƒ“ƒc‚ÉÀsŒ‹‰Ê
- * ‚ğŠÜ‚ß‚Ä•Ô‚·B‚±‚Ì‚½‚ßAƒRƒ“ƒeƒ“ƒc‚ğ‰ğÍ‚µ‚ÄƒGƒ‰[‚ªŠÜ‚Ü‚ê‚Ä
- * ‚¢‚ê‚Î‚»‚Ìî•ñ‚ğƒƒO‚Öo—Í‚·‚éB
- * –{ƒƒ\ƒbƒh‚É‚æ‚èƒRƒ“ƒeƒ“ƒc‚ğ‰ğÍ‚µ‚Äˆ—‚·‚éB
+ * doRequest å‘¼ã³å‡ºã—ã®ã‚ã¨å‘¼ã°ã‚Œã‚‹ã“ã¨ã‚’æƒ³å®šã€‚
+ * Panasonicã®ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚«ãƒ¡ãƒ©ã®å¤šãã®APIã¯ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã«å®Ÿè¡Œçµæœ
+ * ã‚’å«ã‚ã¦è¿”ã™ã€‚ã“ã®ãŸã‚ã€ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’è§£æã—ã¦ã‚¨ãƒ©ãƒ¼ãŒå«ã¾ã‚Œã¦
+ * ã„ã‚Œã°ãã®æƒ…å ±ã‚’ãƒ­ã‚°ã¸å‡ºåŠ›ã™ã‚‹ã€‚
+ * æœ¬ãƒ¡ã‚½ãƒƒãƒ‰ã«ã‚ˆã‚Šã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’è§£æã—ã¦å‡¦ç†ã™ã‚‹ã€‚
  *
- * ÀÛ‚Ìˆ—‚ÍContent-Type‚ªtext/plain‚Ìê‡‚Ì‚İs‚í‚ê‚éB
- * ƒGƒ‰[ƒR[ƒh‚ªŒŸo‚³‚ê‚½ê‡‚ÍAlastResult ‚ğfalse‚Éİ’è‚·‚éB
+ * å®Ÿéš›ã®å‡¦ç†ã¯Content-TypeãŒtext/plainã®å ´åˆã®ã¿è¡Œã‚ã‚Œã‚‹ã€‚
+ * ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ãŒæ¤œå‡ºã•ã‚ŒãŸå ´åˆã¯ã€lastResult ã‚’falseã«è¨­å®šã™ã‚‹ã€‚
  *
- * @param p_contents  ƒRƒ“ƒeƒ“ƒcidoRequest‚Ì–ß‚è’lj
- * @param length      ƒRƒ“ƒeƒ“ƒc’·
+ * @param p_contents  ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ï¼ˆdoRequestã®æˆ»ã‚Šå€¤ï¼‰
+ * @param length      ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·
  */
 void PanasonicNetworkCamera::analyzeContents(const char* p_contents, int length) {
   if (NULL == p_contents) {
     return;
   }
 
-  // text/plain ‚Å‚ ‚é‚±‚Æ‚ÌŠm”F
+  // text/plain ã§ã‚ã‚‹ã“ã¨ã®ç¢ºèª
   const std::string type = p_client_->getContentType();
   if (std::string::npos == type.find(CONTENTS_TYPE_TEXT_PLAIN)) {
     return;
   }
 
-  // ReturnŒ‹‰Ê‚ª‚ ‚èAƒGƒ‰[i•‰‚Ì’lj‚È‚çƒƒO‚Öo—Í
+  // ReturnçµæœãŒã‚ã‚Šã€ã‚¨ãƒ©ãƒ¼ï¼ˆè² ã®å€¤ï¼‰ãªã‚‰ãƒ­ã‚°ã¸å‡ºåŠ›
   const std::string target(p_contents, p_contents+length);
 
   static const boost::regex reg("^Return:\\s*(-?\\d+)"); // Return:0, Return:-10, Return: 10 etc
@@ -415,7 +415,7 @@ void PanasonicNetworkCamera::analyzeContents(const char* p_contents, int length)
       ss << return_code;
       RTC_WARN_STR("error: return code is " + ss.str());
       RTC_WARN_STR("Check your setup parameters and your camera features.");
-      lastResult = false;  // ƒGƒ‰[‚ªŒ©‚Â‚©‚Á‚½‚Ì‚ÅAfalse‚É•ÏX
+      lastResult = false;  // ã‚¨ãƒ©ãƒ¼ãŒè¦‹ã¤ã‹ã£ãŸã®ã§ã€falseã«å¤‰æ›´
     }
   }
 }

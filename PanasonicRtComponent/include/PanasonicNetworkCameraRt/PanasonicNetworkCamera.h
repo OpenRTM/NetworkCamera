@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * @file  PanasonicNetworkCamera.h
  * @brief NetworkCamera access class for Panasonic camera.
  * @date  2014-02-07
@@ -12,43 +12,43 @@
 
 /*!
  * @namespace openrtm_network_camera
- * @brief OpenRTM NetworkCamera—pƒRƒ“ƒ|[ƒlƒ“ƒg
+ * @brief OpenRTM NetworkCameraç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
  *
  */
 namespace openrtm_network_camera {
 
 /*!
  * @namespace utility
- * @brief ‹¤’Êˆ—
+ * @brief å…±é€šå‡¦ç†
  *
  */
 namespace utility {
-  class HttpClient; // ‘O•ûéŒ¾
+  class HttpClient; // å‰æ–¹å®£è¨€
 }
 
 /*!
  * @namespace panasonic
- * @brief PanasonicƒJƒƒ‰
+ * @brief Panasonicã‚«ãƒ¡ãƒ©
  *
  */
 namespace panasonic {
 
 /*!
  * @class PanasonicNetworkCamera
- * @brief PanasonicNetworkCamera ƒNƒ‰ƒX
+ * @brief PanasonicNetworkCamera ã‚¯ãƒ©ã‚¹
  * 
- * Panasonic»ƒlƒbƒgƒ[ƒNƒJƒƒ‰‚ÖƒAƒNƒZƒX‚·‚é‚½‚ß‚ÌƒNƒ‰ƒXB
- * ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰»Œã‚àAÚ‘±æ‚ğØ‚è‘Ö‚¦‰Â”\‚Æ‚·‚éB
+ * Panasonicè£½ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚«ãƒ¡ãƒ©ã¸ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã€‚
+ * ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–å¾Œã‚‚ã€æ¥ç¶šå…ˆã‚’åˆ‡ã‚Šæ›¿ãˆå¯èƒ½ã¨ã™ã‚‹ã€‚
  *
- * ƒJƒƒ‰ŒÄ‚Ño‚µ‚ÌŒ‹‰Ê‚ª¬Œ÷‚µ‚½‚©”Û‚©‚ğƒƒ\ƒbƒh‚É‚æ‚èæ“¾‰Â”\‚Æ‚·‚éB
- * Ú×‚ÈƒGƒ‰[î•ñ‚ÍƒƒO‚Öo—Í‚·‚éB
+ * ã‚«ãƒ¡ãƒ©å‘¼ã³å‡ºã—ã®çµæœãŒæˆåŠŸã—ãŸã‹å¦ã‹ã‚’ãƒ¡ã‚½ãƒƒãƒ‰ã«ã‚ˆã‚Šå–å¾—å¯èƒ½ã¨ã™ã‚‹ã€‚
+ * è©³ç´°ãªã‚¨ãƒ©ãƒ¼æƒ…å ±ã¯ãƒ­ã‚°ã¸å‡ºåŠ›ã™ã‚‹ã€‚
  */
 class PanasonicNetworkCamera
 {
 public:
 
   /*!
-   * @brief ‰æ‘œƒTƒCƒY
+   * @brief ç”»åƒã‚µã‚¤ã‚º
    */
   enum Resolution {
     w192x144,    //!< 192x144
@@ -59,258 +59,258 @@ public:
   };
 
   /*!
-   * @brief ‰æ¿
+   * @brief ç”»è³ª
    */
   enum Quality {
-    Motion ,  //!< “®‚«—Dæ
-    Standard, //!< ’Êí
-    Clarity,  //!< ‰æ¿—Dæ
+    Motion ,  //!< å‹•ãå„ªå…ˆ
+    Standard, //!< é€šå¸¸
+    Clarity,  //!< ç”»è³ªå„ªå…ˆ
   };
 
   /*!
-   * @brief ƒtƒH[ƒJƒX
+   * @brief ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
    */
   enum FocusType {
-    Near,       //!< ‹ß‚­
-    AutoFocus,  //!< ©“®
-    Far,        //!< ‰“‚­
+    Near,       //!< è¿‘ã
+    AutoFocus,  //!< è‡ªå‹•
+    Far,        //!< é ã
   };
 
   /*!
-   * @brief ƒzƒƒCƒgƒoƒ‰ƒ“ƒX
+   * @brief ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹
    */
   enum WhiteBalance {
-    AutoWB,            //!< ©“®
-    Indoor,            //!< ‰®“à
-    Fluorescent_White, //!< ŒuŒõ“”i”’Fj
-    Fluorescent_Day,   //!< ŒuŒõ“”i’‹”’Fj
-    Outdoor,           //!< ‰®ŠO
-    Hold,              //!< ƒz[ƒ‹ƒh
+    AutoWB,            //!< è‡ªå‹•
+    Indoor,            //!< å±‹å†…
+    Fluorescent_White, //!< è›å…‰ç¯ï¼ˆç™½è‰²ï¼‰
+    Fluorescent_Day,   //!< è›å…‰ç¯ï¼ˆæ˜¼ç™½è‰²ï¼‰
+    Outdoor,           //!< å±‹å¤–
+    Hold,              //!< ãƒ›ãƒ¼ãƒ«ãƒ‰
   };
 
   /*!
-   * @brief –¾‚é‚³
+   * @brief æ˜ã‚‹ã•
    */
   enum BrightnessType {
-    Darker,             //!< ˆÃ‚­
-    DefaultBrightness,  //!< ƒfƒtƒHƒ‹ƒg‚Ì–¾‚é‚³
-    Brighter,           //!< –¾‚é‚­
+    Darker,             //!< æš—ã
+    DefaultBrightness,  //!< ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®æ˜ã‚‹ã•
+    Brighter,           //!< æ˜ã‚‹ã
   };
 
   /*!
-   * @brief İ’uƒ^ƒCƒv
+   * @brief è¨­ç½®ã‚¿ã‚¤ãƒ—
    */
   enum SetupType {
-    Ceiling,  //!< “Vˆä
-    Desktop,  //!< ‘ìã
+    Ceiling,  //!< å¤©äº•
+    Desktop,  //!< å“ä¸Š
   };
 
 	PanasonicNetworkCamera(void);
 	~PanasonicNetworkCamera(void);
 
   /*!
-   * @brief ƒJƒƒ‰‚Ìİ’è
+   * @brief ã‚«ãƒ¡ãƒ©ã®è¨­å®š
    *
-   * @param host  ƒzƒXƒg–¼‚Ü‚½‚ÍIPƒAƒhƒŒƒX
-   * @param port  ƒ|[ƒg”Ô†
+   * @param host  ãƒ›ã‚¹ãƒˆåã¾ãŸã¯IPã‚¢ãƒ‰ãƒ¬ã‚¹
+   * @param port  ãƒãƒ¼ãƒˆç•ªå·
    */
   void setCamera(const std::string& host, const std::string& port);
 
   /*!
-   * @brief ”FØƒ†[ƒU[‚Ìİ’è
+   * @brief èªè¨¼ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®è¨­å®š
    *
-   * Basic”FØ—p‚Ìƒ†[ƒU[–¼‚ÆƒpƒXƒ[ƒh‚ğİ’è‚·‚éB
-   * İ’è‚ÍAí‚É”FØî•ñ‚ğ‘—M‚·‚éB
-   * ‹ó•¶š—ñ‚ğİ’è‚·‚ê‚ÎAw’è‚ª‰ğœ‚³‚ê‚éB
+   * Basicèªè¨¼ç”¨ã®ãƒ¦ãƒ¼ã‚¶ãƒ¼åã¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’è¨­å®šã™ã‚‹ã€‚
+   * è¨­å®šæ™‚ã¯ã€å¸¸ã«èªè¨¼æƒ…å ±ã‚’é€ä¿¡ã™ã‚‹ã€‚
+   * ç©ºæ–‡å­—åˆ—ã‚’è¨­å®šã™ã‚Œã°ã€æŒ‡å®šãŒè§£é™¤ã•ã‚Œã‚‹ã€‚
    *
-   * @param user      ƒ†[ƒU[–¼
-   * @param password  ƒpƒXƒ[ƒh
+   * @param user      ãƒ¦ãƒ¼ã‚¶ãƒ¼å
+   * @param password  ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
    */
   void setAuthenticateUser(const std::string& user, const std::string password);
 
   /*!
-   * @brief ‰æ‘œ‚Ìæ“¾
+   * @brief ç”»åƒã®å–å¾—
    *
-   * ƒJƒƒ‰‚©‚ç‚Ì‰æ‘œ‚ğæ“¾‚·‚éBƒtƒH[ƒ}ƒbƒg‚ÍJPEGB
-   * ŒÄ‚Ño‚µ‚É‰ğ‘œ“x‚Æ‰æ¿‚ğƒpƒ‰ƒ[ƒ^‚Æ‚µ‚Ä—^‚¦‚éB
-   * Œ»İİ’è’†‚Ì‰ğ‘œ“x‚Æ‰æ¿ˆÈŠO‚ğw’è‚·‚éê‡A•ÏXŒ ŒÀ‚ª•K—vB
-   * ‰ğ‘œ“x‚¨‚æ‚Ñ‰æ¿‚Ìw’è’l‚ªAƒJƒƒ‰‘¤‚ª‘Î‰‚µ‚Ä‚¢‚È‚¢ê‡‚Ì‹““®‚ÍƒJƒƒ‰‚ÉˆË‘¶‚·‚éB
+   * ã‚«ãƒ¡ãƒ©ã‹ã‚‰ã®ç”»åƒã‚’å–å¾—ã™ã‚‹ã€‚ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã¯JPEGã€‚
+   * å‘¼ã³å‡ºã—æ™‚ã«è§£åƒåº¦ã¨ç”»è³ªã‚’ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã—ã¦ä¸ãˆã‚‹ã€‚
+   * ç¾åœ¨è¨­å®šä¸­ã®è§£åƒåº¦ã¨ç”»è³ªä»¥å¤–ã‚’æŒ‡å®šã™ã‚‹å ´åˆã€å¤‰æ›´æ¨©é™ãŒå¿…è¦ã€‚
+   * è§£åƒåº¦ãŠã‚ˆã³ç”»è³ªã®æŒ‡å®šå€¤ãŒã€ã‚«ãƒ¡ãƒ©å´ãŒå¯¾å¿œã—ã¦ã„ãªã„å ´åˆã®æŒ™å‹•ã¯ã‚«ãƒ¡ãƒ©ã«ä¾å­˜ã™ã‚‹ã€‚
    *
-   * @caution –ß‚è’l‚ÍŒÄ‚Ño‚µ‘¤‚Åíœ‚µ‚È‚¢
-   * @caution Ÿ‚ÌAPIŒÄ‚Ño‚µi‰æ‘œˆÈŠO‚àŠÜ‚Ş‚·‚×‚Äj‚É‚æ‚èƒf[ƒ^‚ªÁ‹‚³‚ê‚éB
-   * ‚µ‚½‚ª‚Á‚ÄAŸ‚ÌŒÄ‚Ño‚µ‘O‚Éi•K—v‚ª‚ ‚ê‚Îj–ß‚è’l‚ğƒRƒs[‚·‚é‚±‚Æ
+   * @caution æˆ»ã‚Šå€¤ã¯å‘¼ã³å‡ºã—å´ã§å‰Šé™¤ã—ãªã„
+   * @caution æ¬¡ã®APIå‘¼ã³å‡ºã—ï¼ˆç”»åƒä»¥å¤–ã‚‚å«ã‚€ã™ã¹ã¦ï¼‰ã«ã‚ˆã‚Šãƒ‡ãƒ¼ã‚¿ãŒæ¶ˆå»ã•ã‚Œã‚‹ã€‚
+   * ã—ãŸãŒã£ã¦ã€æ¬¡ã®å‘¼ã³å‡ºã—å‰ã«ï¼ˆå¿…è¦ãŒã‚ã‚Œã°ï¼‰æˆ»ã‚Šå€¤ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ã“ã¨
    *
-   * @parma resolution  ‰ğ‘œ“x
-   * @param quality     ‰æ¿
-   * @param p_length    ƒf[ƒ^’·io—Íj
-   * @return ‰æ‘œƒf[ƒ^”z—ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+   * @parma resolution  è§£åƒåº¦
+   * @param quality     ç”»è³ª
+   * @param p_length    ãƒ‡ãƒ¼ã‚¿é•·ï¼ˆå‡ºåŠ›ï¼‰
+   * @return ç”»åƒãƒ‡ãƒ¼ã‚¿é…åˆ—ã¸ã®ãƒã‚¤ãƒ³ã‚¿
    */
   const char* getImage(const Resolution resolution, const Quality quality, int* p_length);
 
   /*!
-   * @brief ¶•ûŒü‚Öƒpƒ“
+   * @brief å·¦æ–¹å‘ã¸ãƒ‘ãƒ³
    */
 	void movePanLeft();
 
   /*!
-   * @brief ‰E•ûŒü‚Öƒpƒ“
+   * @brief å³æ–¹å‘ã¸ãƒ‘ãƒ³
    */
   void movePanRight();
 
   /*!
-   * @brief ƒ`ƒ‹ƒgƒAƒbƒv
+   * @brief ãƒãƒ«ãƒˆã‚¢ãƒƒãƒ—
    */
   void moveTiltUp();
 
   /*!
-   * @brief ƒ`ƒ‹ƒgƒ_ƒEƒ“
+   * @brief ãƒãƒ«ãƒˆãƒ€ã‚¦ãƒ³
    */
   void moveTiltDown();
 
   /*!
-   * @brief ƒY[ƒ€ƒCƒ“
+   * @brief ã‚ºãƒ¼ãƒ ã‚¤ãƒ³
    */
   void zoomTele();
 
   /*!
-   * @brief ƒY[ƒ€ƒAƒEƒg
+   * @brief ã‚ºãƒ¼ãƒ ã‚¢ã‚¦ãƒˆ
    */
   void zoomWide();
 
   /*!
-   * @brief ƒtƒH[ƒJƒX’²®
+   * @brief ãƒ•ã‚©ãƒ¼ã‚«ã‚¹èª¿æ•´
    *
-   * @param type  ƒtƒH[ƒJƒX’²®ƒ^ƒCƒv
+   * @param type  ãƒ•ã‚©ãƒ¼ã‚«ã‚¹èª¿æ•´ã‚¿ã‚¤ãƒ—
    */
   void adjustFocus(const FocusType type);
 
   /*!
-   * @brief ƒzƒƒCƒgƒoƒ‰ƒ“ƒXİ’è
+   * @brief ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹è¨­å®š
    *
-   * @param type  ƒzƒƒCƒgƒoƒ‰ƒ“ƒXƒ^ƒCƒv
+   * @param type  ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹ã‚¿ã‚¤ãƒ—
    */
   void setWhiteBalance(const WhiteBalance type);
 
   /*!
-   * @brief –¾‚é‚³’²®
+   * @brief æ˜ã‚‹ã•èª¿æ•´
    *
-   * @param type  –¾‚é‚³’²®ƒ^ƒCƒv
+   * @param type  æ˜ã‚‹ã•èª¿æ•´ã‚¿ã‚¤ãƒ—
    */
   void adjustBrightness(const BrightnessType type);
 
   /*!
-   * @brief ƒz[ƒ€ƒ|ƒWƒVƒ‡ƒ“•œ‹A
+   * @brief ãƒ›ãƒ¼ãƒ ãƒã‚¸ã‚·ãƒ§ãƒ³å¾©å¸°
    */
   void moveToHomePosition();
 
   /*!
-   * @brief İ’uêŠ‚Ìİ’è
+   * @brief è¨­ç½®å ´æ‰€ã®è¨­å®š
    *
-   * @param type  İ’uêŠƒ^ƒCƒv
+   * @param type  è¨­ç½®å ´æ‰€ã‚¿ã‚¤ãƒ—
    */
   void setSetupType(const SetupType type);
 
   /*!
-   * @brief ÀsAPI‚Ì¬”Û
+   * @brief å®Ÿè¡ŒAPIã®æˆå¦
    *
-   * ‘O‰ñŒÄ‚Ño‚µ‚½API‚ª¬Œ÷‚µ‚½‚©”Û‚©‚ğ’²‚×‚éB
+   * å‰å›å‘¼ã³å‡ºã—ãŸAPIãŒæˆåŠŸã—ãŸã‹å¦ã‹ã‚’èª¿ã¹ã‚‹ã€‚
    *
-   * @return true : ‘O‰ñŒÄ‚Ño‚µ‚ª¬Œ÷
-   *         false: ‘O‰ñŒÄ‚Ño‚µ‚ª¸”s
+   * @return true : å‰å›å‘¼ã³å‡ºã—ãŒæˆåŠŸ
+   *         false: å‰å›å‘¼ã³å‡ºã—ãŒå¤±æ•—
    */
   bool isLastApiSuccess() const { return lastResult; }
 
 protected:
 private:
   /*!
-   * @brief ƒpƒ““®ì
+   * @brief ãƒ‘ãƒ³å‹•ä½œ
    *
-   * @param parameter ¶‰E
+   * @param parameter å·¦å³
    */
   void movePan(const std::string& parameter);
 
   /*!
-   * @brief ƒ`ƒ‹ƒg“®ì
+   * @brief ãƒãƒ«ãƒˆå‹•ä½œ
    *
-   * @param parameter ã‰º
+   * @param parameter ä¸Šä¸‹
    */
   void moveTilt(const std::string& parameter);
 
   /*!
-   * @brief ƒY[ƒ€“®ì
+   * @brief ã‚ºãƒ¼ãƒ å‹•ä½œ
    *
-   * @param parameter ƒCƒ“ƒAƒEƒg
+   * @param parameter ã‚¤ãƒ³ã‚¢ã‚¦ãƒˆ
    */
   void moveZoom(const std::string& parameter);
 
   /*!
-   * @brief ƒpƒ“Eƒ`ƒ‹ƒgEƒY[ƒ€“®ì
+   * @brief ãƒ‘ãƒ³ãƒ»ãƒãƒ«ãƒˆãƒ»ã‚ºãƒ¼ãƒ å‹•ä½œ
    *
-   * @param path      API‚ÌƒpƒX
-   * @param parameter “®ìƒpƒ‰ƒ[ƒ^
+   * @param path      APIã®ãƒ‘ã‚¹
+   * @param parameter å‹•ä½œãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
    */
   void movePTZ(const std::string& path, const std::string& parameter);
 
   /*!
-   * @brief ƒŒƒXƒ|ƒ“ƒX‚ÌContent-Type‚ªƒeƒLƒXƒg‚Å‚ ‚éAPIŒÄ‚Ño‚µ
+   * @brief ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®Content-TypeãŒãƒ†ã‚­ã‚¹ãƒˆã§ã‚ã‚‹APIå‘¼ã³å‡ºã—
    *
-   * @param path API‚ÌƒpƒX
+   * @param path APIã®ãƒ‘ã‚¹
    */
   void callTextTypeAPI(const std::string& path);
 
   /*!
-   * @brief ƒŠƒNƒGƒXƒg‚ÌÀs
+   * @brief ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®å®Ÿè¡Œ
    *
-   * ƒlƒbƒgƒ[ƒNƒJƒƒ‰‚Ö‚ÌAPIƒŠƒNƒGƒXƒg‚ğs‚¤B
-   * ŒÄ‚Ño‚µŒ‹‰Ê‚É‰‚¶‚ÄA‘O‰ñ‚ÌÀsŒ‹‰Ê‚ğİ’è‚·‚éB
+   * ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚«ãƒ¡ãƒ©ã¸ã®APIãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
+   * å‘¼ã³å‡ºã—çµæœã«å¿œã˜ã¦ã€å‰å›ã®å®Ÿè¡Œçµæœã‚’è¨­å®šã™ã‚‹ã€‚
    *
-   * @caution –ß‚è’l‚ÍŒÄ‚Ño‚µ‘¤‚Åíœ‚µ‚È‚¢
-   * @caution Ÿ‚ÌAPIŒÄ‚Ño‚µ‚É‚æ‚èƒŒƒXƒ|ƒ“ƒXƒ{ƒfƒB‚ªÁ‹‚³‚ê‚éB
+   * @caution æˆ»ã‚Šå€¤ã¯å‘¼ã³å‡ºã—å´ã§å‰Šé™¤ã—ãªã„
+   * @caution æ¬¡ã®APIå‘¼ã³å‡ºã—ã«ã‚ˆã‚Šãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒœãƒ‡ã‚£ãŒæ¶ˆå»ã•ã‚Œã‚‹ã€‚
    *
-   * @param path  API‚ÌƒpƒX
-   * @param p_length  ƒŒƒXƒ|ƒ“ƒXƒf[ƒ^’·io—Íj
-   * @return ƒRƒ“ƒeƒ“ƒciƒŒƒXƒ|ƒ“ƒXƒ{ƒfƒBj‚Ö‚Ìƒ|ƒCƒ“ƒ^
+   * @param path  APIã®ãƒ‘ã‚¹
+   * @param p_length  ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿é•·ï¼ˆå‡ºåŠ›ï¼‰
+   * @return ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ï¼ˆãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒœãƒ‡ã‚£ï¼‰ã¸ã®ãƒã‚¤ãƒ³ã‚¿
    */
   const char* doRequest(const std::string& path, int* p_length);
 
   /*!
-   * @brief ‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒc‚©”Û‚©
+   * @brief æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‹å¦ã‹
    *
-   * ƒŠƒNƒGƒXƒg‚Å‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒc‚©”Û‚©‚ğ”»’è‚·‚éB
-   * ”»’è‚ÍAContents-Typeƒwƒbƒ_‚Ìî•ñ‚ÉŠî‚Ã‚­B
+   * ãƒªã‚¯ã‚¨ã‚¹ãƒˆã§æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‹å¦ã‹ã‚’åˆ¤å®šã™ã‚‹ã€‚
+   * åˆ¤å®šã¯ã€Contents-Typeãƒ˜ãƒƒãƒ€ã®æƒ…å ±ã«åŸºã¥ãã€‚
    *
-   * @param target_type ‘z’è‚µ‚Ä‚¢‚éƒRƒ“ƒeƒ“ƒcƒ^ƒCƒviMIME•\‹L‚Å—^‚¦‚éj
-   * @return true : ƒŒƒXƒ|ƒ“ƒX‚Í‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒc ‚Ü‚½‚ÍContents-Typeƒwƒbƒ_‚ª‚È‚¢
-   *         false: ƒŒƒXƒ|ƒ“ƒX‚Í‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒc‚ÆˆÙ‚È‚é
+   * @param target_type æƒ³å®šã—ã¦ã„ã‚‹ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ï¼ˆMIMEè¡¨è¨˜ã§ä¸ãˆã‚‹ï¼‰
+   * @return true : ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã¯æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ ã¾ãŸã¯Contents-Typeãƒ˜ãƒƒãƒ€ãŒãªã„
+   *         false: ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã¯æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã¨ç•°ãªã‚‹
    */
   bool isValidContentsType(const std::string& target_type);
 
   /*!
-   * @brief ƒRƒ“ƒeƒ“ƒc‚Ì‰ğÍ
+   * @brief ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã®è§£æ
    *
-   * Panasonic‚Ìƒlƒbƒgƒ[ƒNƒJƒƒ‰‚Ì‘½‚­‚ÌAPI‚ÍƒRƒ“ƒeƒ“ƒc‚ÉÀsŒ‹‰Ê
-   * ‚ğŠÜ‚ß‚Ä•Ô‚·B‚±‚Ì‚½‚ßAƒRƒ“ƒeƒ“ƒc‚ğ‰ğÍ‚µ‚ÄƒGƒ‰[‚ªŠÜ‚Ü‚ê‚Ä
-   * ‚¢‚ê‚Î‚»‚Ìî•ñ‚ğƒƒO‚Öo—Í‚·‚éB
+   * Panasonicã®ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚«ãƒ¡ãƒ©ã®å¤šãã®APIã¯ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã«å®Ÿè¡Œçµæœ
+   * ã‚’å«ã‚ã¦è¿”ã™ã€‚ã“ã®ãŸã‚ã€ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’è§£æã—ã¦ã‚¨ãƒ©ãƒ¼ãŒå«ã¾ã‚Œã¦
+   * ã„ã‚Œã°ãã®æƒ…å ±ã‚’ãƒ­ã‚°ã¸å‡ºåŠ›ã™ã‚‹ã€‚
    *
-   * ƒGƒ‰[ƒR[ƒh‚ªŒŸo‚³‚ê‚½ê‡‚Í‘O‰ñ‚ÌÀsŒ‹‰Ê‚ğ¸”s‚Éİ’è‚·‚éB
+   * ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ãŒæ¤œå‡ºã•ã‚ŒãŸå ´åˆã¯å‰å›ã®å®Ÿè¡Œçµæœã‚’å¤±æ•—ã«è¨­å®šã™ã‚‹ã€‚
    *
-   * @param p_contents  ƒRƒ“ƒeƒ“ƒcidoRequest‚Ì–ß‚è’lj
-   * @param length      ƒRƒ“ƒeƒ“ƒc’·
+   * @param p_contents  ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ï¼ˆdoRequestã®æˆ»ã‚Šå€¤ï¼‰
+   * @param length      ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·
    */
   void analyzeContents(const char* p_contents, int length);
 
 
-  RTC::Logger rtclog;              //!< ƒƒK[
+  RTC::Logger rtclog;              //!< ãƒ­ã‚¬ãƒ¼
 
-  utility::HttpClient* p_client_;  //!< HttpClientƒCƒ“ƒXƒ^ƒ“ƒX
+  utility::HttpClient* p_client_;  //!< HttpClientã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 
-  std::string host_;      //!< ƒzƒXƒg–¼‚Ü‚½‚ÍIPƒAƒhƒŒƒX
-  std::string port_;      //!< ƒ|[ƒg”Ô†
+  std::string host_;      //!< ãƒ›ã‚¹ãƒˆåã¾ãŸã¯IPã‚¢ãƒ‰ãƒ¬ã‚¹
+  std::string port_;      //!< ãƒãƒ¼ãƒˆç•ªå·
 
-  std::string user_;      //!< Basic”FØ—pƒ†[ƒU[
-  std::string password_;  //!< Basic”FØ—pƒpƒXƒ[ƒh
+  std::string user_;      //!< Basicèªè¨¼ç”¨ãƒ¦ãƒ¼ã‚¶ãƒ¼
+  std::string password_;  //!< Basicèªè¨¼ç”¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
 
-  bool lastResult;        //!< ’¼‘O‚ÌAPI‚ÌÀsŒ‹‰Ê, false:‚È‚ñ‚ç‚©‚ÌƒGƒ‰[, true:¬Œ÷
+  bool lastResult;        //!< ç›´å‰ã®APIã®å®Ÿè¡Œçµæœ, false:ãªã‚“ã‚‰ã‹ã®ã‚¨ãƒ©ãƒ¼, true:æˆåŠŸ
 
 
   PanasonicNetworkCamera(const PanasonicNetworkCamera&);

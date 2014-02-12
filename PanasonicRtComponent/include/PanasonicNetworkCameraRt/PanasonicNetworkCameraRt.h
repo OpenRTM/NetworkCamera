@@ -1,4 +1,4 @@
-// -*- C++ -*-
+﻿// -*- C++ -*-
 /*!
  * @file  PanasonicNetworkCameraRt.h
  * @brief Network camera component for Panasonic
