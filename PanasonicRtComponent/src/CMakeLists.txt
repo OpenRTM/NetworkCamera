@@ -39,10 +39,13 @@ include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
 # add http library
-set(network_camera_dir "C:/Users/mor/network_camera/network_camera_utility")
-set(network_camera_utility_libs "NetworkCameraUtility.lib")
+set(network_camera_tmp "${PROJECT_SOURCE_DIR}/../network_camera_utility")
+get_filename_component(network_camera_dir ${network_camera_tmp} ABSOLUTE)
+#
 include_directories(${network_camera_dir}/include)
-link_directories(${network_camera_dir}/build/debug/)
+link_directories(${network_camera_dir}/build)
+#
+set(network_camera_utility_libs "NetworkCameraUtility.lib")
 
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
