@@ -35,8 +35,8 @@ static const char* panasonicnetworkcamerart_spec[] =
     "conf.default.user", "user",
     "conf.default.password", "password",
     "conf.default.imageFormat", "JPEG",
-    "conf.default.imageQuality", "Standard",
-    "conf.default.imageSize", "w640",
+    "conf.default.imageQuality", "5",
+    "conf.default.imageSize", "640x480",
     "conf.default.whiteBalance", "auto",
     "conf.default.setupType", "desktop",
     // Widget
@@ -45,16 +45,16 @@ static const char* panasonicnetworkcamerart_spec[] =
     "conf.__widget__.user", "text",
     "conf.__widget__.password", "text",
     "conf.__widget__.imageFormat", "radio",
-    "conf.__widget__.imageQuality", "radio",
+    "conf.__widget__.imageQuality", "slider.5",
     "conf.__widget__.imageSize", "radio",
     "conf.__widget__.whiteBalance", "radio",
     "conf.__widget__.setupType", "radio",
     // Constraints
-    "conf.__constraints__.imageFormat", "(JPEG, RAW)",
-    "conf.__constraints__.imageQuality", "(Motion, Standard, Clarity)",
-    "conf.__constraints__.imageSize", "(w192, w320, w640, w1280_43, w1280_54)",
-    "conf.__constraints__.whiteBalance", "(auto, indoor, fluorescent_white, fluorescent_day, outdoor, hold)",
-    "conf.__constraints__.setupType", "(ceiling, desktop)",
+    "conf.__constraints__.imageFormat", "(JPEG,RAW)",
+    "conf.__constraints__.imageQuality", "1<=x<=10",
+    "conf.__constraints__.imageSize", "(192x144,320x240,640x480,1280x960,1280x1024)",
+    "conf.__constraints__.whiteBalance", "(auto,indoor,fluorescent_white,fluorescent_day,outdoor,hold)",
+    "conf.__constraints__.setupType", "(ceiling,desktop)",
     ""
   };
 // </rtc-template>
@@ -111,8 +111,8 @@ RTC::ReturnCode_t PanasonicNetworkCameraRt::onInitialize()
   bindParameter("user", m_user, "user");
   bindParameter("password", m_password, "password");
   bindParameter("imageFormat", m_imageFormat, "JPEG");
-  bindParameter("imageQuality", m_imageQuality, "Standard");
-  bindParameter("imageSize", m_imageSize, "w640");
+  bindParameter("imageQuality", m_imageQuality, "5");
+  bindParameter("imageSize", m_imageSize, "640x480");
   bindParameter("whiteBalance", m_whiteBalance, "auto");
   bindParameter("setupType", m_setupType, "desktop");
   // </rtc-template>
@@ -146,13 +146,13 @@ RTC::ReturnCode_t PanasonicNetworkCameraRt::onActivated(RTC::UniqueId ec_id)
 {
   RTC_DEBUG_STR("onActivated");
 
-  // ‰Šúİ’è
+  // åˆæœŸè¨­å®š
   setupCamera();
   setupAuthenticate();
   setupWhiteBalance();
   setupSetupType();
 
-  // ˆÈ‘O‚ÌƒRƒ“ƒtƒBƒMƒ…ƒŒ[ƒVƒ‡ƒ“’l‚ğ‰Šú‰»
+  // ä»¥å‰ã®ã‚³ãƒ³ãƒ•ã‚£ã‚®ãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³å€¤ã‚’åˆæœŸåŒ–
   m_lastConfig.cameraHost = m_cameraHost;
   m_lastConfig.cameraPort = m_cameraPort;
   m_lastConfig.user       = m_user;
@@ -174,15 +174,15 @@ RTC::ReturnCode_t PanasonicNetworkCameraRt::onExecute(RTC::UniqueId ec_id)
 {
   RTC_DEBUG_STR("onExecute");
 
-  // ƒRƒ“ƒtƒBƒMƒ…ƒŒ[ƒVƒ‡ƒ“Šm”F
+  // ã‚³ãƒ³ãƒ•ã‚£ã‚®ãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ç¢ºèª
   setupByConfigurations();
 
-  // ƒf[ƒ^ƒ|[ƒg“ü—Í‚ÌŠm”F
+  // ãƒ‡ãƒ¼ã‚¿ãƒãƒ¼ãƒˆå…¥åŠ›ã®ç¢ºèª
   procPtz();
   procFocus();
   procBrightness();
 
-  // ‰æ‘œæ“¾ˆ—
+  // ç”»åƒå–å¾—å‡¦ç†
   procImage();
 
   return RTC::RTC_OK;
@@ -224,16 +224,16 @@ RTC::ReturnCode_t PanasonicNetworkCameraRt::onRateChanged(RTC::UniqueId ec_id)
 */
 
 /*!
- * @brief ‰æ‘œæ“¾ˆ—
+ * @brief ç”»åƒå–å¾—å‡¦ç†
  *
- * å‚ÉA‚R‚Â‚ÌƒXƒeƒbƒv‚Åˆ—‚ğs‚¤B
- * 1. http‚ğ—p‚¢‚½‰æ‘œ‚Ìæ“¾
- * 2. æ“¾‚µ‚½‰æ‘œ‚ÌƒtƒH[ƒ}ƒbƒg•ÏŠ·
- * 3. o—Í‰æ‘œƒtƒH[ƒ}ƒbƒg‚É‰‚¶‚½‰æ‘œ‚ğOutPort‚Ö‘‚«‚İ
+ * ä¸»ã«ã€ï¼“ã¤ã®ã‚¹ãƒ†ãƒƒãƒ—ã§å‡¦ç†ã‚’è¡Œã†ã€‚
+ * 1. httpã‚’ç”¨ã„ãŸç”»åƒã®å–å¾—
+ * 2. å–å¾—ã—ãŸç”»åƒã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆå¤‰æ›
+ * 3. å‡ºåŠ›ç”»åƒãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã«å¿œã˜ãŸç”»åƒã‚’OutPortã¸æ›¸ãè¾¼ã¿
  *
  * @caution
- * o—Í‰æ‘œƒtƒH[ƒ}ƒbƒg‚É‚©‚©‚í‚ç‚¸AJPEG‰æ‘œ‚Íˆê“x
- * ƒGƒ“ƒR[ƒh‚³‚ê‚éB
+ * å‡ºåŠ›ç”»åƒãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã«ã‹ã‹ã‚ã‚‰ãšã€JPEGç”»åƒã¯ä¸€åº¦
+ * ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã•ã‚Œã‚‹ã€‚
  */
 void PanasonicNetworkCameraRt::procImage() {
 
@@ -244,7 +244,7 @@ void PanasonicNetworkCameraRt::procImage() {
     return;
   }
 
-  // ƒtƒH[ƒ}ƒbƒgŠm”F
+  // ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆç¢ºèª
   bool isJpeg;
   if ("JPEG" == m_imageFormat) {
     isJpeg = true;
@@ -255,9 +255,9 @@ void PanasonicNetworkCameraRt::procImage() {
     isJpeg = true;
   }
 
-  // ‰æ‘œƒTƒCƒY‚ğæ“¾‚·‚é‚½‚ß‚ÉAƒtƒH[ƒ}ƒbƒg•ÏŠ·‚ğŒÄ‚Ño‚·
-  // ’ˆÓ
-  //   o—Í‰æ‘œƒtƒH[ƒ}ƒbƒg‚ªJPEG‚Ìê‡‚àˆê“x‚Í•ÏŠ·‚³‚ê‚é
+  // ç”»åƒã‚µã‚¤ã‚ºã‚’å–å¾—ã™ã‚‹ãŸã‚ã«ã€ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆå¤‰æ›ã‚’å‘¼ã³å‡ºã™
+  // æ³¨æ„
+  //   å‡ºåŠ›ç”»åƒãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãŒJPEGã®å ´åˆã‚‚ä¸€åº¦ã¯å¤‰æ›ã•ã‚Œã‚‹
   std::vector<unsigned char> data;
   data.reserve(length);
   for (int i = 0; i < length; ++i) {
@@ -267,12 +267,12 @@ void PanasonicNetworkCameraRt::procImage() {
   cv::Mat converted = cv::imdecode(cv::Mat(data), 1);
 
 
-  // o—Íƒf[ƒ^‚Ìİ’è
+  // å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã®è¨­å®š
 
   m_image.width = converted.cols;
   m_image.height = converted.rows;
 
-  // o—ÍƒtƒH[ƒ}ƒbƒg‚É‰‚¶‚Äˆ—‚ğ•Ï‚¦‚é
+  // å‡ºåŠ›ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã«å¿œã˜ã¦å‡¦ç†ã‚’å¤‰ãˆã‚‹
   if (isJpeg) {
     m_image.format = "JPEG";
 
@@ -287,12 +287,12 @@ void PanasonicNetworkCameraRt::procImage() {
     memcpy((void*)&(m_image.pixels[0]), converted.data, l);
   }
 
-  // OutPort‚Ö‘‚«‚İ
+  // OutPortã¸æ›¸ãè¾¼ã¿
   m_imageOut.write();
 }
 const char* PanasonicNetworkCameraRt::getCameraImage(int* p_length) {
 
-  // ‰æ‘œ‚Ìæ“¾
+  // ç”»åƒã®å–å¾—
   using openrtm_network_camera::panasonic::PanasonicNetworkCamera;
 
   PanasonicNetworkCamera::Resolution resolution;
@@ -337,7 +337,7 @@ void PanasonicNetworkCameraRt::procPtz() {
     return;
   }
 
-  // ƒpƒ“
+  // ãƒ‘ãƒ³
   const int data_pan = m_ptz.data[0];
   if (0 > data_pan) {
     m_camera.movePanRight();
@@ -345,7 +345,7 @@ void PanasonicNetworkCameraRt::procPtz() {
     m_camera.movePanLeft();
   }
 
-  // ƒ`ƒ‹ƒg
+  // ãƒãƒ«ãƒˆ
   const int data_tilt = m_ptz.data[1];
   if (0 > data_tilt) {
     m_camera.moveTiltUp();
@@ -353,7 +353,7 @@ void PanasonicNetworkCameraRt::procPtz() {
     m_camera.moveTiltDown();
   }
 
-  // ƒY[ƒ€
+  // ã‚ºãƒ¼ãƒ 
   const int data_zoom = m_ptz.data[2];
   if (0 > data_zoom) {
     m_camera.zoomTele();
@@ -361,7 +361,7 @@ void PanasonicNetworkCameraRt::procPtz() {
     m_camera.zoomWide();
   }
 
-  // ƒz[ƒ€ƒ|ƒWƒVƒ‡ƒ“•œ‹A
+  // ãƒ›ãƒ¼ãƒ ãƒã‚¸ã‚·ãƒ§ãƒ³å¾©å¸°
   if (0 == data_pan && 0 == data_tilt && 0 == data_zoom) {
     m_camera.moveToHomePosition();
   }
@@ -396,33 +396,33 @@ void PanasonicNetworkCameraRt::procBrightness() {
 }
 
 /*!
- * @brief ƒRƒ“ƒtƒBƒMƒ…ƒŒ[ƒVƒ‡ƒ“‚ğ—p‚¢‚½İ’è
+ * @brief ã‚³ãƒ³ãƒ•ã‚£ã‚®ãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç”¨ã„ãŸè¨­å®š
  *
- * ˆÈ‘O‚Ìİ’è’l‚ÆˆÙ‚È‚éê‡‚ÉAİ’è—pAPI‚ğŒÄ‚Ño‚·
+ * ä»¥å‰ã®è¨­å®šå€¤ã¨ç•°ãªã‚‹å ´åˆã«ã€è¨­å®šç”¨APIã‚’å‘¼ã³å‡ºã™
  */
 void PanasonicNetworkCameraRt::setupByConfigurations() {
 
-  // ƒJƒƒ‰İ’è
+  // ã‚«ãƒ¡ãƒ©è¨­å®š
   if ((m_lastConfig.cameraHost != m_cameraHost) || (m_lastConfig.cameraPort != m_cameraPort)) {
     setupCamera();
     m_lastConfig.cameraHost = m_cameraHost;
     m_lastConfig.cameraPort = m_cameraPort;
   }
 
-  // ”FØî•ñ
+  // èªè¨¼æƒ…å ±
   if ((m_lastConfig.user != m_user) || (m_lastConfig.password != m_password)) {
     setupAuthenticate();
     m_lastConfig.user       = m_user;
     m_lastConfig.password   = m_password;
   }
 
-  // ƒzƒƒCƒgƒoƒ‰ƒ“ƒX
+  // ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹
   if (m_lastConfig.whiteBalance != m_whiteBalance) {
     setupWhiteBalance();
     m_lastConfig.whiteBalance = m_whiteBalance;
   }
 
-  // İ’uêŠ
+  // è¨­ç½®å ´æ‰€
   if (m_lastConfig.setupType != m_setupType) {
     setupSetupType();
     m_lastConfig.setupType    = m_setupType;

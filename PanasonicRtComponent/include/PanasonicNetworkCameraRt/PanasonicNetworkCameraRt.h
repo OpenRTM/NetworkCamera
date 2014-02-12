@@ -273,13 +273,13 @@ class PanasonicNetworkCameraRt
   /*!
    * 
    * - Name:  imageQuality
-   * - DefaultValue: Standard
+   * - DefaultValue: 5
    */
-  std::string m_imageQuality;
+  int m_imageQuality;
   /*!
    * 
    * - Name:  imageSize
-   * - DefaultValue: w640
+   * - DefaultValue: 640x480
    */
   std::string m_imageSize;
   /*!
@@ -349,66 +349,66 @@ class PanasonicNetworkCameraRt
   // </rtc-template>
 
   /*!
-   * @brief ‰æ‘œæ“¾ˆ—
+   * @brief ç”»åƒå–å¾—å‡¦ç†
    */
   void procImage();
 
   /*!
-   * @brief ‰æ‘œæ“¾
+   * @brief ç”»åƒå–å¾—
    */
   const char* getCameraImage(int* p_length);
 
-  // ƒf[ƒ^ƒ|[ƒg‚É‚æ‚éİ’è
+  // ãƒ‡ãƒ¼ã‚¿ãƒãƒ¼ãƒˆã«ã‚ˆã‚‹è¨­å®š
 
   /*!
-   * @brief ƒpƒ“Eƒ`ƒ‹ƒgEƒY[ƒ€
+   * @brief ãƒ‘ãƒ³ãƒ»ãƒãƒ«ãƒˆãƒ»ã‚ºãƒ¼ãƒ 
    */
   void procPtz();
 
   /*!
-   * @brief ƒtƒH[ƒJƒXİ’è
+   * @brief ãƒ•ã‚©ãƒ¼ã‚«ã‚¹è¨­å®š
    */
   void procFocus();
 
   /*!
-   * @brief –¾‚é‚³İ’è
+   * @brief æ˜ã‚‹ã•è¨­å®š
    */
   void procBrightness();
 
   /*!
-   * @brief ƒRƒ“ƒtƒBƒMƒ…ƒŒ[ƒVƒ‡ƒ“‚ğ—p‚¢‚½İ’è
+   * @brief ã‚³ãƒ³ãƒ•ã‚£ã‚®ãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç”¨ã„ãŸè¨­å®š
    */
   void setupByConfigurations();
 
   /*!
-   * @brief ƒJƒƒ‰İ’è
+   * @brief ã‚«ãƒ¡ãƒ©è¨­å®š
    *
-   * ƒzƒXƒg–¼‚Æƒ|[ƒg”Ô†‚ğİ’è‚·‚é
+   * ãƒ›ã‚¹ãƒˆåã¨ãƒãƒ¼ãƒˆç•ªå·ã‚’è¨­å®šã™ã‚‹
    */
   void setupCamera();
 
   /*!
-   * @brief ”FØİ’è
+   * @brief èªè¨¼è¨­å®š
    *
-   * ”FØ‚Åg‚¤ƒ†[ƒU[–¼‚ÆƒpƒXƒ[ƒh‚ğİ’è‚·‚é
+   * èªè¨¼ã§ä½¿ã†ãƒ¦ãƒ¼ã‚¶ãƒ¼åã¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’è¨­å®šã™ã‚‹
    */
   void setupAuthenticate();
 
   /*!
-   * @brief ƒzƒƒCƒgƒoƒ‰ƒ“ƒXİ’è
+   * @brief ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹è¨­å®š
    */
   void setupWhiteBalance();
 
   /*!
-   * @brief İ’uƒ^ƒCƒvİ’è
+   * @brief è¨­ç½®ã‚¿ã‚¤ãƒ—è¨­å®š
    *
-   * İ’uƒ^ƒCƒvi“VˆäA‘ìãj‚ğİ’è‚·‚é
+   * è¨­ç½®ã‚¿ã‚¤ãƒ—ï¼ˆå¤©äº•ã€å“ä¸Šï¼‰ã‚’è¨­å®šã™ã‚‹
    */
   void setupSetupType();
 
 
-  ApiSetupConfigurations m_lastConfig;                                 //!< ˆÈ‘O‚ÌƒRƒ“ƒtƒBƒMƒ…ƒŒ[ƒVƒ‡ƒ“’l
-  openrtm_network_camera::panasonic::PanasonicNetworkCamera m_camera;  //!< Panasonicƒlƒbƒgƒ[ƒNƒJƒƒ‰ƒNƒ‰ƒX
+  ApiSetupConfigurations m_lastConfig;                                 //!< ä»¥å‰ã®ã‚³ãƒ³ãƒ•ã‚£ã‚®ãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³å€¤
+  openrtm_network_camera::panasonic::PanasonicNetworkCamera m_camera;  //!< Panasonicãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚«ãƒ¡ãƒ©ã‚¯ãƒ©ã‚¹
 };
 
 

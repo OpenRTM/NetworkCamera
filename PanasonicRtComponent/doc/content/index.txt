@@ -111,8 +111,8 @@ cameraPort       int                80
 user             string             user             
 password         string             password         
 imageFormat      string             JPEG             
-imageQuality     string             Standard         
-imageSize        string             w640             
+imageQuality     int                5                
+imageSize        string             640x480          
 whiteBalance     string             auto             
 setupType        string             desktop          
 ================ ================== ================ ======

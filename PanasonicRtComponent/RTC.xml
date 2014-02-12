@@ -56,72 +56,53 @@
             </rtc:Constraint>
             <rtcExt:Properties rtcExt:value="radio" rtcExt:name="__widget__"/>
         </rtc:Configuration>
-        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="Standard" rtc:type="string" rtc:name="imageQuality">
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="5" rtc:type="int" rtc:name="imageQuality">
             <rtc:Constraint>
                 <rtc:ConstraintUnitType>
-                    <rtc:Or>
-                        <rtc:Constraint>
-                            <rtc:ConstraintUnitType>
-                                <rtc:propertyIsEqualTo rtc:matchCase="false">
-                                    <rtc:Literal>Motion</rtc:Literal>
-                                </rtc:propertyIsEqualTo>
-                            </rtc:ConstraintUnitType>
-                        </rtc:Constraint>
-                        <rtc:Constraint>
-                            <rtc:ConstraintUnitType>
-                                <rtc:propertyIsEqualTo rtc:matchCase="false">
-                                    <rtc:Literal>Standard</rtc:Literal>
-                                </rtc:propertyIsEqualTo>
-                            </rtc:ConstraintUnitType>
-                        </rtc:Constraint>
-                        <rtc:Constraint>
-                            <rtc:ConstraintUnitType>
-                                <rtc:propertyIsEqualTo rtc:matchCase="false">
-                                    <rtc:Literal>Clarity</rtc:Literal>
-                                </rtc:propertyIsEqualTo>
-                            </rtc:ConstraintUnitType>
-                        </rtc:Constraint>
-                    </rtc:Or>
+                    <rtc:propertyIsBetween>
+                        <rtc:LowerBoundary>1</rtc:LowerBoundary>
+                        <rtc:UpperBoundary>10</rtc:UpperBoundary>
+                    </rtc:propertyIsBetween>
                 </rtc:ConstraintUnitType>
             </rtc:Constraint>
-            <rtcExt:Properties rtcExt:value="radio" rtcExt:name="__widget__"/>
+            <rtcExt:Properties rtcExt:value="slider.5" rtcExt:name="__widget__"/>
         </rtc:Configuration>
-        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="w640" rtc:type="string" rtc:name="imageSize">
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="640x480" rtc:type="string" rtc:name="imageSize">
             <rtc:Constraint>
                 <rtc:ConstraintUnitType>
                     <rtc:Or>
                         <rtc:Constraint>
                             <rtc:ConstraintUnitType>
                                 <rtc:propertyIsEqualTo rtc:matchCase="false">
-                                    <rtc:Literal>w192</rtc:Literal>
+                                    <rtc:Literal>192x144</rtc:Literal>
                                 </rtc:propertyIsEqualTo>
                             </rtc:ConstraintUnitType>
                         </rtc:Constraint>
                         <rtc:Constraint>
                             <rtc:ConstraintUnitType>
                                 <rtc:propertyIsEqualTo rtc:matchCase="false">
-                                    <rtc:Literal>w320</rtc:Literal>
+                                    <rtc:Literal>320x240</rtc:Literal>
                                 </rtc:propertyIsEqualTo>
                             </rtc:ConstraintUnitType>
                         </rtc:Constraint>
                         <rtc:Constraint>
                             <rtc:ConstraintUnitType>
                                 <rtc:propertyIsEqualTo rtc:matchCase="false">
-                                    <rtc:Literal>w640</rtc:Literal>
+                                    <rtc:Literal>640x480</rtc:Literal>
                                 </rtc:propertyIsEqualTo>
                             </rtc:ConstraintUnitType>
                         </rtc:Constraint>
                         <rtc:Constraint>
                             <rtc:ConstraintUnitType>
                                 <rtc:propertyIsEqualTo rtc:matchCase="false">
-                                    <rtc:Literal>w1280_43</rtc:Literal>
+                                    <rtc:Literal>1280x960</rtc:Literal>
                                 </rtc:propertyIsEqualTo>
                             </rtc:ConstraintUnitType>
                         </rtc:Constraint>
                         <rtc:Constraint>
                             <rtc:ConstraintUnitType>
                                 <rtc:propertyIsEqualTo rtc:matchCase="false">
-                                    <rtc:Literal>w1280_54</rtc:Literal>
+                                    <rtc:Literal>1280x1024</rtc:Literal>
                                 </rtc:propertyIsEqualTo>
                             </rtc:ConstraintUnitType>
                         </rtc:Constraint>
