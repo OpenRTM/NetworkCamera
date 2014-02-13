@@ -34,7 +34,8 @@ namespace {
 }
 
 HttpClientConcrete::HttpClientConcrete(void)
-    : user_(""),
+    : client_(),
+      user_(""),
       password_(""),
       status_code_(ERROR_CODE),
       headers_(),
@@ -58,16 +59,8 @@ void HttpClientConcrete::doGet(const std::string& host_name, const std::string& 
 
   try
   {
-    boost::asio::io_service io_service;
-
-    // Get a list of endpoints corresponding to the server name.
-    tcp::resolver resolver(io_service);
-    tcp::resolver::query query(host_name, port);
-    tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
-
-    // Try each endpoint until we successfully establish a connection.
-    tcp::socket socket(io_service);
-    boost::asio::connect(socket, endpoint_iterator);
+    // 接続
+    client_.connect(host_name, port, boost::posix_time::seconds(TIMEOUT_SEC));
 
     // Form the request. We specify the "Connection: close" header so that the
     // server will close the socket after transmitting the response. This will
@@ -87,16 +80,14 @@ void HttpClientConcrete::doGet(const std::string& host_name, const std::string& 
 
     request_stream << "Connection: close" << CRLF << CRLF;
 
-    // TODO タイムアウトは設定できる？
-
     // Send the request.
-    boost::asio::write(socket, request);
+    client_.write(request, boost::posix_time::seconds(TIMEOUT_SEC));
 
     // Read the response status line. The response streambuf will automatically
     // grow to accommodate the entire line. The growth may be limited by passing
     // a maximum size to the streambuf constructor.
-    boost::asio::streambuf response;
-    boost::asio::read_until(socket, response, CRLF);
+    client_.read_until(CRLF, boost::posix_time::seconds(TIMEOUT_SEC));
+    boost::asio::streambuf& response = client_.getStreambuf();
 
     // Check that response is OK.
     std::istream response_stream(&response);
@@ -119,13 +110,13 @@ void HttpClientConcrete::doGet(const std::string& host_name, const std::string& 
     }
 
     // ヘッダの解析
-    processHeaders(&socket, &response);
+    processHeaders();
 
     setContentType();
     setContentLength();
 
     // コンテンツの取得
-    processContents(&socket, &response);
+    processContents();
   }
   catch (std::exception& e)
   {
@@ -150,13 +141,13 @@ void HttpClientConcrete::response_member_init() {
   }
 }
 
-void HttpClientConcrete::processHeaders(boost::asio::ip::tcp::socket* p_socket, boost::asio::streambuf* p_response) {
+void HttpClientConcrete::processHeaders() {
   headers_.clear();
 
-  std::istream response_stream(p_response);
-
   // Read the response headers, which are terminated by a blank line.
-  boost::asio::read_until(*p_socket, *p_response, CRLF2);
+  client_.read_until(CRLF2, boost::posix_time::seconds(TIMEOUT_SEC));
+  boost::asio::streambuf& response = client_.getStreambuf();
+  std::istream response_stream(&response);
 
   // Process the response headers.
   std::string header;
@@ -223,11 +214,8 @@ void HttpClientConcrete::setContentLength() {
  * @caution
  * コンテンツ長が0の場合でも、実際のデータがあればそちらに従い、
  * コンテンツ長を再設定する。
- *
- * @param p_socket    socketへのポインタ
- * @param p_response  レスポンス処理用のstreambuf
  */
-void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket, boost::asio::streambuf* p_response) {
+void HttpClientConcrete::processContents() {
   if (contents_ != NULL) {
     delete [] contents_;
     contents_ = NULL;
@@ -235,28 +223,24 @@ void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket,
 
   // コンテンツサイズの確認
   const size_t length = getContentLength();
-  if (0 == length) {
-    std::cout << "Maybe no Content-Length header.\n";
-  }
+  //if (0 == length) {
+  //  std::cout << "Maybe no Content-Length header.\n";
+  //}
+
+  boost::asio::streambuf& response = client_.getStreambuf();
 
   // バッファに読み込み済みデータを出力
   std::vector<char> buf_pre(0);
-  size_t pre_readed = p_response->size();
+  size_t pre_readed = response.size();
   if (pre_readed > 0) {
     buf_pre.reserve(pre_readed);
-    p_response->commit(pre_readed);
-    const char * st = boost::asio::buffer_cast<const char*>(p_response->data());
+    const char * st = boost::asio::buffer_cast<const char*>(response.data());
     std::copy(st, st + pre_readed, std::back_inserter(buf_pre));
-    p_response->consume(pre_readed);
+    response.consume(pre_readed);
   }
 
   // Read until EOF, writing data to output as we go.
-  boost::system::error_code error;
-  size_t bytes = boost::asio::read(*p_socket, *p_response, boost::asio::transfer_all(), error);
-  if (error != boost::asio::error::eof) {
-    status_code_ = ERROR_CODE;
-    return;
-  }
+  size_t bytes = client_.read(boost::posix_time::seconds(TIMEOUT_SEC));
 
   // メッセージボディ長のチェック
   if (0 == length) {
@@ -278,8 +262,7 @@ void HttpClientConcrete::processContents(boost::asio::ip::tcp::socket* p_socket,
   std::vector<char> buf_second(0);
   if (0 < bytes) {
     buf_second.reserve(bytes);
-    p_response->commit(bytes);
-    const char * st = boost::asio::buffer_cast<const char*>(p_response->data());
+    const char * st = boost::asio::buffer_cast<const char*>(response.data());
     std::copy(st, st + bytes, std::back_inserter(buf_second));
   }
 

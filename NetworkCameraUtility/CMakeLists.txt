@@ -10,6 +10,7 @@ set(TARGET_SORCES
   ${SRC}/string_utility.cpp
   ${SRC}/HttpClient.cpp
   ${SRC}/HttpClientConcrete.cpp
+  ${SRC}/TimeoutBlockingClient.cpp
 )
 
 # マクロ定義
