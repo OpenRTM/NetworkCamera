@@ -147,7 +147,7 @@ private:
    */
   void deleteHeaderContainer();
 
-  HttpClientConcrete* p_client_;     //!< 実際のhttp処理を行うクラスのインスタンス
+  HttpClientConcrete* p_client_;     //!< 実際のhttp処理を行うクラスのインスタンス, ポインタで保持するのはincludeを含めたくないため
   const char** p_header_container_;  //!< ヘッダ格納用コンテナ
 
 
