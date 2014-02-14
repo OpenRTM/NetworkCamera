@@ -11,6 +11,8 @@
 #include <string>
 #include <sstream>
 
+#include <rtm/SystemLogger.h>
+
 #include "IntBounds.h"
 #include "HttpClient.h"
 
@@ -44,6 +46,8 @@ SonyNetworkCamera::SonyNetworkCamera()
       user_(""),
       password_(""),
       lastResult(false) {
+  rtclog.setName("SonyNetworkCamera");
+  RTC_DEBUG_STR("SonyNetworkCamera ctor");
 }
 
 SonyNetworkCamera::~SonyNetworkCamera() {
@@ -92,7 +96,7 @@ const char* SonyNetworkCamera::getImage(const Resolution resolution, int* p_leng
     path += "vga";
     break;
   default:
-    std::cout << "getImage: invalid resolution. try 640x480 value.\n";
+    RTC_WARN_STR("getImage: invalid resolution. try 640x480 value.");
     path += "vga";
     break;
   }
@@ -163,7 +167,7 @@ void SonyNetworkCamera::adjustFocus(const FocusType type) {
     type_str = "onepushaf";
     break;
   default:
-    std::cout << "adjustFocus: invalid focus type. try onepush value.\n";
+    RTC_WARN_STR("adjustFocus: invalid focus type. try onepush value.");
     type_str = "onepushaf";
     break;
   }
@@ -200,7 +204,7 @@ void SonyNetworkCamera::setWhiteBalance(const WhiteBalance type) {
     path += "onepushwb";
     break;
   default:
-    std::cout << "setWhiteBalance: invalid white balance type. try auto value.\n";
+    RTC_WARN_STR("setWhiteBalance: invalid white balance type. try auto value.");
     path += "auto";
     break;
   }
@@ -248,7 +252,7 @@ void SonyNetworkCamera::setSetupType(const SetupType type) {
     path += "on";
     break;
   default:
-    std::cout << "setSetupType: invalid setuptype value. try ceiling value.\n";
+    RTC_WARN_STR("setSetupType: invalid setuptype value. try ceiling value.");
     path += "off";
     break;
   }
@@ -324,15 +328,17 @@ const char* SonyNetworkCamera::doRequest(const std::string& path, int* p_length)
   case STATUS_NO_CONTENT:
     break;
   case STATUS_UNAUTHORIZED:
-    std::cout << "401エラー。API操作権限がありません。認証情報を見直してください。\n";
+    RTC_WARN_STR("401 error. not permitted for this api. Please check your authenticate information.");
     return NULL;
     break;
   case -1:
-    std::cout << "カメラとの通信に失敗しました。ホスト名・ポート番号などを確認してください。\n";
+    RTC_WARN_STR("Failed to comunicate to a network camera. Please check host name and port number for a target network camera.");
     return NULL;
     break;
   default:
-    std::cout << "成功以外のhttpステータスコード：" << status << "\n";
+    std::stringstream ss;
+    ss << status;
+    RTC_WARN_STR("unexpected http status code: " + ss.str());
     return NULL;
     break;
   }
