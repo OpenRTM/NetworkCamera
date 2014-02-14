@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * @file  SonyNetworkCamera.cpp
  * @brief NetworkCamera access class for Sony camera.
  * @date  2014-02-09
@@ -16,14 +16,14 @@
 
 /*!
  * @namespace openrtm_network_camera
- * @brief OpenRTM NetworkCamera—pƒRƒ“ƒ|[ƒlƒ“ƒg
+ * @brief OpenRTM NetworkCameraç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
  *
  */
 namespace openrtm_network_camera {
 
 /*!
  * @namespace sony
- * @brief SonyƒJƒƒ‰
+ * @brief Sonyã‚«ãƒ¡ãƒ©
  *
  */
 namespace sony {
@@ -64,16 +64,16 @@ void SonyNetworkCamera::setAuthenticateUser(const std::string& user, const std::
 }
 
 /*!
- * @brief ‰æ‘œ‚Ìæ“¾
+ * @brief ç”»åƒã®å–å¾—
  *
- * @caution ‰æ‘œ‚Ìæ“¾‚É‚ÍA/oneshotimage.jpg ‚ğg‚¢A‰ğ‘œ“x‚ÍAcamera.cgi?jpimagesize
- * ‚Å•ÏX‚·‚é•û–@‚à‚ ‚éB‚µ‚©‚µA‚±‚Ì•û–@‚Ìê‡A‰ğ‘œ“x•ÏX‚ª‚·‚®‚É”½‰f‚³‚ê‚¸A
- * æ“¾‚µ‚½‰æ‘œ‚ÌƒTƒCƒY‚ªw’èŠO‚Ì‚à‚Ì‚É‚È‚éê‡‚ª‚ ‚Á‚½B
- * ‚±‚Ì‚½‚ßA/jpeg‚ÌAPI‚ğg‚¤‚±‚Æ‚Æ‚µ‚½B
+ * @caution ç”»åƒã®å–å¾—ã«ã¯ã€/oneshotimage.jpg ã‚’ä½¿ã„ã€è§£åƒåº¦ã¯ã€camera.cgi?jpimagesize
+ * ã§å¤‰æ›´ã™ã‚‹æ–¹æ³•ã‚‚ã‚ã‚‹ã€‚ã—ã‹ã—ã€ã“ã®æ–¹æ³•ã®å ´åˆã€è§£åƒåº¦å¤‰æ›´ãŒã™ãã«åæ˜ ã•ã‚Œãšã€
+ * å–å¾—ã—ãŸç”»åƒã®ã‚µã‚¤ã‚ºãŒæŒ‡å®šå¤–ã®ã‚‚ã®ã«ãªã‚‹å ´åˆãŒã‚ã£ãŸã€‚
+ * ã“ã®ãŸã‚ã€/jpegã®APIã‚’ä½¿ã†ã“ã¨ã¨ã—ãŸã€‚
  *
- * @parma resolution  ‰ğ‘œ“x
- * @param p_length    ƒf[ƒ^’·io—Íj
- * @return ‰æ‘œƒf[ƒ^”z—ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+ * @parma resolution  è§£åƒåº¦
+ * @param p_length    ãƒ‡ãƒ¼ã‚¿é•·ï¼ˆå‡ºåŠ›ï¼‰
+ * @return ç”»åƒãƒ‡ãƒ¼ã‚¿é…åˆ—ã¸ã®ãƒã‚¤ãƒ³ã‚¿
  */
 const char* SonyNetworkCamera::getImage(const Resolution resolution, int* p_length) {
   const char* API_PATH = "/jpeg/";
@@ -138,15 +138,15 @@ void SonyNetworkCamera::zoomWide(const int displacement) {
 }
 
 /*!
- * @brief ƒtƒH[ƒJƒX‚Ì’²®
+ * @brief ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã®èª¿æ•´
  *
- * ƒtƒH[ƒJƒX“®ì‚ğŒÄ‚Ño‚·BonepushˆÈŠO‚Ìê‡‚ÍA
- * ˜A‘±‚µ‚ÄƒtƒH[ƒJƒX’â~‘€ì‚àŒÄ‚Ño‚·B
+ * ãƒ•ã‚©ãƒ¼ã‚«ã‚¹å‹•ä½œã‚’å‘¼ã³å‡ºã™ã€‚onepushä»¥å¤–ã®å ´åˆã¯ã€
+ * é€£ç¶šã—ã¦ãƒ•ã‚©ãƒ¼ã‚«ã‚¹åœæ­¢æ“ä½œã‚‚å‘¼ã³å‡ºã™ã€‚
  *
- * @caution ƒpƒ‰ƒ[ƒ^‚ª•s³‚Ìê‡‚ÍAonepush‚ÅƒŠƒNƒGƒXƒg‚ğs‚¤B
+ * @caution ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒä¸æ­£ã®å ´åˆã¯ã€onepushã§ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
  */
 void SonyNetworkCamera::adjustFocus(const FocusType type) {
-  const char* SPEED = ",1"; // [1,2,...,8] ‚¾‚ªA‚PŒÅ’è‚Æ‚·‚é
+  const char* SPEED = ",1"; // [1,2,...,8] ã ãŒã€ï¼‘å›ºå®šã¨ã™ã‚‹
 
   bool needStop = false;
   std::string type_str;
@@ -168,19 +168,19 @@ void SonyNetworkCamera::adjustFocus(const FocusType type) {
     break;
   }
 
-  // ƒtƒH[ƒJƒXÀs
+  // ãƒ•ã‚©ãƒ¼ã‚«ã‚¹å®Ÿè¡Œ
   doFocus(type_str + SPEED);
 
-  // ƒtƒH[ƒJƒX“®ì’â~
+  // ãƒ•ã‚©ãƒ¼ã‚«ã‚¹å‹•ä½œåœæ­¢
   if (needStop) {
     doFocus("stop,focus");
   }
 }
 
 /*!
- * @brief ƒzƒƒCƒgƒoƒ‰ƒ“ƒX‚Ìİ’è
+ * @brief ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹ã®è¨­å®š
  *
- * @caution ƒpƒ‰ƒ[ƒ^‚ª•s³‚Ìê‡‚ÍAauto‚ÅƒŠƒNƒGƒXƒg‚ğs‚¤B
+ * @caution ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒä¸æ­£ã®å ´åˆã¯ã€autoã§ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
  */
 void SonyNetworkCamera::setWhiteBalance(const WhiteBalance type) {
   const char* API_PATH = "/command/camera.cgi?wbmode=";
@@ -209,9 +209,9 @@ void SonyNetworkCamera::setWhiteBalance(const WhiteBalance type) {
 }
 
 /*!
- * @brief –¾‚é‚³‚Ì’²®
+ * @brief æ˜ã‚‹ã•ã®èª¿æ•´
  *
- * @caution ƒpƒ‰ƒ[ƒ^‚ª•s³‚Ìê‡‚ÍADefaultBrightness‚ÅƒŠƒNƒGƒXƒg‚ğs‚¤B
+ * @caution ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒä¸æ­£ã®å ´åˆã¯ã€DefaultBrightnessã§ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
  */
 void SonyNetworkCamera::adjustBrightness(const int brightness) {
   const char* API_PATH = "/command/camera.cgi?brightness=";
@@ -232,9 +232,9 @@ void SonyNetworkCamera::moveToHomePosition() {
 }
 
 /*!
- * @brief İ’uêŠ‚Ìİ’è
+ * @brief è¨­ç½®å ´æ‰€ã®è¨­å®š
  *
- * @caution ƒpƒ‰ƒ[ƒ^‚ª•s³‚Ìê‡‚ÍACeiling‚ÅƒŠƒNƒGƒXƒg‚ğs‚¤B
+ * @caution ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒä¸æ­£ã®å ´åˆã¯ã€Ceilingã§ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
  */
 void SonyNetworkCamera::setSetupType(const SetupType type) {
   const char* API_PATH = "/command/camera.cgi?eflip=";
@@ -280,12 +280,12 @@ void SonyNetworkCamera::doFocus(const std::string& parameter) {
 }
 
 /*!
- * @brief ƒŒƒXƒ|ƒ“ƒX‚ÌContent-Type‚ªƒeƒLƒXƒg‚Å‚ ‚éAPIŒÄ‚Ño‚µ
+ * @brief ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®Content-TypeãŒãƒ†ã‚­ã‚¹ãƒˆã§ã‚ã‚‹APIå‘¼ã³å‡ºã—
  *
- * httpƒŠƒNƒGƒXƒg‚Ì”­sA‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv‚ÌŠm”FAƒRƒ“ƒeƒ“ƒc‚Ì‰ğÍ
- * ‚ğ‚Ü‚Æ‚ß‚ÄÀs‚·‚é‚½‚ß‚Ìƒƒ\ƒbƒhB
+ * httpãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ç™ºè¡Œã€æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ã®ç¢ºèªã€ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã®è§£æ
+ * ã‚’ã¾ã¨ã‚ã¦å®Ÿè¡Œã™ã‚‹ãŸã‚ã®ãƒ¡ã‚½ãƒƒãƒ‰ã€‚
  *
- * @param path API‚ÌƒpƒX
+ * @param path APIã®ãƒ‘ã‚¹
  */
 void SonyNetworkCamera::callTextTypeAPI(const std::string& path) {
   int length;
@@ -294,29 +294,29 @@ void SonyNetworkCamera::callTextTypeAPI(const std::string& path) {
 }
 
 /*!
- * @brief ƒŠƒNƒGƒXƒg‚ÌÀs
+ * @brief ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®å®Ÿè¡Œ
  *
- * SonyNetworkCamera::setCamera ‚Åİ’è‚µ‚½ƒJƒƒ‰‚ÉA
- * ˆø”‚Åw’è‚³‚ê‚½APIƒŠƒNƒGƒXƒg‚ğ“Š‚°‚éB
- * Às‚Íí‚ÉABasic”FØ•t‚«B
+ * SonyNetworkCamera::setCamera ã§è¨­å®šã—ãŸã‚«ãƒ¡ãƒ©ã«ã€
+ * å¼•æ•°ã§æŒ‡å®šã•ã‚ŒãŸAPIãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’æŠ•ã’ã‚‹ã€‚
+ * å®Ÿè¡Œæ™‚ã¯å¸¸ã«ã€Basicèªè¨¼ä»˜ãã€‚
  *
- * @caution –ß‚è’l‚ÍŒÄ‚Ño‚µ‘¤‚Åíœ‚µ‚È‚¢
- * @caution Ÿ‚ÌAPIŒÄ‚Ño‚µ‚É‚æ‚èƒŒƒXƒ|ƒ“ƒXƒ{ƒfƒB‚ªÁ‹‚³‚ê‚éB
+ * @caution æˆ»ã‚Šå€¤ã¯å‘¼ã³å‡ºã—å´ã§å‰Šé™¤ã—ãªã„
+ * @caution æ¬¡ã®APIå‘¼ã³å‡ºã—ã«ã‚ˆã‚Šãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒœãƒ‡ã‚£ãŒæ¶ˆå»ã•ã‚Œã‚‹ã€‚
  *
- * @param path  API‚ÌƒpƒX
- * @param p_length  ƒŒƒXƒ|ƒ“ƒXƒf[ƒ^’·io—Íj
- * @return ƒRƒ“ƒeƒ“ƒciƒŒƒXƒ|ƒ“ƒXƒ{ƒfƒBj‚Ö‚Ìƒ|ƒCƒ“ƒ^
+ * @param path  APIã®ãƒ‘ã‚¹
+ * @param p_length  ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿é•·ï¼ˆå‡ºåŠ›ï¼‰
+ * @return ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ï¼ˆãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒœãƒ‡ã‚£ï¼‰ã¸ã®ãƒã‚¤ãƒ³ã‚¿
  */
 const char* SonyNetworkCamera::doRequest(const std::string& path, int* p_length) {
   lastResult = false;
 
-  // Basic”FØ•t‚«ƒŠƒNƒGƒXƒg
+  // Basicèªè¨¼ä»˜ããƒªã‚¯ã‚¨ã‚¹ãƒˆ
   p_client_->setBasicAuthenticationParameter(user_.c_str(), password_.c_str());
   p_client_->doGet(host_.c_str(), path.c_str(), port_.c_str());
 
-  // Œ‹‰Êˆ—
+  // çµæœå‡¦ç†
 
-  // ƒXƒe[ƒ^ƒXƒR[ƒh
+  // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰
   *p_length = 0;
   const int status = p_client_->getStatusCode();
   switch(status) {
@@ -324,23 +324,23 @@ const char* SonyNetworkCamera::doRequest(const std::string& path, int* p_length)
   case STATUS_NO_CONTENT:
     break;
   case STATUS_UNAUTHORIZED:
-    std::cout << "401ƒGƒ‰[BAPI‘€ìŒ ŒÀ‚ª‚ ‚è‚Ü‚¹‚ñB”FØî•ñ‚ğŒ©’¼‚µ‚Ä‚­‚¾‚³‚¢B\n";
+    std::cout << "401ã‚¨ãƒ©ãƒ¼ã€‚APIæ“ä½œæ¨©é™ãŒã‚ã‚Šã¾ã›ã‚“ã€‚èªè¨¼æƒ…å ±ã‚’è¦‹ç›´ã—ã¦ãã ã•ã„ã€‚\n";
     return NULL;
     break;
   case -1:
-    std::cout << "ƒJƒƒ‰‚Æ‚Ì’ÊM‚É¸”s‚µ‚Ü‚µ‚½BƒzƒXƒg–¼Eƒ|[ƒg”Ô†‚È‚Ç‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B\n";
+    std::cout << "ã‚«ãƒ¡ãƒ©ã¨ã®é€šä¿¡ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ãƒ›ã‚¹ãƒˆåãƒ»ãƒãƒ¼ãƒˆç•ªå·ãªã©ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚\n";
     return NULL;
     break;
   default:
-    std::cout << "¬Œ÷ˆÈŠO‚ÌhttpƒXƒe[ƒ^ƒXƒR[ƒhF" << status << "\n";
+    std::cout << "æˆåŠŸä»¥å¤–ã®httpã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ï¼š" << status << "\n";
     return NULL;
     break;
   }
 
-  // httpƒXƒe[ƒ^ƒXƒR[ƒh‚Å‚Ì”»’èŒ‹‰Ê
+  // httpã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã§ã®åˆ¤å®šçµæœ
   lastResult = true;
 
-  // ƒRƒ“ƒeƒ“ƒc’·‚ÌŠm”F
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·ã®ç¢ºèª
   *p_length = p_client_->getContentLength();
   if (0 == *p_length) {
     return NULL;
@@ -352,12 +352,12 @@ const char* SonyNetworkCamera::doRequest(const std::string& path, int* p_length)
 bool SonyNetworkCamera::isValidContentsType(const std::string& target_type) {
   const std::string type = p_client_->getContentType();
   if (0 == type.size()) {
-    // ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒvƒwƒbƒ_‚ª‚È‚¢ê‡‚Í”»’è‚Å‚«‚È‚¢‚Ì‚Åtrue‚Æ‚·‚é
+    // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ãƒ˜ãƒƒãƒ€ãŒãªã„å ´åˆã¯åˆ¤å®šã§ããªã„ã®ã§trueã¨ã™ã‚‹
     return true;
   }
 
   if (std::string::npos == type.find(target_type)) {
-    lastResult = false;  // ‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv‚ÆˆÙ‚È‚é‚Ì‚ÅAfalse‚É•ÏX
+    lastResult = false;  // æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ã¨ç•°ãªã‚‹ã®ã§ã€falseã«å¤‰æ›´
     return false;
   }
   return true;

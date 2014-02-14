@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * @file  SonyNetworkCamera.h
  * @brief NetworkCamera access class for Sony camera.
  * @date  2014-02-09
@@ -10,43 +10,43 @@
 
 /*!
  * @namespace openrtm_network_camera
- * @brief OpenRTM NetworkCamera—pƒRƒ“ƒ|[ƒlƒ“ƒg
+ * @brief OpenRTM NetworkCameraç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
  *
  */
 namespace openrtm_network_camera {
 
 /*!
  * @namespace utility
- * @brief ‹¤’Êˆ—
+ * @brief å…±é€šå‡¦ç†
  *
  */
 namespace utility {
-  class HttpClient; // ‘O•ûéŒ¾
+  class HttpClient; // å‰æ–¹å®£è¨€
 }
 
 /*!
  * @namespace sony
- * @brief SonyƒJƒƒ‰
+ * @brief Sonyã‚«ãƒ¡ãƒ©
  *
  */
 namespace sony {
 
 /*!
  * @class SonyNetworkCamera
- * @brief SonyNetworkCamera ƒNƒ‰ƒX
+ * @brief SonyNetworkCamera ã‚¯ãƒ©ã‚¹
  * 
- * Sony»ƒlƒbƒgƒ[ƒNƒJƒƒ‰‚ÖƒAƒNƒZƒX‚·‚é‚½‚ß‚ÌƒNƒ‰ƒXB
- * ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰»Œã‚àAÚ‘±æ‚ğØ‚è‘Ö‚¦‰Â”\‚Æ‚·‚éB
+ * Sonyè£½ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚«ãƒ¡ãƒ©ã¸ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã€‚
+ * ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–å¾Œã‚‚ã€æ¥ç¶šå…ˆã‚’åˆ‡ã‚Šæ›¿ãˆå¯èƒ½ã¨ã™ã‚‹ã€‚
  *
- * ƒJƒƒ‰ŒÄ‚Ño‚µ‚ÌŒ‹‰Ê‚ª¬Œ÷‚µ‚½‚©”Û‚©‚ğƒƒ\ƒbƒh‚É‚æ‚èæ“¾‰Â”\‚Æ‚·‚éB
- * Ú×‚ÈƒGƒ‰[î•ñ‚ÍƒƒO‚Öo—Í‚·‚éB
+ * ã‚«ãƒ¡ãƒ©å‘¼ã³å‡ºã—ã®çµæœãŒæˆåŠŸã—ãŸã‹å¦ã‹ã‚’ãƒ¡ã‚½ãƒƒãƒ‰ã«ã‚ˆã‚Šå–å¾—å¯èƒ½ã¨ã™ã‚‹ã€‚
+ * è©³ç´°ãªã‚¨ãƒ©ãƒ¼æƒ…å ±ã¯ãƒ­ã‚°ã¸å‡ºåŠ›ã™ã‚‹ã€‚
  */
 class SonyNetworkCamera
 {
 public:
 
   /*!
-   * @brief ‰æ‘œƒTƒCƒY
+   * @brief ç”»åƒã‚µã‚¤ã‚º
    */
   enum Resolution {
     w160x120,    //!< 160x120
@@ -55,241 +55,241 @@ public:
   };
 
   /*!
-   * @brief ƒtƒH[ƒJƒX
+   * @brief ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
    */
   enum FocusType {
-    Near,          //!< ‹ß‚­
-    Far,           //!< ‰“‚­
-    OnePushFocus,  //!< ƒƒ“ƒvƒbƒVƒ…
+    Near,          //!< è¿‘ã
+    Far,           //!< é ã
+    OnePushFocus,  //!< ãƒ¯ãƒ³ãƒ—ãƒƒã‚·ãƒ¥
   };
 
   /*!
-   * @brief ƒzƒƒCƒgƒoƒ‰ƒ“ƒX
+   * @brief ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹
    */
   enum WhiteBalance {
-    AutoWB,            //!< ©“®
-    Indoor,            //!< ‰®“à
-    Outdoor,           //!< ‰®ŠO
-    OnePushWB,         //!< ƒƒ“ƒvƒbƒVƒ…
+    AutoWB,            //!< è‡ªå‹•
+    Indoor,            //!< å±‹å†…
+    Outdoor,           //!< å±‹å¤–
+    OnePushWB,         //!< ãƒ¯ãƒ³ãƒ—ãƒƒã‚·ãƒ¥
   };
 
   /*!
-   * @brief İ’uƒ^ƒCƒv
+   * @brief è¨­ç½®ã‚¿ã‚¤ãƒ—
    */
   enum SetupType {
-    Ceiling,  //!< “Vˆä
-    Desktop,  //!< ‘ìã
+    Ceiling,  //!< å¤©äº•
+    Desktop,  //!< å“ä¸Š
   };
 
 	SonyNetworkCamera(void);
 	~SonyNetworkCamera(void);
 
   /*!
-   * @brief ƒJƒƒ‰‚Ìİ’è
+   * @brief ã‚«ãƒ¡ãƒ©ã®è¨­å®š
    *
-   * @param host  ƒzƒXƒg–¼‚Ü‚½‚ÍIPƒAƒhƒŒƒX
-   * @param port  ƒ|[ƒg”Ô†
+   * @param host  ãƒ›ã‚¹ãƒˆåã¾ãŸã¯IPã‚¢ãƒ‰ãƒ¬ã‚¹
+   * @param port  ãƒãƒ¼ãƒˆç•ªå·
    */
   void setCamera(const std::string& host, const std::string& port);
 
   /*!
-   * @brief ”FØƒ†[ƒU[‚Ìİ’è
+   * @brief èªè¨¼ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®è¨­å®š
    *
-   * Basic”FØ—p‚Ìƒ†[ƒU[–¼‚ÆƒpƒXƒ[ƒh‚ğİ’è‚·‚éB
-   * İ’è‚ÍAí‚É”FØî•ñ‚ğ‘—M‚·‚éB
-   * ‹ó•¶š—ñ‚ğİ’è‚·‚ê‚ÎAw’è‚ª‰ğœ‚³‚ê‚éB
+   * Basicèªè¨¼ç”¨ã®ãƒ¦ãƒ¼ã‚¶ãƒ¼åã¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’è¨­å®šã™ã‚‹ã€‚
+   * è¨­å®šæ™‚ã¯ã€å¸¸ã«èªè¨¼æƒ…å ±ã‚’é€ä¿¡ã™ã‚‹ã€‚
+   * ç©ºæ–‡å­—åˆ—ã‚’è¨­å®šã™ã‚Œã°ã€æŒ‡å®šãŒè§£é™¤ã•ã‚Œã‚‹ã€‚
    *
-   * @param user      ƒ†[ƒU[–¼
-   * @param password  ƒpƒXƒ[ƒh
+   * @param user      ãƒ¦ãƒ¼ã‚¶ãƒ¼å
+   * @param password  ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
    */
   void setAuthenticateUser(const std::string& user, const std::string password);
 
   /*!
-   * @brief ‰æ‘œ‚Ìæ“¾
+   * @brief ç”»åƒã®å–å¾—
    *
-   * ƒJƒƒ‰‚©‚ç‚Ì‰æ‘œ‚ğæ“¾‚·‚éBƒtƒH[ƒ}ƒbƒg‚ÍJPEGB
-   * ŒÄ‚Ño‚µ‚É‰ğ‘œ“x‚ğƒpƒ‰ƒ[ƒ^‚Æ‚µ‚Ä—^‚¦‚éB
+   * ã‚«ãƒ¡ãƒ©ã‹ã‚‰ã®ç”»åƒã‚’å–å¾—ã™ã‚‹ã€‚ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã¯JPEGã€‚
+   * å‘¼ã³å‡ºã—æ™‚ã«è§£åƒåº¦ã‚’ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã—ã¦ä¸ãˆã‚‹ã€‚
    *
-   * @caution –ß‚è’l‚ÍŒÄ‚Ño‚µ‘¤‚Åíœ‚µ‚È‚¢
-   * @caution Ÿ‚ÌAPIŒÄ‚Ño‚µi‰æ‘œˆÈŠO‚àŠÜ‚Ş‚·‚×‚Äj‚É‚æ‚èƒf[ƒ^‚ªÁ‹‚³‚ê‚éB
-   * ‚µ‚½‚ª‚Á‚ÄAŸ‚ÌŒÄ‚Ño‚µ‘O‚Éi•K—v‚ª‚ ‚ê‚Îj–ß‚è’l‚ğƒRƒs[‚·‚é‚±‚Æ
+   * @caution æˆ»ã‚Šå€¤ã¯å‘¼ã³å‡ºã—å´ã§å‰Šé™¤ã—ãªã„
+   * @caution æ¬¡ã®APIå‘¼ã³å‡ºã—ï¼ˆç”»åƒä»¥å¤–ã‚‚å«ã‚€ã™ã¹ã¦ï¼‰ã«ã‚ˆã‚Šãƒ‡ãƒ¼ã‚¿ãŒæ¶ˆå»ã•ã‚Œã‚‹ã€‚
+   * ã—ãŸãŒã£ã¦ã€æ¬¡ã®å‘¼ã³å‡ºã—å‰ã«ï¼ˆå¿…è¦ãŒã‚ã‚Œã°ï¼‰æˆ»ã‚Šå€¤ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ã“ã¨
    *
-   * @parma resolution  ‰ğ‘œ“x
-   * @param p_length    ƒf[ƒ^’·io—Íj
-   * @return ‰æ‘œƒf[ƒ^”z—ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+   * @parma resolution  è§£åƒåº¦
+   * @param p_length    ãƒ‡ãƒ¼ã‚¿é•·ï¼ˆå‡ºåŠ›ï¼‰
+   * @return ç”»åƒãƒ‡ãƒ¼ã‚¿é…åˆ—ã¸ã®ãƒã‚¤ãƒ³ã‚¿
    */
   const char* getImage(const Resolution resolution, int* p_length);
 
   /*!
-   * @brief ‰æ¿‚Ìİ’è
+   * @brief ç”»è³ªã®è¨­å®š
    *
-   * ƒJƒƒ‰‰æ‘œ‚Ì‰æ¿‚ğİ’è‚·‚éB
+   * ã‚«ãƒ¡ãƒ©ç”»åƒã®ç”»è³ªã‚’è¨­å®šã™ã‚‹ã€‚
    *
-   * @param quality  ‰æ¿
+   * @param quality  ç”»è³ª
    */
   void setQuality(const int quality = DEFAULT_QUALITY);
 
   /*!
-   * @brief ¶•ûŒü‚Öƒpƒ“
+   * @brief å·¦æ–¹å‘ã¸ãƒ‘ãƒ³
    */
 	void movePanLeft(const int displacement = DEFAULT_PAN);
 
   /*!
-   * @brief ‰E•ûŒü‚Öƒpƒ“
+   * @brief å³æ–¹å‘ã¸ãƒ‘ãƒ³
    */
   void movePanRight(const int displacement = DEFAULT_PAN);
 
   /*!
-   * @brief ƒ`ƒ‹ƒgƒAƒbƒv
+   * @brief ãƒãƒ«ãƒˆã‚¢ãƒƒãƒ—
    */
   void moveTiltUp(const int displacement = DEFAULT_TILT);
 
   /*!
-   * @brief ƒ`ƒ‹ƒgƒ_ƒEƒ“
+   * @brief ãƒãƒ«ãƒˆãƒ€ã‚¦ãƒ³
    */
   void moveTiltDown(const int displacement = DEFAULT_TILT);
 
   /*!
-   * @brief ƒY[ƒ€ƒCƒ“
+   * @brief ã‚ºãƒ¼ãƒ ã‚¤ãƒ³
    */
   void zoomTele(const int displacement = DEFAULT_ZOOM);
 
   /*!
-   * @brief ƒY[ƒ€ƒAƒEƒg
+   * @brief ã‚ºãƒ¼ãƒ ã‚¢ã‚¦ãƒˆ
    */
   void zoomWide(const int displacement = DEFAULT_ZOOM);
 
   /*!
-   * @brief ƒtƒH[ƒJƒX’²®
+   * @brief ãƒ•ã‚©ãƒ¼ã‚«ã‚¹èª¿æ•´
    *
-   * @param type  ƒtƒH[ƒJƒX’²®ƒ^ƒCƒv
+   * @param type  ãƒ•ã‚©ãƒ¼ã‚«ã‚¹èª¿æ•´ã‚¿ã‚¤ãƒ—
    */
   void adjustFocus(const FocusType type);
 
   /*!
-   * @brief ƒzƒƒCƒgƒoƒ‰ƒ“ƒXİ’è
+   * @brief ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹è¨­å®š
    *
-   * @param type  ƒzƒƒCƒgƒoƒ‰ƒ“ƒXƒ^ƒCƒv
+   * @param type  ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹ã‚¿ã‚¤ãƒ—
    */
   void setWhiteBalance(const WhiteBalance type);
 
   /*!
-   * @brief –¾‚é‚³’²®
+   * @brief æ˜ã‚‹ã•èª¿æ•´
    *
-   * @param type  –¾‚é‚³’²®ƒ^ƒCƒv
+   * @param type  æ˜ã‚‹ã•èª¿æ•´ã‚¿ã‚¤ãƒ—
    */
   void adjustBrightness(const int brightness = DEFAULT_BRIGHTNESS);
 
   /*!
-   * @brief ƒz[ƒ€ƒ|ƒWƒVƒ‡ƒ“•œ‹A
+   * @brief ãƒ›ãƒ¼ãƒ ãƒã‚¸ã‚·ãƒ§ãƒ³å¾©å¸°
    */
   void moveToHomePosition();
 
   /*!
-   * @brief İ’uêŠ‚Ìİ’è
+   * @brief è¨­ç½®å ´æ‰€ã®è¨­å®š
    *
-   * @param type  İ’uêŠƒ^ƒCƒv
+   * @param type  è¨­ç½®å ´æ‰€ã‚¿ã‚¤ãƒ—
    */
   void setSetupType(const SetupType type);
 
   /*!
-   * @brief ÀsAPI‚Ì¬”Û
+   * @brief å®Ÿè¡ŒAPIã®æˆå¦
    *
-   * ‘O‰ñŒÄ‚Ño‚µ‚½API‚ª¬Œ÷‚µ‚½‚©”Û‚©‚ğ’²‚×‚éB
+   * å‰å›å‘¼ã³å‡ºã—ãŸAPIãŒæˆåŠŸã—ãŸã‹å¦ã‹ã‚’èª¿ã¹ã‚‹ã€‚
    *
-   * @return true : ‘O‰ñŒÄ‚Ño‚µ‚ª¬Œ÷
-   *         false: ‘O‰ñŒÄ‚Ño‚µ‚ª¸”s
+   * @return true : å‰å›å‘¼ã³å‡ºã—ãŒæˆåŠŸ
+   *         false: å‰å›å‘¼ã³å‡ºã—ãŒå¤±æ•—
    */
   bool isLastApiSuccess() const { return lastResult; }
 
 protected:
 private:
   /*!
-   * @brief ƒpƒ““®ì
+   * @brief ãƒ‘ãƒ³å‹•ä½œ
    *
-   * @param parameter ¶‰E
+   * @param parameter å·¦å³
    */
   void movePan(const std::string& parameter, const int displacement);
 
   /*!
-   * @brief ƒ`ƒ‹ƒg“®ì
+   * @brief ãƒãƒ«ãƒˆå‹•ä½œ
    *
-   * @param parameter ã‰º
+   * @param parameter ä¸Šä¸‹
    */
   void moveTilt(const std::string& parameter, const int displacement);
 
   /*!
-   * @brief ƒY[ƒ€“®ì
+   * @brief ã‚ºãƒ¼ãƒ å‹•ä½œ
    *
-   * @param parameter ƒCƒ“ƒAƒEƒg
+   * @param parameter ã‚¤ãƒ³ã‚¢ã‚¦ãƒˆ
    */
   void moveZoom(const std::string& parameter, const int displacement);
 
   /*!
-   * @brief ƒpƒ“Eƒ`ƒ‹ƒgEƒY[ƒ€“®ì
+   * @brief ãƒ‘ãƒ³ãƒ»ãƒãƒ«ãƒˆãƒ»ã‚ºãƒ¼ãƒ å‹•ä½œ
    *
-   * @param parameter “®ìƒpƒ‰ƒ[ƒ^
+   * @param parameter å‹•ä½œãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
    */
   void movePTZ(const std::string& parameter);
 
   /*!
-   * @brief ƒtƒH[ƒJƒXÀs
+   * @brief ãƒ•ã‚©ãƒ¼ã‚«ã‚¹å®Ÿè¡Œ
    *
-   * @param parameter “®ìƒpƒ‰ƒ[ƒ^
+   * @param parameter å‹•ä½œãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
    */
   void doFocus(const std::string& parameter);
 
   /*!
-   * @brief ƒŒƒXƒ|ƒ“ƒX‚ÌContent-Type‚ªƒeƒLƒXƒg‚Å‚ ‚éAPIŒÄ‚Ño‚µ
+   * @brief ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®Content-TypeãŒãƒ†ã‚­ã‚¹ãƒˆã§ã‚ã‚‹APIå‘¼ã³å‡ºã—
    *
-   * @param path API‚ÌƒpƒX
+   * @param path APIã®ãƒ‘ã‚¹
    */
   void callTextTypeAPI(const std::string& path);
 
   /*!
-   * @brief ƒŠƒNƒGƒXƒg‚ÌÀs
+   * @brief ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®å®Ÿè¡Œ
    *
-   * ƒlƒbƒgƒ[ƒNƒJƒƒ‰‚Ö‚ÌAPIƒŠƒNƒGƒXƒg‚ğs‚¤B
-   * ŒÄ‚Ño‚µŒ‹‰Ê‚É‰‚¶‚ÄA‘O‰ñ‚ÌÀsŒ‹‰Ê‚ğİ’è‚·‚éB
+   * ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚«ãƒ¡ãƒ©ã¸ã®APIãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’è¡Œã†ã€‚
+   * å‘¼ã³å‡ºã—çµæœã«å¿œã˜ã¦ã€å‰å›ã®å®Ÿè¡Œçµæœã‚’è¨­å®šã™ã‚‹ã€‚
    *
-   * @caution –ß‚è’l‚ÍŒÄ‚Ño‚µ‘¤‚Åíœ‚µ‚È‚¢
-   * @caution Ÿ‚ÌAPIŒÄ‚Ño‚µ‚É‚æ‚èƒŒƒXƒ|ƒ“ƒXƒ{ƒfƒB‚ªÁ‹‚³‚ê‚éB
+   * @caution æˆ»ã‚Šå€¤ã¯å‘¼ã³å‡ºã—å´ã§å‰Šé™¤ã—ãªã„
+   * @caution æ¬¡ã®APIå‘¼ã³å‡ºã—ã«ã‚ˆã‚Šãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒœãƒ‡ã‚£ãŒæ¶ˆå»ã•ã‚Œã‚‹ã€‚
    *
-   * @param path  API‚ÌƒpƒX
-   * @param p_length  ƒŒƒXƒ|ƒ“ƒXƒf[ƒ^’·io—Íj
-   * @return ƒRƒ“ƒeƒ“ƒciƒŒƒXƒ|ƒ“ƒXƒ{ƒfƒBj‚Ö‚Ìƒ|ƒCƒ“ƒ^
+   * @param path  APIã®ãƒ‘ã‚¹
+   * @param p_length  ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿é•·ï¼ˆå‡ºåŠ›ï¼‰
+   * @return ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ï¼ˆãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒœãƒ‡ã‚£ï¼‰ã¸ã®ãƒã‚¤ãƒ³ã‚¿
    */
   const char* doRequest(const std::string& path, int* p_length);
 
   /*!
-   * @brief ‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒc‚©”Û‚©
+   * @brief æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‹å¦ã‹
    *
-   * ƒŠƒNƒGƒXƒg‚Å‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒc‚©”Û‚©‚ğ”»’è‚·‚éB
-   * ”»’è‚ÍAContents-Typeƒwƒbƒ_‚Ìî•ñ‚ÉŠî‚Ã‚­B
+   * ãƒªã‚¯ã‚¨ã‚¹ãƒˆã§æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‹å¦ã‹ã‚’åˆ¤å®šã™ã‚‹ã€‚
+   * åˆ¤å®šã¯ã€Contents-Typeãƒ˜ãƒƒãƒ€ã®æƒ…å ±ã«åŸºã¥ãã€‚
    *
-   * @param target_type ‘z’è‚µ‚Ä‚¢‚éƒRƒ“ƒeƒ“ƒcƒ^ƒCƒviMIME•\‹L‚Å—^‚¦‚éj
-   * @return true : ƒŒƒXƒ|ƒ“ƒX‚Í‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒc ‚Ü‚½‚ÍContents-Typeƒwƒbƒ_‚ª‚È‚¢
-   *         false: ƒŒƒXƒ|ƒ“ƒX‚Í‘z’è‚µ‚½ƒRƒ“ƒeƒ“ƒc‚ÆˆÙ‚È‚é
+   * @param target_type æƒ³å®šã—ã¦ã„ã‚‹ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—ï¼ˆMIMEè¡¨è¨˜ã§ä¸ãˆã‚‹ï¼‰
+   * @return true : ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã¯æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ ã¾ãŸã¯Contents-Typeãƒ˜ãƒƒãƒ€ãŒãªã„
+   *         false: ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã¯æƒ³å®šã—ãŸã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã¨ç•°ãªã‚‹
    */
   bool isValidContentsType(const std::string& target_type);
 
 
 
-  utility::HttpClient* p_client_;  //!< HttpClientƒCƒ“ƒXƒ^ƒ“ƒX
+  utility::HttpClient* p_client_;  //!< HttpClientã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 
-  std::string host_;      //!< ƒzƒXƒg–¼‚Ü‚½‚ÍIPƒAƒhƒŒƒX
-  std::string port_;      //!< ƒ|[ƒg”Ô†
+  std::string host_;      //!< ãƒ›ã‚¹ãƒˆåã¾ãŸã¯IPã‚¢ãƒ‰ãƒ¬ã‚¹
+  std::string port_;      //!< ãƒãƒ¼ãƒˆç•ªå·
 
-  std::string user_;      //!< Basic”FØ—pƒ†[ƒU[
-  std::string password_;  //!< Basic”FØ—pƒpƒXƒ[ƒh
+  std::string user_;      //!< Basicèªè¨¼ç”¨ãƒ¦ãƒ¼ã‚¶ãƒ¼
+  std::string password_;  //!< Basicèªè¨¼ç”¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
 
-  bool lastResult;        //!< ’¼‘O‚ÌAPI‚ÌÀsŒ‹‰Ê, false:‚È‚ñ‚ç‚©‚ÌƒGƒ‰[, true:¬Œ÷
+  bool lastResult;        //!< ç›´å‰ã®APIã®å®Ÿè¡Œçµæœ, false:ãªã‚“ã‚‰ã‹ã®ã‚¨ãƒ©ãƒ¼, true:æˆåŠŸ
 
-  static const int DEFAULT_QUALITY    = 5;  //!< ‰æ¿‚ÌƒfƒtƒHƒ‹ƒg’l
-  static const int DEFAULT_PAN        = 5;  //!< ƒpƒ“‘€ì‚ÌƒfƒtƒHƒ‹ƒgˆÚ“®—Ê
-  static const int DEFAULT_TILT       = 5;  //!< ƒ`ƒ‹ƒg‘€ì‚ÌƒfƒtƒHƒ‹ƒgˆÚ“®—Ê
-  static const int DEFAULT_ZOOM       = 5;  //!< ƒY[ƒ€‘€ì‚ÌƒfƒtƒHƒ‹ƒgˆÚ“®—Ê
-  static const int DEFAULT_BRIGHTNESS = 5;  //!< –¾‚é‚³‚ÌƒfƒtƒHƒ‹ƒg’l
+  static const int DEFAULT_QUALITY    = 5;  //!< ç”»è³ªã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
+  static const int DEFAULT_PAN        = 5;  //!< ãƒ‘ãƒ³æ“ä½œã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆç§»å‹•é‡
+  static const int DEFAULT_TILT       = 5;  //!< ãƒãƒ«ãƒˆæ“ä½œã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆç§»å‹•é‡
+  static const int DEFAULT_ZOOM       = 5;  //!< ã‚ºãƒ¼ãƒ æ“ä½œã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆç§»å‹•é‡
+  static const int DEFAULT_BRIGHTNESS = 5;  //!< æ˜ã‚‹ã•ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
 
 
   SonyNetworkCamera(const SonyNetworkCamera&);
@@ -297,13 +297,13 @@ private:
 };
 
 /*!
- * @brief ®”‚©‚ç®Œ`Ï‚İ•¶š—ñ‚Ö‚Ì•ÏŠ·
+ * @brief æ•´æ•°ã‹ã‚‰æ•´å½¢æ¸ˆã¿æ–‡å­—åˆ—ã¸ã®å¤‰æ›
  *
- * ˆø”‚Å—^‚¦‚ç‚ê‚½®”‚ğA2Œ…•\¦‚µA
- * •s‘«•ª‚Í0‚Å–„‚ß‚½Œ`®‚Ì•¶š—ñ‚É•ÏŠ·‚·‚éB
+ * å¼•æ•°ã§ä¸ãˆã‚‰ã‚ŒãŸæ•´æ•°ã‚’ã€2æ¡è¡¨ç¤ºã—ã€
+ * ä¸è¶³åˆ†ã¯0ã§åŸ‹ã‚ãŸå½¢å¼ã®æ–‡å­—åˆ—ã«å¤‰æ›ã™ã‚‹ã€‚
  *
- * @parma val  ®Œ`‘ÎÛ‚Ì”’l
- * @return ®Œ`Œã‚Ì•¶š—ñ
+ * @parma val  æ•´å½¢å¯¾è±¡ã®æ•°å€¤
+ * @return æ•´å½¢å¾Œã®æ–‡å­—åˆ—
  */
 std::string formatDigitFill0Width2(const int val);
 

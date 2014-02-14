@@ -1,4 +1,4 @@
-// -*- C++ -*-
+﻿// -*- C++ -*-
 /*!
  * @file SonyNetworkCameraRtComp.cpp
  * @brief Standalone component

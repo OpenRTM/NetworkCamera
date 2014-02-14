@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * @file  IntBounds.h
  * @brief bounds for int.
  * @date  2014-02-09
@@ -8,24 +8,24 @@
 
 /*!
  * @namespace openrtm_network_camera
- * @brief OpenRTM NetworkCamera—pƒRƒ“ƒ|[ƒlƒ“ƒg
+ * @brief OpenRTM NetworkCameraç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
  *
  */
 namespace openrtm_network_camera {
 
 /*!
  * @namespace sony
- * @brief SonyƒJƒƒ‰
+ * @brief Sonyã‚«ãƒ¡ãƒ©
  *
  */
 namespace sony {
 
 /*!
- * @brief intŒ^‚Ì‹«ŠEƒNƒ‰ƒX
+ * @brief intå‹ã®å¢ƒç•Œã‚¯ãƒ©ã‚¹
  *
- * intŒ^®”‚É‘Î‚·‚é‹«ŠE‚ğ•\‚·ƒNƒ‰ƒX
- * ƒeƒ“ƒvƒŒ[ƒgƒpƒ‰ƒ[ƒ^‚Å¦‚µ‚½”ÍˆÍ‚ğ’´‚¦‚é”’l‚ÍAƒfƒtƒHƒ‹ƒg’l‚É
- * ’u‚«Š·‚¦‚éB
+ * intå‹æ•´æ•°ã«å¯¾ã™ã‚‹å¢ƒç•Œã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
+ * ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§ç¤ºã—ãŸç¯„å›²ã‚’è¶…ãˆã‚‹æ•°å€¤ã¯ã€ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ã«
+ * ç½®ãæ›ãˆã‚‹ã€‚
  */
 template<int lower, int upper, int defaultValue>
 class IntBounds {
