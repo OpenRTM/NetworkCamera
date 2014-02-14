@@ -475,7 +475,7 @@ void PanasonicNetworkCameraRt::setupSetupType() {
   PanasonicNetworkCamera::SetupType st;
   if ("ceiling" == m_setupType) {
     st = PanasonicNetworkCamera::Ceiling;
-  } if ("desktop" == m_setupType) {
+  } else if ("desktop" == m_setupType) {
     st = PanasonicNetworkCamera::Desktop;
   } else {
     RTC_WARN_STR("invalid configuration parameter, setupType:" + m_setupType + ". use \"desktop\" instead.");
