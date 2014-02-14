@@ -108,7 +108,7 @@ const char* SonyNetworkCamera::getImage(const Resolution resolution, int* p_leng
 void SonyNetworkCamera::setQuality(const int quality) {
   const char* API_PATH = "/command/camera.cgi?jpquality=";
 
-  IntBounds<1, 10, DEFAULT_QUALITY> bounds;
+  IntBounds<1, 10, DEFAULT_IMAGE_QUALITY> bounds;
   std::stringstream ss;
   ss << bounds(quality);
   

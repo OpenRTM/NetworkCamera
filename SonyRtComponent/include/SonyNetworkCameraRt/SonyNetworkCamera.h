@@ -127,7 +127,7 @@ public:
    *
    * @param quality  画質
    */
-  void setQuality(const int quality = DEFAULT_QUALITY);
+  void setQuality(const int quality = DEFAULT_IMAGE_QUALITY);
 
   /*!
    * @brief 左方向へパン
@@ -285,11 +285,11 @@ private:
 
   bool lastResult;        //!< 直前のAPIの実行結果, false:なんらかのエラー, true:成功
 
-  static const int DEFAULT_QUALITY    = 5;  //!< 画質のデフォルト値
-  static const int DEFAULT_PAN        = 5;  //!< パン操作のデフォルト移動量
-  static const int DEFAULT_TILT       = 5;  //!< チルト操作のデフォルト移動量
-  static const int DEFAULT_ZOOM       = 5;  //!< ズーム操作のデフォルト移動量
-  static const int DEFAULT_BRIGHTNESS = 5;  //!< 明るさのデフォルト値
+  static const int DEFAULT_IMAGE_QUALITY = 5;  //!< 画質のデフォルト値
+  static const int DEFAULT_PAN           = 5;  //!< パン操作のデフォルト移動量
+  static const int DEFAULT_TILT          = 5;  //!< チルト操作のデフォルト移動量
+  static const int DEFAULT_ZOOM          = 5;  //!< ズーム操作のデフォルト移動量
+  static const int DEFAULT_BRIGHTNESS    = 5;  //!< 明るさのデフォルト値
 
 
   SonyNetworkCamera(const SonyNetworkCamera&);
