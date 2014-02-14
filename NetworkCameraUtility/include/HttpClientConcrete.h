@@ -16,8 +16,6 @@
 
 #include <boost/asio.hpp>
 
-#include "TimeoutBlockingClient.h"
-
 /*!
  * @namespace openrtm_network_camera
  * @brief OpenRTM NetworkCamera用コンポーネント
@@ -31,6 +29,8 @@ namespace openrtm_network_camera {
  *
  */
 namespace utility {
+
+class TimeoutBlockingClient;
 
 /*!
  * @class HttpClientConcrete
@@ -153,8 +153,10 @@ private:
    * @brief ヘッダの処理
    *
    * レスポンスデータを処理して、ヘッダを取り出す。
+   *
+   * @param client  タイムアウト付き同期処理TCPクライアントの参照
    */
-  void processHeaders();
+  void processHeaders(TimeoutBlockingClient& client);
 
   /*!
    * @breif コンテンツタイプを設定する。
@@ -170,8 +172,10 @@ private:
    * @breif コンテンツの処理。
    *
    * レスポンスデータを処理して、コンテンツを取り出す。
+   *
+   * @param client  タイムアウト付き同期処理TCPクライアントの参照
    */
-  void processContents();
+  void processContents(TimeoutBlockingClient& client);
 
   /*!
    * @breif ヘッダ値の取得。
@@ -187,8 +191,7 @@ private:
   const static int ERROR_CODE = -1;  //!< エラー発生時のステータスコード
   const static int DEFAULT_TIMEOUT_SEC = 60;  //!< デフォルトのタイムアウト時間, 秒単位
 
-  TimeoutBlockingClient client_;  //!< タイムアウト付き同期処理クライアント
-  long timeout_;                  //!< タイムアウト時間, 秒単位
+  long timeout_;  //!< タイムアウト時間, 秒単位
 
   // リクエスト用変数
   std::string user_;      //!< ユーザー名
