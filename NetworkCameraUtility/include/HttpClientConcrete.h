@@ -128,6 +128,20 @@ public:
    */
   void setBasicAuthenticationParameter(const std::string& user, const std::string& password);
 
+  /*!
+   * @brief タイムアウト時間の設定
+   *
+   * ネットワークアクセス時のタイムアウトを指定時間とする。
+   * 本メソッドが呼ばれない場合は、デフォルト値が使われる。
+   * （デフォルト値は60秒）
+   *
+   * @caution
+   * パラメータが０以下の場合、デフォルト値が使われる。
+   *
+   * @param timeout  タイムアウト時間, 秒単位
+   */
+  void setTimeout(const long timeout);
+
 protected:
 private:
   /*!
@@ -171,9 +185,10 @@ private:
 
 
   const static int ERROR_CODE = -1;  //!< エラー発生時のステータスコード
-  const static int TIMEOUT_SEC = 60; //!< タイムアウト秒数, [sec]
+  const static int DEFAULT_TIMEOUT_SEC = 60;  //!< デフォルトのタイムアウト時間, 秒単位
 
-  TimeoutBlockingClient client_;
+  TimeoutBlockingClient client_;  //!< タイムアウト付き同期処理クライアント
+  long timeout_;                  //!< タイムアウト時間, 秒単位
 
   // リクエスト用変数
   std::string user_;      //!< ユーザー名

@@ -126,6 +126,20 @@ public:
    */
   void setBasicAuthenticationParameter(const char* p_user, const char* p_password);
 
+  /*!
+   * @brief タイムアウト時間の設定
+   *
+   * ネットワークアクセス時のタイムアウトを指定時間とする。
+   * 本メソッドが呼ばれない場合は、デフォルト値が使われる。
+   * （デフォルト値は60秒）
+   *
+   * @caution
+   * パラメータが０以下の場合、デフォルト値が使われる。
+   *
+   * @param timeout  タイムアウト時間, 秒単位
+   */
+  void setTimeout(const long timeout);
+
 protected:
 private:
   /*!

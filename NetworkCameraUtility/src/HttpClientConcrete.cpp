@@ -35,6 +35,7 @@ namespace {
 
 HttpClientConcrete::HttpClientConcrete(void)
     : client_(),
+      timeout_(DEFAULT_TIMEOUT_SEC),
       user_(""),
       password_(""),
       status_code_(ERROR_CODE),
@@ -60,7 +61,7 @@ void HttpClientConcrete::doGet(const std::string& host_name, const std::string& 
   try
   {
     // 接続
-    client_.connect(host_name, port, boost::posix_time::seconds(TIMEOUT_SEC));
+    client_.connect(host_name, port, boost::posix_time::seconds(timeout_));
 
     // Form the request. We specify the "Connection: close" header so that the
     // server will close the socket after transmitting the response. This will
@@ -81,12 +82,12 @@ void HttpClientConcrete::doGet(const std::string& host_name, const std::string& 
     request_stream << "Connection: close" << CRLF << CRLF;
 
     // Send the request.
-    client_.write(request, boost::posix_time::seconds(TIMEOUT_SEC));
+    client_.write(request, boost::posix_time::seconds(timeout_));
 
     // Read the response status line. The response streambuf will automatically
     // grow to accommodate the entire line. The growth may be limited by passing
     // a maximum size to the streambuf constructor.
-    client_.read_until(CRLF, boost::posix_time::seconds(TIMEOUT_SEC));
+    client_.read_until(CRLF, boost::posix_time::seconds(timeout_));
     boost::asio::streambuf& response = client_.getStreambuf();
 
     // Check that response is OK.
@@ -130,6 +131,15 @@ void HttpClientConcrete::setBasicAuthenticationParameter(const std::string& user
   password_ = password;
 }
 
+void HttpClientConcrete::setTimeout(const long timeout) {
+  // ０以下の場合はデフォルト値とする
+  if (0 < timeout) {
+    timeout_ = timeout;
+  } else {
+    timeout_ = DEFAULT_TIMEOUT_SEC;
+  }
+}
+
 void HttpClientConcrete::response_member_init() {
   status_code_ = ERROR_CODE;
   headers_.clear();
@@ -145,7 +155,7 @@ void HttpClientConcrete::processHeaders() {
   headers_.clear();
 
   // Read the response headers, which are terminated by a blank line.
-  client_.read_until(CRLF2, boost::posix_time::seconds(TIMEOUT_SEC));
+  client_.read_until(CRLF2, boost::posix_time::seconds(timeout_));
   boost::asio::streambuf& response = client_.getStreambuf();
   std::istream response_stream(&response);
 
@@ -240,7 +250,7 @@ void HttpClientConcrete::processContents() {
   }
 
   // Read until EOF, writing data to output as we go.
-  size_t bytes = client_.read(boost::posix_time::seconds(TIMEOUT_SEC));
+  size_t bytes = client_.read(boost::posix_time::seconds(timeout_));
 
   // メッセージボディ長のチェック
   if (0 == length) {

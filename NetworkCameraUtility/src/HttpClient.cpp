@@ -75,6 +75,10 @@ void HttpClient::setBasicAuthenticationParameter(const char* p_user, const char 
   p_client_->setBasicAuthenticationParameter(p_user, p_password);
 }
 
+void HttpClient::setTimeout(const long timeout) {
+  p_client_->setTimeout(timeout);
+}
+
 void HttpClient::deleteHeaderContainer() {
     if (p_header_container_ != NULL) {
     delete [] p_header_container_;

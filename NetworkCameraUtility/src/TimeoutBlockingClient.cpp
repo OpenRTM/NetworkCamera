@@ -5,7 +5,7 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying
  * file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
  * 
- * @date  2014-02-06
+ * @date  2014-02-13
  */
 #include "TimeoutBlockingClient.h"
 
@@ -20,6 +20,12 @@
 namespace openrtm_network_camera {
 namespace utility {
 
+/*!
+ * @brief コンストラクタ
+ *
+ * @caution
+ * タイムアウト処理用にタイマーを初期化する
+ */
 TimeoutBlockingClient::TimeoutBlockingClient()
     : io_service_(),
       socket_(io_service_),
@@ -82,7 +88,7 @@ void TimeoutBlockingClient::connect(const std::string& host, const std::string& 
   // check whether the socket is still open before deciding if we succeeded
   // or failed.
   if (ec || !socket_.is_open()) {
-    std::cout << "connect, Exception: " << ec << std::endl;
+    std::cout << "TimeoutBlockingClient::connect, Exception: " << ec << std::endl;
     throw boost::system::system_error(
         ec ? ec : boost::asio::error::operation_aborted);
   }
@@ -120,7 +126,7 @@ size_t TimeoutBlockingClient::read(boost::posix_time::time_duration timeout)
 
   // すべてのデータを読み込んだときは、eofが返るのでエラーとはしない
   if (ec && ec != boost::asio::error::eof) {
-    std::cout << "read, Exception: " << ec << std::endl;
+    std::cout << "TimeoutBlockingClient::read, Exception: " << ec << std::endl;
     throw boost::system::system_error(ec);
   }
   return length;
@@ -156,7 +162,7 @@ size_t TimeoutBlockingClient::read_until(const std::string& delimiter, boost::po
   } while (ec == boost::asio::error::would_block);
 
   if (ec) {
-    std::cout << "read_until, Exception: " << ec << std::endl;
+    std::cout << "TimeoutBlockingClient::read_until, Exception: " << ec << std::endl;
     throw boost::system::system_error(ec);
   }
   return length;
@@ -191,7 +197,7 @@ void TimeoutBlockingClient::write(boost::asio::streambuf& buf, boost::posix_time
   } while (ec == boost::asio::error::would_block);
 
   if (ec) {
-    std::cout << "write, Exception: " << ec << std::endl;
+    std::cout << "TimeoutBlockingClient::write, Exception: " << ec << std::endl;
     throw boost::system::system_error(ec);
   }
 }
@@ -209,7 +215,7 @@ void TimeoutBlockingClient::check_deadline()
     boost::system::error_code ignored_ec;
     socket_.close(ignored_ec);
 
-    std::cout << "timeout\n";
+    std::cout << "TimeoutBlockingClient, request is timeout\n";
 
     // There is no longer an active deadline. The expiry is set to positive
     // infinity so that the actor takes no action until a new deadline is set.
