@@ -458,7 +458,7 @@ void SonyNetworkCameraRt::setupSetupType() {
   SonyNetworkCamera::SetupType st;
   if ("ceiling" == m_setupType) {
     st = SonyNetworkCamera::Ceiling;
-  } if ("desktop" == m_setupType) {
+  } else if ("desktop" == m_setupType) {
     st = SonyNetworkCamera::Desktop;
   } else {
     RTC_WARN_STR("invalid configuration parameter, setupType:" + m_setupType + ". use \"desktop\" instead.");
