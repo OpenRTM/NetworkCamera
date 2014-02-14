@@ -1,4 +1,4 @@
-set(comp_srcs SonyNetworkCameraRt.cpp )
+set(comp_srcs SonyNetworkCameraRt.cpp SonyNetworkCamera.cpp)
 set(standalone_srcs SonyNetworkCameraRtComp.cpp)
 
 if (DEFINED OPENRTM_INCLUDE_DIRS)
@@ -22,6 +22,32 @@ if (DEFINED OPENRTM_LIBRARIES)
     OPENRTM_LIBRARIES "${OPENRTM_LIBRARIES}")
 endif (DEFINED OPENRTM_LIBRARIES)
 
+# add OpenCV
+find_package(OpenCV REQUIRED)
+ 
+# add Boost
+# hints if library can't find
+set(BOOST_ROOT       "C:/Program Files (x86)/boost/boost_1_55_0/")
+set(BOOST_INCLUDEDIR "C:/Program Files (x86)/boost/boost_1_55_0/")
+set(BOOST_LIBRARYDIR "C:/Program Files (x86)/boost/boost_1_55_0/lib32-msvc-10.0")
+#
+# if no specific libraries, Boost_LIBRARY_DIRS is empty
+#find_package(Boost 1.55.0 REQUIRED)
+find_package(Boost 1.55.0 REQUIRED COMPONENTS regex)
+#
+include_directories(${Boost_INCLUDE_DIRS})
+link_directories(${Boost_LIBRARY_DIRS})
+
+# add http library
+set(network_camera_tmp "${PROJECT_SOURCE_DIR}/../network_camera_utility")
+get_filename_component(network_camera_dir ${network_camera_tmp} ABSOLUTE)
+#
+include_directories(${network_camera_dir}/include)
+link_directories(${network_camera_dir}/build)
+#
+set(network_camera_utility_libs "NetworkCameraUtility.lib")
+
+
 include_directories(${PROJECT_SOURCE_DIR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME})
 include_directories(${PROJECT_BINARY_DIR})
@@ -41,11 +67,11 @@ add_library(${PROJECT_NAME} ${LIB_TYPE} ${comp_srcs}
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
 set_source_files_properties(${ALL_IDL_SRCS} PROPERTIES GENERATED 1)
 add_dependencies(${PROJECT_NAME} ALL_IDL_TGT)
-target_link_libraries(${PROJECT_NAME} ${OPENRTM_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${OPENRTM_LIBRARIES} ${OpenCV_LIBS} ${network_camera_utility_libs})
 
 add_executable(${PROJECT_NAME}Comp ${standalone_srcs}
   ${comp_srcs} ${comp_headers} ${ALL_IDL_SRCS})
-target_link_libraries(${PROJECT_NAME}Comp ${OPENRTM_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}Comp ${OPENRTM_LIBRARIES} ${OpenCV_LIBS} ${network_camera_utility_libs})
 
 install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}Comp
     EXPORT ${PROJECT_NAME}
