@@ -1,4 +1,4 @@
-set(hdrs SonyNetworkCameraRt.h SonyNetworkCamera.h
+set(hdrs SonyNetworkCameraRt.h SonyNetworkCamera.h IntBounds.h
     PARENT_SCOPE
     )
 
