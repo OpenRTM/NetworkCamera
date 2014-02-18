@@ -10,11 +10,8 @@
 #ifndef HTTP_CLIENT_CONCRETE_H
 #define HTTP_CLIENT_CONCRETE_H
 
-#include <iostream>
 #include <string>
 #include <vector>
-
-#include <boost/asio.hpp>
 
 /*!
  * @namespace openrtm_network_camera
