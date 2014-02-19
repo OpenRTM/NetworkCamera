@@ -8,7 +8,9 @@
 
 #include <string>
 
+#ifndef NO_RTC_LOG
 #include <rtm/SystemLogger.h>
+#endif
 
 /*!
  * @namespace openrtm_network_camera
@@ -126,7 +128,7 @@ public:
    * @param user      ユーザー名
    * @param password  パスワード
    */
-  void setAuthenticateUser(const std::string& user, const std::string password);
+  void setAuthenticateUser(const std::string& user, const std::string& password);
 
   /*!
    * @brief 画像の取得
@@ -299,8 +301,9 @@ private:
    */
   void analyzeContents(const char* p_contents, int length);
 
-
+#ifndef NO_RTC_LOG
   RTC::Logger rtclog;              //!< ロガー
+#endif
 
   utility::HttpClient* p_client_;  //!< HttpClientインスタンス
 
