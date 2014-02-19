@@ -11,7 +11,9 @@
 #include <string>
 #include <sstream>
 
+#ifndef NO_RTC_LOG
 #include <rtm/SystemLogger.h>
+#endif
 
 #include "IntBounds.h"
 #include "HttpClient.h"
@@ -46,8 +48,10 @@ SonyNetworkCamera::SonyNetworkCamera()
       user_(""),
       password_(""),
       lastResult(false) {
+#ifndef NO_RTC_LOG
   rtclog.setName("SonyNetworkCamera");
   RTC_DEBUG_STR("SonyNetworkCamera ctor");
+#endif
 }
 
 SonyNetworkCamera::~SonyNetworkCamera() {
@@ -62,7 +66,7 @@ void SonyNetworkCamera::setCamera(const std::string& host, const std::string& po
   port_ = port;
 }
 
-void SonyNetworkCamera::setAuthenticateUser(const std::string& user, const std::string password) {
+void SonyNetworkCamera::setAuthenticateUser(const std::string& user, const std::string& password) {
   user_ = user;
   password_ = password;
 }
@@ -96,7 +100,9 @@ const char* SonyNetworkCamera::getImage(const Resolution resolution, int* p_leng
     path += "vga";
     break;
   default:
+#ifndef NO_RTC_LOG
     RTC_WARN_STR("getImage: invalid resolution. try 640x480 value.");
+#endif
     path += "vga";
     break;
   }
@@ -167,7 +173,9 @@ void SonyNetworkCamera::adjustFocus(const FocusType type) {
     type_str = "onepushaf";
     break;
   default:
+#ifndef NO_RTC_LOG
     RTC_WARN_STR("adjustFocus: invalid focus type. try onepush value.");
+#endif
     type_str = "onepushaf";
     break;
   }
@@ -204,7 +212,9 @@ void SonyNetworkCamera::setWhiteBalance(const WhiteBalance type) {
     path += "onepushwb";
     break;
   default:
+#ifndef NO_RTC_LOG
     RTC_WARN_STR("setWhiteBalance: invalid white balance type. try auto value.");
+#endif
     path += "auto";
     break;
   }
@@ -252,7 +262,9 @@ void SonyNetworkCamera::setSetupType(const SetupType type) {
     path += "on";
     break;
   default:
+#ifndef NO_RTC_LOG
     RTC_WARN_STR("setSetupType: invalid setuptype value. try ceiling value.");
+#endif
     path += "off";
     break;
   }
@@ -328,17 +340,23 @@ const char* SonyNetworkCamera::doRequest(const std::string& path, int* p_length)
   case STATUS_NO_CONTENT:
     break;
   case STATUS_UNAUTHORIZED:
+#ifndef NO_RTC_LOG
     RTC_WARN_STR("401 error. not permitted for this api. Please check your authenticate information.");
+#endif
     return NULL;
     break;
   case -1:
+#ifndef NO_RTC_LOG
     RTC_WARN_STR("Failed to comunicate to a network camera. Please check host name and port number for a target network camera.");
+#endif
     return NULL;
     break;
   default:
     std::stringstream ss;
     ss << status;
+#ifndef NO_RTC_LOG
     RTC_WARN_STR("unexpected http status code: " + ss.str());
+#endif
     return NULL;
     break;
   }
