@@ -18,15 +18,25 @@ public:
 
 TEST_F(HttpClientTest, doGetTest) {
   client.doGet("127.0.0.1", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
 }
 
 TEST_F(HttpClientTest, getStatusCodeTest) {
   client.doGet("127.0.0.1", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
   ASSERT_EQ(200, client.getStatusCode());
 }
 
 TEST_F(HttpClientTest, getHeadersTest) {
   client.doGet("127.0.0.1", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
+
   int length;
   const char* const* headers = client.getHeaders(&length);
 
@@ -39,23 +49,38 @@ TEST_F(HttpClientTest, getHeadersTest) {
 
 TEST_F(HttpClientTest, getContentTypeTest) {
   client.doGet("127.0.0.1", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
   ASSERT_STREQ("text/plain", client.getContentType());
 }
 
 TEST_F(HttpClientTest, getContentLengthTest) {
   client.doGet("127.0.0.1", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
   ASSERT_EQ(123, client.getContentLength());
 }
 
 TEST_F(HttpClientTest, getContentsTest) {
   client.doGet("127.0.0.1", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
   ASSERT_STREQ("this is a test", client.getContents());
 }
 
 TEST_F(HttpClientTest, setBasicAuthenticationParameterTest) {
   client.setBasicAuthenticationParameter("user", "password");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
 }
 
 TEST_F(HttpClientTest, setTimeoutTest) {
   client.setTimeout(10);
+  if (HasFatalFailure()) {
+    FAIL();
+  }
 }
