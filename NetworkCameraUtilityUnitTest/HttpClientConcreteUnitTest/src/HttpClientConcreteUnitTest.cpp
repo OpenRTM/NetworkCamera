@@ -24,6 +24,9 @@ public:
 // 一般のリクエスト
 TEST_F(HttpClientConcreteTest, requestOkTest) {
   client.doGet("127.0.0.1", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
 
   // レスポンスコード
   ASSERT_EQ(200, client.getStatusCode());
@@ -49,6 +52,9 @@ TEST_F(HttpClientConcreteTest, requestOkTest) {
 TEST_F(HttpClientConcreteTest, requestOkWithBasicAuthTest) {
   client.setBasicAuthenticationParameter("user", "password");
   client.doGet("127.0.0.2", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
 
   // レスポンスコード
   ASSERT_EQ(200, client.getStatusCode());
@@ -75,6 +81,9 @@ TEST_F(HttpClientConcreteTest, requestOkWithBasicAuthTest) {
 TEST_F(HttpClientConcreteTest, requestokWithTimeoutTest) {
   client.setTimeout(10);
   client.doGet("127.0.0.3", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
 
   // レスポンスコード
   ASSERT_EQ(200, client.getStatusCode());
@@ -100,6 +109,9 @@ TEST_F(HttpClientConcreteTest, requestokWithTimeoutTest) {
 // レスポンス204
 TEST_F(HttpClientConcreteTest, request204NoContentTest) {
   client.doGet("127.0.0.4", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
 
   // レスポンスコード
   ASSERT_EQ(204, client.getStatusCode());
@@ -127,6 +139,9 @@ TEST_F(HttpClientConcreteTest, request204NoContentTest) {
 // レスポンス401
 TEST_F(HttpClientConcreteTest, request401Test) {
   client.doGet("127.0.0.5", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
 
   // レスポンスコード
   ASSERT_EQ(401, client.getStatusCode());
@@ -135,5 +150,8 @@ TEST_F(HttpClientConcreteTest, request401Test) {
 // 例外発生
 TEST_F(HttpClientConcreteTest, exceptionTest) {
   client.doGet("127.0.0.6", "/test", "80");
+  if (HasFatalFailure()) {
+    FAIL();
+  }
   ASSERT_EQ(-1, client.getStatusCode());
 }
