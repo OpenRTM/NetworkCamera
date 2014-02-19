@@ -1,4 +1,4 @@
-
+ï»¿
 #include "TimeoutBlockingClient.h"
 
 #include <boost/asio.hpp>
@@ -9,12 +9,12 @@ namespace openrtm_network_camera {
 namespace utility {
 
 namespace {
-  const std::string testType1 = "127.0.0.1"; // •W€, 200 ‰“š
-  const std::string testType2 = "127.0.0.2"; // ”FØw’è‚ ‚è
-  const std::string testType3 = "127.0.0.3"; // ƒ^ƒCƒ€ƒAƒEƒgw’è‚ ‚è
+  const std::string testType1 = "127.0.0.1"; // æ¨™æº–, 200 å¿œç­”
+  const std::string testType2 = "127.0.0.2"; // èªè¨¼æŒ‡å®šã‚ã‚Š
+  const std::string testType3 = "127.0.0.3"; // ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæŒ‡å®šã‚ã‚Š
   const std::string testType4 = "127.0.0.4"; // 204
   const std::string testType5 = "127.0.0.5"; // 401
-  const std::string testType6 = "127.0.0.6"; // —áŠO”­¶
+  const std::string testType6 = "127.0.0.6"; // ä¾‹å¤–ç™ºç”Ÿ
 
   int test_type = 0;
 
@@ -57,7 +57,7 @@ TimeoutBlockingClient::~TimeoutBlockingClient() {
 void TimeoutBlockingClient::connect(const std::string& host, const std::string& service, boost::posix_time::time_duration timeout) {
   ASSERT_EQ(std::string("80"), service);
 
-  // ƒzƒXƒg–¼‚Å‰“š“à—e‚ğ•ÏX‚·‚é
+  // ãƒ›ã‚¹ãƒˆåã§å¿œç­”å†…å®¹ã‚’å¤‰æ›´ã™ã‚‹
   if (testType1 == host) {
     test_type = 1;
     ASSERT_EQ(60, timeout.total_seconds());
@@ -84,8 +84,8 @@ void TimeoutBlockingClient::connect(const std::string& host, const std::string& 
 
 size_t TimeoutBlockingClient::read(boost::posix_time::time_duration timeout) {
 
-  // ƒ^ƒCƒ€ƒAƒEƒgŠÔ‚ÌŠm”F
-  //   –ß‚è’l‚ª‚ ‚é‚Ì‚ÅÈ—ª
+  // ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“ã®ç¢ºèª
+  //   æˆ»ã‚Šå€¤ãŒã‚ã‚‹ã®ã§çœç•¥
   // http://opencv.jp/googletestdocs/FAQ.html#void-value-not-ignored-as-it-ought-to-be
 
   std::ostream os(&input_buffer_);
@@ -102,8 +102,8 @@ size_t TimeoutBlockingClient::read(boost::posix_time::time_duration timeout) {
 
 size_t TimeoutBlockingClient::read_until(const std::string& delimiter, boost::posix_time::time_duration timeout) {
 
-  // ƒ^ƒCƒ€ƒAƒEƒgŠÔ‚ÌŠm”F
-  //   –ß‚è’l‚ª‚ ‚é‚Ì‚ÅÈ—ª
+  // ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“ã®ç¢ºèª
+  //   æˆ»ã‚Šå€¤ãŒã‚ã‚‹ã®ã§çœç•¥
   // http://opencv.jp/googletestdocs/FAQ.html#void-value-not-ignored-as-it-ought-to-be
 
   std::ostream os(&input_buffer_);
@@ -128,7 +128,7 @@ size_t TimeoutBlockingClient::read_until(const std::string& delimiter, boost::po
 }
 
 void TimeoutBlockingClient::write(boost::asio::streambuf& buf, boost::posix_time::time_duration timeout) {
-  // streambuf ‚Ì’†g‚ğƒ`ƒFƒbƒN
+  // streambuf ã®ä¸­èº«ã‚’ãƒã‚§ãƒƒã‚¯
   std::istream is(&buf);
 
   std::string request;
@@ -166,20 +166,20 @@ void TimeoutBlockingClient::write(boost::asio::streambuf& buf, boost::posix_time
 
   if (test_type == 2) {
     std::getline(is, request);
-    ASSERT_EQ(std::string("Authorization: Basic dXNlcjpwYXNzd29yZA==\r"), request); // user:password‚Ìbase64ƒGƒ“ƒR[ƒfƒBƒ“ƒO
+    ASSERT_EQ(std::string("Authorization: Basic dXNlcjpwYXNzd29yZA==\r"), request); // user:passwordã®base64ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°
   }
 
   std::getline(is, request);
   ASSERT_EQ(std::string("Connection: close\r"), request);
 
-  // ƒ^ƒCƒ€ƒAƒEƒgŠÔ‚ÌŠm”F
+  // ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“ã®ç¢ºèª
   if (test_type == 3) {
     ASSERT_EQ(10, timeout.total_seconds());
   } else {
     ASSERT_EQ(60, timeout.total_seconds());
   }
 
-  // ‰“šƒf[ƒ^‚ğİ’è‚·‚é
+  // å¿œç­”ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹
   input_buffer_.consume(input_buffer_.size());
 
   switch(test_type) {

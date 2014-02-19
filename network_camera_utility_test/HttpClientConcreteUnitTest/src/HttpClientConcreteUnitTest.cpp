@@ -1,11 +1,11 @@
-
+ï»¿
 #include <string>
 
 #include "gtest/gtest.h"
 
 #include "HttpClientConcrete.h"
 
-// ƒeƒXƒgƒtƒBƒNƒXƒ`ƒƒ
+// ãƒ†ã‚¹ãƒˆãƒ•ã‚£ã‚¯ã‚¹ãƒãƒ£
 class HttpClientConcreteTest : public ::testing::Test {
 public:
   virtual void SetUp() {
@@ -13,98 +13,98 @@ public:
   openrtm_network_camera::utility::HttpClientConcrete client;
 };
 
-// ˆÈ‰ºAHttpClientConcreteƒNƒ‰ƒX‚ÌƒeƒXƒg
-// TimeoutBlockingClient ƒNƒ‰ƒX‚ÌƒXƒ^ƒuÀ‘•‚ğg‚¢A³‚µ‚­‰“š‚µ‚Ä‚¢‚é‚±‚Æ‚ğŠm”F
+// ä»¥ä¸‹ã€HttpClientConcreteã‚¯ãƒ©ã‚¹ã®ãƒ†ã‚¹ãƒˆ
+// TimeoutBlockingClient ã‚¯ãƒ©ã‚¹ã®ã‚¹ã‚¿ãƒ–å®Ÿè£…ã‚’ä½¿ã„ã€æ­£ã—ãå¿œç­”ã—ã¦ã„ã‚‹ã“ã¨ã‚’ç¢ºèª
 //
-// ‚È‚¨A–{ƒeƒXƒg‚Å—p‚¢‚Ä‚¢‚éTimeoutBlockingClient‚ÌƒXƒ^ƒuÀ‘•‚Å‚ÍA
-// read_untilŒÄ‚Ño‚µ‚És‚í‚ê‚éAƒfƒŠƒ~ƒ^ˆÈ~‚Ìƒoƒbƒtƒ@‚Ö‚Ìæ“Ç‚İ‚ğ–Í‹[‚Å‚«‚Ä‚¢‚È‚¢B
-// ‚±‚Ì•”•ª‚É‚Â‚¢‚Ä‚ÍAŒ‹‡ƒeƒXƒg‚É‚Ä‰æ‘œƒf[ƒ^“™‚ÌƒTƒCƒY‚Ì‘å‚«‚Èƒf[ƒ^‚ğ–â‘è‚È‚­óM
-// ‚Å‚«‚é‚±‚Æ‚ÅŠm”F‚·‚éB
+// ãªãŠã€æœ¬ãƒ†ã‚¹ãƒˆã§ç”¨ã„ã¦ã„ã‚‹TimeoutBlockingClientã®ã‚¹ã‚¿ãƒ–å®Ÿè£…ã§ã¯ã€
+// read_untilå‘¼ã³å‡ºã—æ™‚ã«è¡Œã‚ã‚Œã‚‹ã€ãƒ‡ãƒªãƒŸã‚¿ä»¥é™ã®ãƒãƒƒãƒ•ã‚¡ã¸ã®å…ˆèª­ã¿ã‚’æ¨¡æ“¬ã§ãã¦ã„ãªã„ã€‚
+// ã“ã®éƒ¨åˆ†ã«ã¤ã„ã¦ã¯ã€çµåˆãƒ†ã‚¹ãƒˆã«ã¦ç”»åƒãƒ‡ãƒ¼ã‚¿ç­‰ã®ã‚µã‚¤ã‚ºã®å¤§ããªãƒ‡ãƒ¼ã‚¿ã‚’å•é¡Œãªãå—ä¿¡
+// ã§ãã‚‹ã“ã¨ã§ç¢ºèªã™ã‚‹ã€‚
 
-// ˆê”Ê‚ÌƒŠƒNƒGƒXƒg
+// ä¸€èˆ¬ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆ
 TEST_F(HttpClientConcreteTest, requestOkTest) {
   client.doGet("127.0.0.1", "/test", "80");
 
-  // ƒŒƒXƒ|ƒ“ƒXƒR[ƒh
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚³ãƒ¼ãƒ‰
   ASSERT_EQ(200, client.getStatusCode());
 
-  // ƒwƒbƒ_
+  // ãƒ˜ãƒƒãƒ€
   std::vector<std::string> headers = client.getHeaders();
   ASSERT_EQ(1, headers.size());
   ASSERT_EQ(std::string("Content-type: text/plain"), headers[0]);
 
-  // ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—
   ASSERT_EQ(std::string("text/plain"), client.getContentType());
 
-  // ƒRƒ“ƒeƒ“ƒc’·
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·
   ASSERT_EQ(11, client.getContentLength());
 
-  // ƒRƒ“ƒeƒ“ƒc
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„
   const char * p = client.getContents();
   std::string str(p, p + client.getContentLength());
   ASSERT_EQ(std::string("Return: 0\r\n"), str);
 }
 
-// ”FØw’è‚ ‚è
+// èªè¨¼æŒ‡å®šã‚ã‚Š
 TEST_F(HttpClientConcreteTest, requestOkWithBasicAuthTest) {
   client.setBasicAuthenticationParameter("user", "password");
   client.doGet("127.0.0.2", "/test", "80");
 
-  // ƒŒƒXƒ|ƒ“ƒXƒR[ƒh
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚³ãƒ¼ãƒ‰
   ASSERT_EQ(200, client.getStatusCode());
 
-  // ƒwƒbƒ_
+  // ãƒ˜ãƒƒãƒ€
   std::vector<std::string> headers = client.getHeaders();
   ASSERT_EQ(2, headers.size());
   ASSERT_EQ(std::string("Content-type: text/plain"), headers[0]);
   ASSERT_EQ(std::string("Content-length: 11"), headers[1]);
 
-  // ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—
   ASSERT_EQ(std::string("text/plain"), client.getContentType());
 
-  // ƒRƒ“ƒeƒ“ƒc’·
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·
   ASSERT_EQ(11, client.getContentLength());
 
-  // ƒRƒ“ƒeƒ“ƒc
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„
   const char * p = client.getContents();
   std::string str(p, p + client.getContentLength());
   ASSERT_EQ(std::string("Return: 0\r\n"), str);
 }
 
-// ƒ^ƒCƒ€ƒAƒEƒgw’è‚ ‚è
+// ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæŒ‡å®šã‚ã‚Š
 TEST_F(HttpClientConcreteTest, requestokWithTimeoutTest) {
   client.setTimeout(10);
   client.doGet("127.0.0.3", "/test", "80");
 
-  // ƒŒƒXƒ|ƒ“ƒXƒR[ƒh
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚³ãƒ¼ãƒ‰
   ASSERT_EQ(200, client.getStatusCode());
 
-  // ƒwƒbƒ_
+  // ãƒ˜ãƒƒãƒ€
   std::vector<std::string> headers = client.getHeaders();
   ASSERT_EQ(2, headers.size());
   ASSERT_EQ(std::string("Content-type: text/plain"), headers[0]);
   ASSERT_EQ(std::string("Content-length: 11"), headers[1]);
 
-  // ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—
   ASSERT_EQ(std::string("text/plain"), client.getContentType());
 
-  // ƒRƒ“ƒeƒ“ƒc’·
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·
   ASSERT_EQ(11, client.getContentLength());
 
-  // ƒRƒ“ƒeƒ“ƒc
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„
   const char * p = client.getContents();
   std::string str(p, p + client.getContentLength());
   ASSERT_EQ(std::string("Return: 0\r\n"), str);
 }
 
-// ƒŒƒXƒ|ƒ“ƒX204
+// ãƒ¬ã‚¹ãƒãƒ³ã‚¹204
 TEST_F(HttpClientConcreteTest, request204NoContentTest) {
   client.doGet("127.0.0.4", "/test", "80");
 
-  // ƒŒƒXƒ|ƒ“ƒXƒR[ƒh
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚³ãƒ¼ãƒ‰
   ASSERT_EQ(204, client.getStatusCode());
 
-  // ƒwƒbƒ_
+  // ãƒ˜ãƒƒãƒ€
   std::vector<std::string> headers = client.getHeaders();
   ASSERT_EQ(5, headers.size());
   ASSERT_EQ(std::string("Content-length: 0"), headers[0]);
@@ -113,26 +113,26 @@ TEST_F(HttpClientConcreteTest, request204NoContentTest) {
   ASSERT_EQ(std::string("Accept-Ranges: bytes"), headers[3]);
   ASSERT_EQ(std::string("Connection: Keep-Alive"), headers[4]);
 
-  // ƒRƒ“ƒeƒ“ƒcƒ^ƒCƒv
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒ—
   ASSERT_EQ(std::string(""), client.getContentType());
 
-  // ƒRƒ“ƒeƒ“ƒc’·
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„é•·
   ASSERT_EQ(0, client.getContentLength());
 
-  // ƒRƒ“ƒeƒ“ƒc
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„
   const char * p = client.getContents();
   ASSERT_EQ(NULL, p);
 }
 
-// ƒŒƒXƒ|ƒ“ƒX401
+// ãƒ¬ã‚¹ãƒãƒ³ã‚¹401
 TEST_F(HttpClientConcreteTest, request401Test) {
   client.doGet("127.0.0.5", "/test", "80");
 
-  // ƒŒƒXƒ|ƒ“ƒXƒR[ƒh
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚³ãƒ¼ãƒ‰
   ASSERT_EQ(401, client.getStatusCode());
 }
 
-// —áŠO”­¶
+// ä¾‹å¤–ç™ºç”Ÿ
 TEST_F(HttpClientConcreteTest, exceptionTest) {
   client.doGet("127.0.0.6", "/test", "80");
   ASSERT_EQ(-1, client.getStatusCode());

@@ -1,11 +1,11 @@
-
+ï»¿
 #include <string>
 
 #include "gtest/gtest.h"
 
 #include "HttpClient.h"
 
-// ƒeƒXƒgƒtƒBƒNƒXƒ`ƒƒ
+// ãƒ†ã‚¹ãƒˆãƒ•ã‚£ã‚¯ã‚¹ãƒãƒ£
 class HttpClientTest : public ::testing::Test {
 public:
   virtual void SetUp() {
@@ -13,8 +13,8 @@ public:
   openrtm_network_camera::utility::HttpClient client;
 };
 
-// ˆÈ‰ºAHttpClientƒNƒ‰ƒX‚ÌƒeƒXƒg
-// ÀÛ‚Ìˆ—ƒNƒ‰ƒX HttpClientConcrete ‚ğ³‚µ‚­ŒÄ‚Ño‚µ‚Ä‚¢‚é‚±‚Æ‚ğŠm”F
+// ä»¥ä¸‹ã€HttpClientã‚¯ãƒ©ã‚¹ã®ãƒ†ã‚¹ãƒˆ
+// å®Ÿéš›ã®å‡¦ç†ã‚¯ãƒ©ã‚¹ HttpClientConcrete ã‚’æ­£ã—ãå‘¼ã³å‡ºã—ã¦ã„ã‚‹ã“ã¨ã‚’ç¢ºèª
 
 TEST_F(HttpClientTest, doGetTest) {
   client.doGet("127.0.0.1", "/test", "80");

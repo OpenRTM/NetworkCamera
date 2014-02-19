@@ -1,4 +1,4 @@
-
+﻿
 #include "HttpClientConcrete.h"
 
 #include <string>

@@ -1,4 +1,4 @@
-
+ï»¿
 #include <string>
 
 #include "gtest/gtest.h"
@@ -36,16 +36,16 @@ TEST(TrimTest, EmptyStringTest) {
 }
 
 // base64encode
-// ƒGƒ“ƒR[ƒhŒã‚à•¶š—ñ‚ÍA‰º‹L‚ÌƒRƒ}ƒ“ƒh‚Å‹‚ß‚½
+// ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰å¾Œã‚‚æ–‡å­—åˆ—ã¯ã€ä¸‹è¨˜ã®ã‚³ãƒãƒ³ãƒ‰ã§æ±‚ã‚ãŸ
 //   echo -n ABC | base64
 TEST(Base64EncodeTest, Encode6bitTest) {
-  ASSERT_EQ(std::string("QUJD"), openrtm_network_camera::utility::base64encode("ABC"));      // 6bit•ªŠ„‚Å—]‚è‚È‚µ
-  ASSERT_EQ(std::string("QUJDRA=="), openrtm_network_camera::utility::base64encode("ABCD")); // 6bit•ªŠ„‚Å—]‚è‚ ‚è
+  ASSERT_EQ(std::string("QUJD"), openrtm_network_camera::utility::base64encode("ABC"));      // 6bitåˆ†å‰²ã§ä½™ã‚Šãªã—
+  ASSERT_EQ(std::string("QUJDRA=="), openrtm_network_camera::utility::base64encode("ABCD")); // 6bitåˆ†å‰²ã§ä½™ã‚Šã‚ã‚Š
 }
 TEST(Base64EncodeTest, Encode4charactersTest) {
-  ASSERT_EQ(std::string("QUJD"), openrtm_network_camera::utility::base64encode("ABC"));       // 4•¶š•ÏŠ·‚Å—]‚è‚È‚µ
-  ASSERT_EQ(std::string("QUJDRA=="), openrtm_network_camera::utility::base64encode("ABCD"));  // 4•¶š•ÏŠ·‚Å—]‚è2
-  ASSERT_EQ(std::string("QUJDREU="), openrtm_network_camera::utility::base64encode("ABCDE")); // 4•¶š•ÏŠ·‚Å—]‚è1
+  ASSERT_EQ(std::string("QUJD"), openrtm_network_camera::utility::base64encode("ABC"));       // 4æ–‡å­—å¤‰æ›ã§ä½™ã‚Šãªã—
+  ASSERT_EQ(std::string("QUJDRA=="), openrtm_network_camera::utility::base64encode("ABCD"));  // 4æ–‡å­—å¤‰æ›ã§ä½™ã‚Š2
+  ASSERT_EQ(std::string("QUJDREU="), openrtm_network_camera::utility::base64encode("ABCDE")); // 4æ–‡å­—å¤‰æ›ã§ä½™ã‚Š1
 }
 TEST(Base64EncodeTest, EmptyStringTest) {
   ASSERT_EQ(std::string(""), openrtm_network_camera::utility::base64encode(""));

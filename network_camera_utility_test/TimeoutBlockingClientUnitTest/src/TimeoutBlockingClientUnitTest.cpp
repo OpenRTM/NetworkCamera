@@ -1,11 +1,11 @@
-
+ï»¿
 #include <string>
 
 #include "gtest/gtest.h"
 
 #include "TimeoutBlockingClient.h"
 
-// ƒeƒXƒgƒtƒBƒNƒXƒ`ƒƒ
+// ãƒ†ã‚¹ãƒˆãƒ•ã‚£ã‚¯ã‚¹ãƒãƒ£
 class TimeoutBlockingClientTest : public ::testing::Test {
 public:
   virtual void SetUp() {
@@ -13,22 +13,22 @@ public:
   openrtm_network_camera::utility::TimeoutBlockingClient client;
 };
 
-// ˆÈ‰ºATimeoutBlockingClientƒNƒ‰ƒX‚ÌƒeƒXƒg
-// Linuxã‚ÅƒT[ƒo[‚ğ—§‚Ä‚Ä‚©‚çƒeƒXƒg‚ğÀs‚·‚é
-// ‚Ü‚½AƒT[ƒo[‘¤‚Ì‰“šˆ—‚ğ•ÏX‚·‚é•K—v‚ª‚ ‚é‚Ì‚ÅAƒeƒXƒgƒP[ƒX‚ÍŒÂ•Ê‚ÉÀs‚·‚é‚±‚Æ
+// ä»¥ä¸‹ã€TimeoutBlockingClientã‚¯ãƒ©ã‚¹ã®ãƒ†ã‚¹ãƒˆ
+// Linuxä¸Šã§ã‚µãƒ¼ãƒãƒ¼ã‚’ç«‹ã¦ã¦ã‹ã‚‰ãƒ†ã‚¹ãƒˆã‚’å®Ÿè¡Œã™ã‚‹
+// ã¾ãŸã€ã‚µãƒ¼ãƒãƒ¼å´ã®å¿œç­”å‡¦ç†ã‚’å¤‰æ›´ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã®ã§ã€ãƒ†ã‚¹ãƒˆã‚±ãƒ¼ã‚¹ã¯å€‹åˆ¥ã«å®Ÿè¡Œã™ã‚‹ã“ã¨
 
-// ’Êí‚ÌƒŠƒNƒGƒXƒg
-// ƒŒƒXƒ|ƒ“ƒXƒf[ƒ^‚ªAread_untilÀs‚Éstreambuf‚Éæ“Ç‚İ‚³‚ê‚éƒTƒCƒYiƒoƒbƒtƒ@ƒTƒCƒYj
-// ‚ÉŠÜ‚Ü‚ê‚é’ö“x‚É¬‚³‚¢‚±‚Æ‚ğ‘z’è
+// é€šå¸¸ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆ
+// ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿ãŒã€read_untilå®Ÿè¡Œæ™‚ã«streambufã«å…ˆèª­ã¿ã•ã‚Œã‚‹ã‚µã‚¤ã‚ºï¼ˆãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºï¼‰
+// ã«å«ã¾ã‚Œã‚‹ç¨‹åº¦ã«å°ã•ã„ã“ã¨ã‚’æƒ³å®š
 //
-// ƒT[ƒo[‘¤‚Ì‘z’èFcat response.txt | nc -l 8080
+// ã‚µãƒ¼ãƒãƒ¼å´ã®æƒ³å®šï¼šcat response.txt | nc -l 8080
 TEST_F(TimeoutBlockingClientTest, requestOkTest) {
 
   boost::posix_time::time_duration td = boost::posix_time::seconds(60);
-  client.connect("192.168.0.28", "8080", td); // ƒeƒXƒgƒT[ƒo[‚É‰‚¶‚Ä•ÏX
+  client.connect("192.168.0.28", "8080", td); // ãƒ†ã‚¹ãƒˆã‚µãƒ¼ãƒãƒ¼ã«å¿œã˜ã¦å¤‰æ›´
 
-  // ‘—MƒeƒXƒg
-  // •W€o—Í‚ÅŠm”F‚·‚é
+  // é€ä¿¡ãƒ†ã‚¹ãƒˆ
+  // æ¨™æº–å‡ºåŠ›ã§ç¢ºèªã™ã‚‹
   const std::string send_str = "Test request\r\n"
                                "this is a dummy request to netcat(nc) command as a http server.\r\n"
                                "end\r\n";
@@ -40,8 +40,8 @@ TEST_F(TimeoutBlockingClientTest, requestOkTest) {
   client.write(buf, td);
   std::cout << "send str:\n" << send_str << std::endl;
 
-  // óMƒeƒXƒg
-  // ‘z’è‚·‚éƒeƒLƒXƒg‚ÌóM‚ğŠm”F‚·‚é
+  // å—ä¿¡ãƒ†ã‚¹ãƒˆ
+  // æƒ³å®šã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆã®å—ä¿¡ã‚’ç¢ºèªã™ã‚‹
   size_t s = client.read_until("\r\n", td);
   ASSERT_EQ(17, s);
 
@@ -55,7 +55,7 @@ TEST_F(TimeoutBlockingClientTest, requestOkTest) {
     ASSERT_EQ(std::string("HTTP/1.0 200 OK\r"), msg);
   }
 
-  // ƒwƒbƒ_ƒf[ƒ^‚ÌŠm”F
+  // ãƒ˜ãƒƒãƒ€ãƒ‡ãƒ¼ã‚¿ã®ç¢ºèª
   s = client.read_until("\r\n\r\n", td);
   std::cout << "readed size:" << s << ", buffer size:" << input_buf.size() << std::endl;
   {
@@ -74,7 +74,7 @@ TEST_F(TimeoutBlockingClientTest, requestOkTest) {
     ASSERT_EQ(std::string("\r"), msg);
   }
 
-  // ƒRƒ“ƒeƒ“ƒc‚ÌŠm”F
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã®ç¢ºèª
   std::string msg;
   s = input_buf.size();
   if (s > 0) {
@@ -84,7 +84,7 @@ TEST_F(TimeoutBlockingClientTest, requestOkTest) {
     input_buf.consume(input_buf.size());
   }
 
-  s = client.read(td);  // read ‚Å“Ç‚İ‚İƒf[ƒ^‚ª‚È‚¢
+  s = client.read(td);  // read ã§èª­ã¿è¾¼ã¿ãƒ‡ãƒ¼ã‚¿ãŒãªã„
   EXPECT_EQ(0, s);
 
   std::cout << "additional read data size:" << s << std::endl;
@@ -99,18 +99,18 @@ TEST_F(TimeoutBlockingClientTest, requestOkTest) {
   ASSERT_EQ(std::string("Return: 0\r\n"), msg);
 }
 
-// readƒƒ\ƒbƒh‚ÌŠm”F
-// ƒŒƒXƒ|ƒ“ƒXƒf[ƒ^‚ªAread_untilÀs‚Éstreambuf‚Éæ“Ç‚İ‚³‚ê‚éƒTƒCƒYiƒoƒbƒtƒ@ƒTƒCƒYj
-// ‚æ‚è‚à‘å‚«‚¢‚±‚Æ‚ğ‘z’è
+// readãƒ¡ã‚½ãƒƒãƒ‰ã®ç¢ºèª
+// ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿ãŒã€read_untilå®Ÿè¡Œæ™‚ã«streambufã«å…ˆèª­ã¿ã•ã‚Œã‚‹ã‚µã‚¤ã‚ºï¼ˆãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºï¼‰
+// ã‚ˆã‚Šã‚‚å¤§ãã„ã“ã¨ã‚’æƒ³å®š
 //
-// ƒT[ƒo[‘¤‚Ì‘z’èFcat response_read_test.txt | nc -l 8080
+// ã‚µãƒ¼ãƒãƒ¼å´ã®æƒ³å®šï¼šcat response_read_test.txt | nc -l 8080
 TEST_F(TimeoutBlockingClientTest, readMethodTest) {
 
   boost::posix_time::time_duration td = boost::posix_time::seconds(60);
-  client.connect("192.168.0.28", "8080", td); // ƒeƒXƒgƒT[ƒo[‚É‰‚¶‚Ä•ÏX
+  client.connect("192.168.0.28", "8080", td); // ãƒ†ã‚¹ãƒˆã‚µãƒ¼ãƒãƒ¼ã«å¿œã˜ã¦å¤‰æ›´
 
-  // ‘—MƒeƒXƒg
-  // •W€o—Í‚ÅŠm”F‚·‚é
+  // é€ä¿¡ãƒ†ã‚¹ãƒˆ
+  // æ¨™æº–å‡ºåŠ›ã§ç¢ºèªã™ã‚‹
   const std::string send_str = "Test requestfor read\r\n";
 
   boost::asio::streambuf buf;
@@ -120,8 +120,8 @@ TEST_F(TimeoutBlockingClientTest, readMethodTest) {
   client.write(buf, td);
   std::cout << "send str:\n" << send_str << std::endl;
 
-  // óMƒeƒXƒg
-  // ‘z’è‚·‚éƒeƒLƒXƒg‚ÌóM‚ğŠm”F‚·‚é
+  // å—ä¿¡ãƒ†ã‚¹ãƒˆ
+  // æƒ³å®šã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆã®å—ä¿¡ã‚’ç¢ºèªã™ã‚‹
   size_t s = client.read_until("\r\n", td);
   ASSERT_EQ(17, s);
 
@@ -135,7 +135,7 @@ TEST_F(TimeoutBlockingClientTest, readMethodTest) {
     ASSERT_EQ(std::string("HTTP/1.0 200 OK\r"), msg);
   }
 
-  // ƒRƒ“ƒeƒ“ƒc‚ÌŠm”F
+  // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã®ç¢ºèª
   std::string msg;
   s = input_buf.size();
   if (s > 0) {
@@ -145,7 +145,7 @@ TEST_F(TimeoutBlockingClientTest, readMethodTest) {
     input_buf.consume(input_buf.size());
   }
 
-  s = client.read(td);  // read ‚Å“Ç‚İ‚İƒf[ƒ^‚ª‚ ‚é
+  s = client.read(td);  // read ã§èª­ã¿è¾¼ã¿ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚‹
   EXPECT_LT(0, s);
 
   std::cout << "additional read data size:" << s << std::endl;
@@ -183,8 +183,8 @@ TEST_F(TimeoutBlockingClientTest, readMethodTest) {
   ASSERT_EQ(correct, msg);
 }
 
-// ƒ^ƒCƒ€ƒAƒEƒg
-// ƒT[ƒo[‘¤‚Ì‘z’èFnc -l 8080
+// ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ
+// ã‚µãƒ¼ãƒãƒ¼å´ã®æƒ³å®šï¼šnc -l 8080
 TEST_F(TimeoutBlockingClientTest, requestTimeoutTest) {
 
   boost::posix_time::time_duration td = boost::posix_time::seconds(5);
