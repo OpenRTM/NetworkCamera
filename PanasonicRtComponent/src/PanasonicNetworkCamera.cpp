@@ -7,6 +7,7 @@
 #include "PanasonicNetworkCamera.h"
 
 #include <iostream>
+#include <sstream>
 #include <string>
 
 #include <boost/regex.hpp>
