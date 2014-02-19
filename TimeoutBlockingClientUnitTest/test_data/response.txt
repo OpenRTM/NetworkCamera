@@ -1,0 +1,6 @@
+HTTP/1.0 200 OK
+Content-length: 11
+Accept-Ranges: bytes
+Connection: Keep-Alive
+
+Return: 0

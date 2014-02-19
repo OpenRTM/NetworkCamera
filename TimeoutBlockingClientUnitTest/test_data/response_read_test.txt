@@ -1,0 +1,21 @@
+HTTP/1.0 200 OK
+Content-length: 11
+Accept-Ranges: bytes
+Connection: Keep-Alive
+
+OpenRTM-aist official website
+
+openrtm.org is the official website of OpenRTM-aist, an open source robotic technology middleware which is developed and distributed by Japan's National Institute of Advanced Industrial Science and Technology.
+openrtm-1.1.0-download.png
+
+OpenRTM-aist Version 1.1.0 has been released
+
+The latest release version is OpenRTM-aist-1.1.0-RELEASE. Source and binary packages for Linux and Windows are available from here. Current versions for each language are:
+
+    C++: 1.1.0-RELEASE
+    Python: 1.0.0-RELEASE
+    Java: 1.0.0-RELEASE
+    tools: 1.0.0-RELEASE
+
+
+The Windows installer package available from the link to the right includes all of the libraries, dependencies and tools required to try the example components. Please see "Let's start OpenRTM-aist in ten minutes" after it downloads it. Have fun!
