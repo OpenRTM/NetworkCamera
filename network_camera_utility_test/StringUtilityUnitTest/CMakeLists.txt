@@ -5,7 +5,7 @@ cmake_minimum_required (VERSION 2.8)
 project(StringUtilityUnitTest)
 
 # テスト対象プロジェクトの場所
-set(NETWORK_CAMERA_TMP "${PROJECT_SOURCE_DIR}/../../network_camera_utility")
+set(NETWORK_CAMERA_TMP "${PROJECT_SOURCE_DIR}/../../NetworkCameraUtility")
 get_filename_component(NETWORK_CAMERA_DIR ${NETWORK_CAMERA_TMP} ABSOLUTE)
 
 # ソースファイル指定
