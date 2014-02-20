@@ -1,11 +1,11 @@
-
+ï»¿
 #include <string>
 
 #include "gtest/gtest.h"
 
 #include "PanasonicNetworkCamera.h"
 
-// ƒeƒXƒgƒtƒBƒNƒXƒ`ƒƒ
+// ãƒ†ã‚¹ãƒˆãƒ•ã‚£ã‚¯ã‚¹ãƒãƒ£
 class PanasonicNetworkCameraTest : public ::testing::Test {
 public:
   virtual void SetUp() {
@@ -14,41 +14,41 @@ public:
 };
 
 
-// ˆÈ‰ºAPanasonicNetworkCameraTestƒNƒ‰ƒX‚ÌƒeƒXƒg
-// ÀÛ‚Ìˆ—ƒNƒ‰ƒX HttpClientConcrete ‚ğ³‚µ‚­ŒÄ‚Ño‚µ‚Ä‚¢‚é‚±‚Æ‚ğŠm”F
+// ä»¥ä¸‹ã€PanasonicNetworkCameraTestã‚¯ãƒ©ã‚¹ã®ãƒ†ã‚¹ãƒˆ
+// å®Ÿéš›ã®å‡¦ç†ã‚¯ãƒ©ã‚¹ HttpClientConcrete ã‚’æ­£ã—ãå‘¼ã³å‡ºã—ã¦ã„ã‚‹ã“ã¨ã‚’ç¢ºèª
 
-// ƒeƒXƒgƒP[ƒX‚Íƒ|[ƒg”Ô†‚ğ—p‚¢‚Ä‹æ•Ê‚·‚é
-// ƒXƒ^ƒu‘¤‚Å‚ÍAƒ|[ƒg”Ô†-80 ‚Æ‚µ‚½ƒeƒXƒg”Ô†‚ÅŠm”Fˆ—‚ÆƒŒƒXƒ|ƒ“ƒX‚ğ
-// Ø‚è‘Ö‚¦‚Ä‚¢‚é
+// ãƒ†ã‚¹ãƒˆã‚±ãƒ¼ã‚¹ã¯ãƒãƒ¼ãƒˆç•ªå·ã‚’ç”¨ã„ã¦åŒºåˆ¥ã™ã‚‹
+// ã‚¹ã‚¿ãƒ–å´ã§ã¯ã€ãƒãƒ¼ãƒˆç•ªå·-80 ã¨ã—ãŸãƒ†ã‚¹ãƒˆç•ªå·ã§ç¢ºèªå‡¦ç†ã¨ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚’
+// åˆ‡ã‚Šæ›¿ãˆã¦ã„ã‚‹
 //
-// ƒ|[ƒg”Ô†   | Šm”F€–Ú
-// 81  | ƒpƒ“¶, ”FØw’è‚È‚µ, ƒT[ƒo[w’è‚ ‚è, ‘O‰ñŒÄ‚Ño‚µŒ‹‰Êi¬Œ÷j
-// 82  | ƒpƒ“‰E, ”FØw’è‚ ‚è, ƒŒƒXƒ|ƒ“ƒX³íiReturn: 0j
-// 83  | ƒ`ƒ‹ƒgã
-// 84  | ƒ`ƒ‹ƒg‰º
-// 85  | ƒY[ƒ€ƒCƒ“
-// 86  | ƒY[ƒ€ƒAƒEƒg
-// 87-89  | ƒtƒH[ƒJƒX, 3ƒpƒ^[ƒ“
-// 90-95  | ƒzƒƒCƒgƒoƒ‰ƒ“ƒX, 6ƒpƒ^[ƒ“
-// 96-98  | –¾‚é‚³, 3ƒpƒ^[ƒ“
-// 99-100 | İ’uƒ^ƒCƒv, 2ƒpƒ^[ƒ“
-// 101 | ƒz[ƒ€ƒ|ƒWƒVƒ‡ƒ“•œ‹A, ƒŒƒXƒ|ƒ“ƒX³íiReturn: homej
-// 102 | ƒTƒCƒY  192x144, ‰æ¿Motion, ƒŒƒXƒ|ƒ“ƒX³íiimage/jpegj
-// 103 | ƒTƒCƒY  320x240, ‰æ¿Clarity
-// 104 | ƒTƒCƒY  640x480, ‰æ¿Standard
-// 105 | ƒTƒCƒY 1280x960, ‰æ¿Standard
-// 106 | ƒTƒCƒY1280x1024, ‰æ¿Standard
-// 107 | ˆø”ˆÙí ƒTƒCƒY
-// 108 | ˆø”ˆÙí ‰æ¿
-// 109 | ˆø”ˆÙí ƒtƒH[ƒJƒX
-// 110 | ˆø”ˆÙí ƒzƒƒCƒgƒoƒ‰ƒ“ƒX
-// 111 | ˆø”ˆÙí –¾‚é‚³
-// 112 | ˆø”ˆÙí İ’uƒ^ƒCƒv
-// 113 | ƒŒƒXƒ|ƒ“ƒXˆÙí, ‘O‰ñŒÄ‚Ño‚µŒ‹‰Êi¸”sj, Return: -1
-// 114 | ƒŒƒXƒ|ƒ“ƒXˆÙí, ‘O‰ñŒÄ‚Ño‚µŒ‹‰Êi¸”sj, statuscode: 401
-// 115 | ƒŒƒXƒ|ƒ“ƒXˆÙí, ‘O‰ñŒÄ‚Ño‚µŒ‹‰Êi¸”sj, statuscode: -1
+// ãƒãƒ¼ãƒˆç•ªå·   | ç¢ºèªé …ç›®
+// 81  | ãƒ‘ãƒ³å·¦, èªè¨¼æŒ‡å®šãªã—, ã‚µãƒ¼ãƒãƒ¼æŒ‡å®šã‚ã‚Š, å‰å›å‘¼ã³å‡ºã—çµæœï¼ˆæˆåŠŸï¼‰
+// 82  | ãƒ‘ãƒ³å³, èªè¨¼æŒ‡å®šã‚ã‚Š, ãƒ¬ã‚¹ãƒãƒ³ã‚¹æ­£å¸¸ï¼ˆReturn: 0ï¼‰
+// 83  | ãƒãƒ«ãƒˆä¸Š
+// 84  | ãƒãƒ«ãƒˆä¸‹
+// 85  | ã‚ºãƒ¼ãƒ ã‚¤ãƒ³
+// 86  | ã‚ºãƒ¼ãƒ ã‚¢ã‚¦ãƒˆ
+// 87-89  | ãƒ•ã‚©ãƒ¼ã‚«ã‚¹, 3ãƒ‘ã‚¿ãƒ¼ãƒ³
+// 90-95  | ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹, 6ãƒ‘ã‚¿ãƒ¼ãƒ³
+// 96-98  | æ˜ã‚‹ã•, 3ãƒ‘ã‚¿ãƒ¼ãƒ³
+// 99-100 | è¨­ç½®ã‚¿ã‚¤ãƒ—, 2ãƒ‘ã‚¿ãƒ¼ãƒ³
+// 101 | ãƒ›ãƒ¼ãƒ ãƒã‚¸ã‚·ãƒ§ãƒ³å¾©å¸°, ãƒ¬ã‚¹ãƒãƒ³ã‚¹æ­£å¸¸ï¼ˆReturn: homeï¼‰
+// 102 | ã‚µã‚¤ã‚º  192x144, ç”»è³ªMotion, ãƒ¬ã‚¹ãƒãƒ³ã‚¹æ­£å¸¸ï¼ˆimage/jpegï¼‰
+// 103 | ã‚µã‚¤ã‚º  320x240, ç”»è³ªClarity
+// 104 | ã‚µã‚¤ã‚º  640x480, ç”»è³ªStandard
+// 105 | ã‚µã‚¤ã‚º 1280x960, ç”»è³ªStandard
+// 106 | ã‚µã‚¤ã‚º1280x1024, ç”»è³ªStandard
+// 107 | å¼•æ•°ç•°å¸¸ ã‚µã‚¤ã‚º
+// 108 | å¼•æ•°ç•°å¸¸ ç”»è³ª
+// 109 | å¼•æ•°ç•°å¸¸ ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
+// 110 | å¼•æ•°ç•°å¸¸ ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹
+// 111 | å¼•æ•°ç•°å¸¸ æ˜ã‚‹ã•
+// 112 | å¼•æ•°ç•°å¸¸ è¨­ç½®ã‚¿ã‚¤ãƒ—
+// 113 | ãƒ¬ã‚¹ãƒãƒ³ã‚¹ç•°å¸¸, å‰å›å‘¼ã³å‡ºã—çµæœï¼ˆå¤±æ•—ï¼‰, Return: -1
+// 114 | ãƒ¬ã‚¹ãƒãƒ³ã‚¹ç•°å¸¸, å‰å›å‘¼ã³å‡ºã—çµæœï¼ˆå¤±æ•—ï¼‰, statuscode: 401
+// 115 | ãƒ¬ã‚¹ãƒãƒ³ã‚¹ç•°å¸¸, å‰å›å‘¼ã³å‡ºã—çµæœï¼ˆå¤±æ•—ï¼‰, statuscode: -1
 
-// ƒpƒ“
+// ãƒ‘ãƒ³
 TEST_F(PanasonicNetworkCameraTest, panLeftTest) {
   client.setCamera("127.0.0.1", "81");
   client.movePanLeft();
@@ -66,7 +66,7 @@ TEST_F(PanasonicNetworkCameraTest, panRightTest) {
   }
 }
 
-// ƒ`ƒ‹ƒg
+// ãƒãƒ«ãƒˆ
 TEST_F(PanasonicNetworkCameraTest, tiltUpTest) {
   client.setCamera("127.0.0.1", "83");
   client.moveTiltUp();
@@ -82,7 +82,7 @@ TEST_F(PanasonicNetworkCameraTest, tiltDownTest) {
   }
 }
 
-// ƒY[ƒ€
+// ã‚ºãƒ¼ãƒ 
 TEST_F(PanasonicNetworkCameraTest, zoomInTest) {
   client.setCamera("127.0.0.1", "85");
   client.zoomTele();
@@ -98,7 +98,7 @@ TEST_F(PanasonicNetworkCameraTest, zoomOutTest) {
   }
 }
 
-// ƒtƒH[ƒJƒX
+// ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
 TEST_F(PanasonicNetworkCameraTest, focusNearTest) {
   client.setCamera("127.0.0.1", "87");
   client.adjustFocus(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Near);
@@ -121,7 +121,7 @@ TEST_F(PanasonicNetworkCameraTest, focusAutoTest) {
   }
 }
 
-// ƒzƒƒCƒgƒoƒ‰ƒ“ƒX
+// ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹
 TEST_F(PanasonicNetworkCameraTest, whitebalanceAutoTest) {
   client.setCamera("127.0.0.1", "90");
   client.setWhiteBalance(openrtm_network_camera::panasonic::PanasonicNetworkCamera::AutoWB);
@@ -165,7 +165,7 @@ TEST_F(PanasonicNetworkCameraTest, whitebalanceHoldTest) {
   }
 }
 
-// –¾‚é‚³
+// æ˜ã‚‹ã•
 TEST_F(PanasonicNetworkCameraTest, brightnessDarkerTest) {
   client.setCamera("127.0.0.1", "96");
   client.adjustBrightness(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Darker);
@@ -188,7 +188,7 @@ TEST_F(PanasonicNetworkCameraTest, brightnessDefaultTest) {
   }
 }
 
-// İ’uêŠ
+// è¨­ç½®å ´æ‰€
 TEST_F(PanasonicNetworkCameraTest, setupTypeCeilingTest) {
   client.setCamera("127.0.0.1", "99");
   client.setSetupType(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Ceiling);
@@ -204,7 +204,7 @@ TEST_F(PanasonicNetworkCameraTest, setupTypeDesktopTest) {
   }
 }
 
-// ƒz[ƒ€ƒ|ƒWƒVƒ‡ƒ“
+// ãƒ›ãƒ¼ãƒ ãƒã‚¸ã‚·ãƒ§ãƒ³
 TEST_F(PanasonicNetworkCameraTest, homepositionTest) {
   client.setCamera("127.0.0.1", "101");
   client.moveToHomePosition();
@@ -213,7 +213,7 @@ TEST_F(PanasonicNetworkCameraTest, homepositionTest) {
   }
 }
 
-// ‰æ‘œæ“¾
+// ç”»åƒå–å¾—
 TEST_F(PanasonicNetworkCameraTest, getImage192x144Test) {
   client.setCamera("127.0.0.1", "102");
   int length;
@@ -258,7 +258,7 @@ TEST_F(PanasonicNetworkCameraTest, getImage1280x1024Test) {
 }
 
 
-// ˆø”ˆÙí ƒTƒCƒY
+// å¼•æ•°ç•°å¸¸ ã‚µã‚¤ã‚º
 TEST_F(PanasonicNetworkCameraTest, invalidImageSizeTest) {
   client.setCamera("127.0.0.1", "107");
   int length;
@@ -267,7 +267,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidImageSizeTest) {
     FAIL();
   }
 }
-// ˆø”ˆÙí ‰æ¿
+// å¼•æ•°ç•°å¸¸ ç”»è³ª
 TEST_F(PanasonicNetworkCameraTest, invalidImageQualityTest) {
   client.setCamera("127.0.0.1", "108");
   int length;
@@ -276,7 +276,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidImageQualityTest) {
     FAIL();
   }
 }
-// ˆø”ˆÙí ƒtƒH[ƒJƒX
+// å¼•æ•°ç•°å¸¸ ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
 TEST_F(PanasonicNetworkCameraTest, invalidFocusTest) {
   client.setCamera("127.0.0.1", "109");
   client.adjustFocus(openrtm_network_camera::panasonic::PanasonicNetworkCamera::FocusType(10));
@@ -284,7 +284,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidFocusTest) {
     FAIL();
   }
 }
-// ˆø”ˆÙí ƒzƒƒCƒgƒoƒ‰ƒ“ƒX
+// å¼•æ•°ç•°å¸¸ ãƒ›ãƒ¯ã‚¤ãƒˆãƒãƒ©ãƒ³ã‚¹
 TEST_F(PanasonicNetworkCameraTest, invalidWhiteBalanceTest) {
   client.setCamera("127.0.0.1", "110");
   client.setWhiteBalance(openrtm_network_camera::panasonic::PanasonicNetworkCamera::WhiteBalance(10));
@@ -292,7 +292,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidWhiteBalanceTest) {
     FAIL();
   }
 }
-// ˆø”ˆÙí –¾‚é‚³
+// å¼•æ•°ç•°å¸¸ æ˜ã‚‹ã•
 TEST_F(PanasonicNetworkCameraTest, invalidBrightnessTest) {
   client.setCamera("127.0.0.1", "111");
   client.adjustBrightness(openrtm_network_camera::panasonic::PanasonicNetworkCamera::BrightnessType(10));
@@ -300,7 +300,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidBrightnessTest) {
     FAIL();
   }
 }
-// ˆø”ˆÙí İ’uƒ^ƒCƒv
+// å¼•æ•°ç•°å¸¸ è¨­ç½®ã‚¿ã‚¤ãƒ—
 TEST_F(PanasonicNetworkCameraTest, invalidSetupTypeTest) {
   client.setCamera("127.0.0.1", "112");
   client.setSetupType(openrtm_network_camera::panasonic::PanasonicNetworkCamera::SetupType(10));
@@ -309,7 +309,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidSetupTypeTest) {
   }
 }
 
-// ƒŒƒXƒ|ƒ“ƒXˆÙí, Return: -1
+// ãƒ¬ã‚¹ãƒãƒ³ã‚¹ç•°å¸¸, Return: -1
 TEST_F(PanasonicNetworkCameraTest, responseErrorReturnNegativeTest) {
   client.setCamera("127.0.0.1", "113");
   client.movePanLeft();
@@ -318,7 +318,7 @@ TEST_F(PanasonicNetworkCameraTest, responseErrorReturnNegativeTest) {
   }
   ASSERT_EQ(false, client.isLastApiSuccess());
 }
-// ƒŒƒXƒ|ƒ“ƒXˆÙí, statuscode: 401
+// ãƒ¬ã‚¹ãƒãƒ³ã‚¹ç•°å¸¸, statuscode: 401
 TEST_F(PanasonicNetworkCameraTest, responseError401Test) {
   client.setCamera("127.0.0.1", "114");
   client.movePanLeft();
@@ -327,7 +327,7 @@ TEST_F(PanasonicNetworkCameraTest, responseError401Test) {
   }
   ASSERT_EQ(false, client.isLastApiSuccess());
 }
-// ƒŒƒXƒ|ƒ“ƒXˆÙí, statuscode: -1
+// ãƒ¬ã‚¹ãƒãƒ³ã‚¹ç•°å¸¸, statuscode: -1
 TEST_F(PanasonicNetworkCameraTest, responseErrorStatusCodeNegativeTest) {
   client.setCamera("127.0.0.1", "115");
   client.movePanLeft();
@@ -337,7 +337,7 @@ TEST_F(PanasonicNetworkCameraTest, responseErrorStatusCodeNegativeTest) {
   ASSERT_EQ(false, client.isLastApiSuccess());
 }
 
-// ƒJƒƒ‰w’è‚È‚µ‚Å‚ÌŒÄ‚Ño‚µ
+// ã‚«ãƒ¡ãƒ©æŒ‡å®šãªã—ã§ã®å‘¼ã³å‡ºã—
 TEST_F(PanasonicNetworkCameraTest, noCameraSettingTest) {
   client.movePanLeft();
   if (HasFatalFailure()) {

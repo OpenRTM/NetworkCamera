@@ -1,4 +1,4 @@
-
+ï»¿
 #include "HttpClient.h"
 
 #include <string>
@@ -9,7 +9,7 @@
 namespace openrtm_network_camera {
 namespace utility {
 
-// ƒ|[ƒg”Ô†‚ÅƒeƒXƒg‚ð‹æ•Ê‚µAŒŸØ‚·‚é“à—e‚ðØ‚è‘Ö‚¦‚é
+// ãƒãƒ¼ãƒˆç•ªå·ã§ãƒ†ã‚¹ãƒˆã‚’åŒºåˆ¥ã—ã€æ¤œè¨¼ã™ã‚‹å†…å®¹ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 namespace {
   int test_type = 0;
 
@@ -25,7 +25,7 @@ HttpClient::~HttpClient(void)
 {
 }
 
-// ƒŠƒNƒGƒXƒgURL‚ðŒŸØ‚·‚é
+// ãƒªã‚¯ã‚¨ã‚¹ãƒˆURLã‚’æ¤œè¨¼ã™ã‚‹
 void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const char* p_port) {
   const std::string host = p_host_name;
   const std::string port = p_port;
@@ -36,8 +36,8 @@ void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const c
 
   ASSERT_EQ(std::string("127.0.0.1"), host);
 
-  // ƒ|[ƒg”Ô†‚©‚çƒeƒXƒg”Ô†‚ðŽæ“¾
-  // ƒeƒXƒg”Ô†ƒ|[ƒg”Ô†|‚W‚O
+  // ãƒãƒ¼ãƒˆç•ªå·ã‹ã‚‰ãƒ†ã‚¹ãƒˆç•ªå·ã‚’å–å¾—
+  // ãƒ†ã‚¹ãƒˆç•ªå·ï¼ãƒãƒ¼ãƒˆç•ªå·ï¼ï¼˜ï¼
   std::stringstream ss(port);
   ss >> test_type;
   test_type -= 80;
@@ -46,7 +46,7 @@ void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const c
 
   std::cout << "test type:" << test_type << std::endl;
 
-  // ƒeƒXƒg”Ô†‚É‰ž‚¶‚ÄAPIƒpƒX‚ðŒŸØ
+  // ãƒ†ã‚¹ãƒˆç•ªå·ã«å¿œã˜ã¦APIãƒ‘ã‚¹ã‚’æ¤œè¨¼
   switch(test_type) {
   case 1:
     ASSERT_STREQ("/Set?Func=Pan&Kind=0&DegMode=4", p_path_name);
@@ -152,7 +152,7 @@ void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const c
     FAIL();
   }
 
-  // ”FØŽü‚è
+  // èªè¨¼å‘¨ã‚Š
   if (2 == test_type) {
     ASSERT_EQ(std::string("user"), user);
     ASSERT_EQ(std::string("password"), password);
