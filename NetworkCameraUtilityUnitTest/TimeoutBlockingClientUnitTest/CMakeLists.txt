@@ -5,7 +5,7 @@ cmake_minimum_required (VERSION 2.8)
 project(TimeoutBlockingClientUnitTest)
 
 # テスト対象プロジェクトの場所
-set(NETWORK_CAMERA_TMP "${PROJECT_SOURCE_DIR}/../../NetworkCameraUtility")
+set(NETWORK_CAMERA_TMP "${PROJECT_SOURCE_DIR}/../../../NetworkCamera/NetworkCameraUtility")
 get_filename_component(NETWORK_CAMERA_DIR ${NETWORK_CAMERA_TMP} ABSOLUTE)
 
 # ソースファイル指定
