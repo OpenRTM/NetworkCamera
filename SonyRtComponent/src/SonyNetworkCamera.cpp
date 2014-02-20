@@ -374,7 +374,7 @@ const char* SonyNetworkCamera::doRequest(const std::string& path, int* p_length)
 }
 
 bool SonyNetworkCamera::isValidContentsType(const std::string& target_type) {
-  const std::string type = p_client_->getContentType();
+  const std::string type((NULL == p_client_->getContentType()) ? "" : p_client_->getContentType());
   if (0 == type.size()) {
     // コンテンツタイプヘッダがない場合は判定できないのでtrueとする
     return true;

@@ -387,7 +387,7 @@ const char* PanasonicNetworkCamera::doRequest(const std::string& path, int* p_le
 }
 
 bool PanasonicNetworkCamera::isValidContentsType(const std::string& target_type) {
-  const std::string type = p_client_->getContentType();
+  const std::string type((NULL == p_client_->getContentType()) ? "" : p_client_->getContentType());
   if (0 == type.size()) {
     // コンテンツタイプヘッダがない場合は判定できないのでtrueとする
     return true;
@@ -421,7 +421,7 @@ void PanasonicNetworkCamera::analyzeContents(const char* p_contents, int length)
   }
 
   // text/plain であることの確認
-  const std::string type = p_client_->getContentType();
+  const std::string type((NULL == p_client_->getContentType()) ? "" : p_client_->getContentType());
   if (std::string::npos == type.find(CONTENTS_TYPE_TEXT_PLAIN)) {
     return;
   }
