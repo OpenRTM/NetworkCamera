@@ -18,39 +18,40 @@ public:
 // 実際の処理クラス HttpClientConcrete を正しく呼び出していることを確認
 
 // テストケースはポート番号を用いて区別する
-// スタブ側では、ポート番号-80 としたテスト番号で確認処理とレスポンスを
-// 切り替えている
+// スタブ側では、ポート番号をテスト番号として扱う
 //
-// ポート番号   | 確認項目
-// 81  | パン左, 認証指定なし, サーバー指定あり, 前回呼び出し結果（成功）
-// 82  | パン右, 認証指定あり, レスポンス正常（Return: 0）
-// 83  | チルト上
-// 84  | チルト下
-// 85  | ズームイン
-// 86  | ズームアウト
-// 87-89  | フォーカス, 3パターン
-// 90-95  | ホワイトバランス, 6パターン
-// 96-98  | 明るさ, 3パターン
-// 99-100 | 設置タイプ, 2パターン
-// 101 | ホームポジション復帰, レスポンス正常（Return: home）
-// 102 | サイズ  192x144, 画質Motion, レスポンス正常（image/jpeg）
-// 103 | サイズ  320x240, 画質Clarity
-// 104 | サイズ  640x480, 画質Standard
-// 105 | サイズ 1280x960, 画質Standard
-// 106 | サイズ1280x1024, 画質Standard
-// 107 | 引数異常 サイズ
-// 108 | 引数異常 画質
-// 109 | 引数異常 フォーカス
-// 110 | 引数異常 ホワイトバランス
-// 111 | 引数異常 明るさ
-// 112 | 引数異常 設置タイプ
-// 113 | レスポンス異常, 前回呼び出し結果（失敗）, Return: -1
-// 114 | レスポンス異常, 前回呼び出し結果（失敗）, statuscode: 401
-// 115 | レスポンス異常, 前回呼び出し結果（失敗）, statuscode: -1
+// ポート番号 | 確認項目
+// 1          | パン左, 認証指定なし, サーバー指定あり, 前回呼び出し結果（成功）
+// 2          | パン右, 認証指定あり, レスポンス正常（Return: 0）
+// 3          | チルト上
+// 4          | チルト下
+// 5          | ズームイン
+// 6          | ズームアウト
+// 7-9        | フォーカス, 3パターン
+// 10-15      | ホワイトバランス, 6パターン
+// 16-18      | 明るさ, 3パターン
+// 19-20      | 設置タイプ, 2パターン
+// 21         | ホームポジション復帰, レスポンス正常（Return: home）
+// 22         | サイズ  192x144, 画質Motion, レスポンス正常（image/jpeg）
+// 23         | サイズ  320x240, 画質Clarity
+// 24         | サイズ  640x480, 画質Standard
+// 25         | サイズ 1280x960, 画質Standard
+// 26         | サイズ1280x1024, 画質Standard
+//
+// 27         | 引数異常 サイズ
+// 28         | 引数異常 画質
+// 29         | 引数異常 フォーカス
+// 30         | 引数異常 ホワイトバランス
+// 31         | 引数異常 明るさ
+// 32         | 引数異常 設置タイプ
+//
+// 33         | レスポンス異常, 前回呼び出し結果（失敗）, Return: -1
+// 34         | レスポンス異常, 前回呼び出し結果（失敗）, statuscode: 401
+// 35         | レスポンス異常, 前回呼び出し結果（失敗）, statuscode: -1
 
 // パン
 TEST_F(PanasonicNetworkCameraTest, panLeftTest) {
-  client.setCamera("127.0.0.1", "81");
+  client.setCamera("127.0.0.1", "1");
   client.movePanLeft();
   if (HasFatalFailure()) {
     FAIL();
@@ -58,7 +59,7 @@ TEST_F(PanasonicNetworkCameraTest, panLeftTest) {
   ASSERT_EQ(true, client.isLastApiSuccess());
 }
 TEST_F(PanasonicNetworkCameraTest, panRightTest) {
-  client.setCamera("127.0.0.1", "82");
+  client.setCamera("127.0.0.1", "2");
   client.setAuthenticateUser("user", "password");
   client.movePanRight();
   if (HasFatalFailure()) {
@@ -68,14 +69,14 @@ TEST_F(PanasonicNetworkCameraTest, panRightTest) {
 
 // チルト
 TEST_F(PanasonicNetworkCameraTest, tiltUpTest) {
-  client.setCamera("127.0.0.1", "83");
+  client.setCamera("127.0.0.1", "3");
   client.moveTiltUp();
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, tiltDownTest) {
-  client.setCamera("127.0.0.1", "84");
+  client.setCamera("127.0.0.1", "4");
   client.moveTiltDown();
   if (HasFatalFailure()) {
     FAIL();
@@ -84,14 +85,14 @@ TEST_F(PanasonicNetworkCameraTest, tiltDownTest) {
 
 // ズーム
 TEST_F(PanasonicNetworkCameraTest, zoomInTest) {
-  client.setCamera("127.0.0.1", "85");
+  client.setCamera("127.0.0.1", "5");
   client.zoomTele();
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, zoomOutTest) {
-  client.setCamera("127.0.0.1", "86");
+  client.setCamera("127.0.0.1", "6");
   client.zoomWide();
   if (HasFatalFailure()) {
     FAIL();
@@ -100,21 +101,21 @@ TEST_F(PanasonicNetworkCameraTest, zoomOutTest) {
 
 // フォーカス
 TEST_F(PanasonicNetworkCameraTest, focusNearTest) {
-  client.setCamera("127.0.0.1", "87");
+  client.setCamera("127.0.0.1", "7");
   client.adjustFocus(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Near);
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, focusFarTest) {
-  client.setCamera("127.0.0.1", "88");
+  client.setCamera("127.0.0.1", "8");
   client.adjustFocus(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Far);
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, focusAutoTest) {
-  client.setCamera("127.0.0.1", "89");
+  client.setCamera("127.0.0.1", "9");
   client.adjustFocus(openrtm_network_camera::panasonic::PanasonicNetworkCamera::AutoFocus);
   if (HasFatalFailure()) {
     FAIL();
@@ -123,42 +124,42 @@ TEST_F(PanasonicNetworkCameraTest, focusAutoTest) {
 
 // ホワイトバランス
 TEST_F(PanasonicNetworkCameraTest, whitebalanceAutoTest) {
-  client.setCamera("127.0.0.1", "90");
+  client.setCamera("127.0.0.1", "10");
   client.setWhiteBalance(openrtm_network_camera::panasonic::PanasonicNetworkCamera::AutoWB);
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, whitebalanceIndoorTest) {
-  client.setCamera("127.0.0.1", "91");
+  client.setCamera("127.0.0.1", "11");
   client.setWhiteBalance(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Indoor);
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, whitebalanceFluorescentWhiteTest) {
-  client.setCamera("127.0.0.1", "92");
+  client.setCamera("127.0.0.1", "12");
   client.setWhiteBalance(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Fluorescent_White);
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, whitebalanceFluorescentDayTest) {
-  client.setCamera("127.0.0.1", "93");
+  client.setCamera("127.0.0.1", "13");
   client.setWhiteBalance(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Fluorescent_Day);
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, whitebalanceOutdoorTest) {
-  client.setCamera("127.0.0.1", "94");
+  client.setCamera("127.0.0.1", "14");
   client.setWhiteBalance(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Outdoor);
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, whitebalanceHoldTest) {
-  client.setCamera("127.0.0.1", "95");
+  client.setCamera("127.0.0.1", "15");
   client.setWhiteBalance(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Hold);
   if (HasFatalFailure()) {
     FAIL();
@@ -167,21 +168,21 @@ TEST_F(PanasonicNetworkCameraTest, whitebalanceHoldTest) {
 
 // 明るさ
 TEST_F(PanasonicNetworkCameraTest, brightnessDarkerTest) {
-  client.setCamera("127.0.0.1", "96");
+  client.setCamera("127.0.0.1", "16");
   client.adjustBrightness(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Darker);
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, brightnessBrighterTest) {
-  client.setCamera("127.0.0.1", "97");
+  client.setCamera("127.0.0.1", "17");
   client.adjustBrightness(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Brighter);
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, brightnessDefaultTest) {
-  client.setCamera("127.0.0.1", "98");
+  client.setCamera("127.0.0.1", "18");
   client.adjustBrightness(openrtm_network_camera::panasonic::PanasonicNetworkCamera::DefaultBrightness);
   if (HasFatalFailure()) {
     FAIL();
@@ -190,14 +191,14 @@ TEST_F(PanasonicNetworkCameraTest, brightnessDefaultTest) {
 
 // 設置場所
 TEST_F(PanasonicNetworkCameraTest, setupTypeCeilingTest) {
-  client.setCamera("127.0.0.1", "99");
+  client.setCamera("127.0.0.1", "19");
   client.setSetupType(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Ceiling);
   if (HasFatalFailure()) {
     FAIL();
   }
 }
 TEST_F(PanasonicNetworkCameraTest, setupTypeDesktopTest) {
-  client.setCamera("127.0.0.1", "100");
+  client.setCamera("127.0.0.1", "20");
   client.setSetupType(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Desktop);
   if (HasFatalFailure()) {
     FAIL();
@@ -206,7 +207,7 @@ TEST_F(PanasonicNetworkCameraTest, setupTypeDesktopTest) {
 
 // ホームポジション
 TEST_F(PanasonicNetworkCameraTest, homepositionTest) {
-  client.setCamera("127.0.0.1", "101");
+  client.setCamera("127.0.0.1", "21");
   client.moveToHomePosition();
   if (HasFatalFailure()) {
     FAIL();
@@ -215,7 +216,7 @@ TEST_F(PanasonicNetworkCameraTest, homepositionTest) {
 
 // 画像取得
 TEST_F(PanasonicNetworkCameraTest, getImage192x144Test) {
-  client.setCamera("127.0.0.1", "102");
+  client.setCamera("127.0.0.1", "22");
   int length;
   const char* p = client.getImage(openrtm_network_camera::panasonic::PanasonicNetworkCamera::w192x144, openrtm_network_camera::panasonic::PanasonicNetworkCamera::Motion, &length);
   if (HasFatalFailure()) {
@@ -225,7 +226,7 @@ TEST_F(PanasonicNetworkCameraTest, getImage192x144Test) {
   ASSERT_STREQ("there is a image contents.\r\n", p);
 }
 TEST_F(PanasonicNetworkCameraTest, getImage320x240Test) {
-  client.setCamera("127.0.0.1", "103");
+  client.setCamera("127.0.0.1", "23");
   int length;
   client.getImage(openrtm_network_camera::panasonic::PanasonicNetworkCamera::w320x240, openrtm_network_camera::panasonic::PanasonicNetworkCamera::Clarity, &length);
   if (HasFatalFailure()) {
@@ -233,7 +234,7 @@ TEST_F(PanasonicNetworkCameraTest, getImage320x240Test) {
   }
 }
 TEST_F(PanasonicNetworkCameraTest, getImage640x480Test) {
-  client.setCamera("127.0.0.1", "104");
+  client.setCamera("127.0.0.1", "24");
   int length;
   client.getImage(openrtm_network_camera::panasonic::PanasonicNetworkCamera::w640x480, openrtm_network_camera::panasonic::PanasonicNetworkCamera::Standard, &length);
   if (HasFatalFailure()) {
@@ -241,7 +242,7 @@ TEST_F(PanasonicNetworkCameraTest, getImage640x480Test) {
   }
 }
 TEST_F(PanasonicNetworkCameraTest, getImage1280x960Test) {
-  client.setCamera("127.0.0.1", "105");
+  client.setCamera("127.0.0.1", "25");
   int length;
   client.getImage(openrtm_network_camera::panasonic::PanasonicNetworkCamera::w1280x960, openrtm_network_camera::panasonic::PanasonicNetworkCamera::Standard, &length);
   if (HasFatalFailure()) {
@@ -249,7 +250,7 @@ TEST_F(PanasonicNetworkCameraTest, getImage1280x960Test) {
   }
 }
 TEST_F(PanasonicNetworkCameraTest, getImage1280x1024Test) {
-  client.setCamera("127.0.0.1", "106");
+  client.setCamera("127.0.0.1", "26");
   int length;
   client.getImage(openrtm_network_camera::panasonic::PanasonicNetworkCamera::w1280x1024, openrtm_network_camera::panasonic::PanasonicNetworkCamera::Standard, &length);
   if (HasFatalFailure()) {
@@ -260,7 +261,7 @@ TEST_F(PanasonicNetworkCameraTest, getImage1280x1024Test) {
 
 // 引数異常 サイズ
 TEST_F(PanasonicNetworkCameraTest, invalidImageSizeTest) {
-  client.setCamera("127.0.0.1", "107");
+  client.setCamera("127.0.0.1", "27");
   int length;
   client.getImage(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Resolution(10), openrtm_network_camera::panasonic::PanasonicNetworkCamera::Motion, &length);
   if (HasFatalFailure()) {
@@ -269,7 +270,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidImageSizeTest) {
 }
 // 引数異常 画質
 TEST_F(PanasonicNetworkCameraTest, invalidImageQualityTest) {
-  client.setCamera("127.0.0.1", "108");
+  client.setCamera("127.0.0.1", "28");
   int length;
   client.getImage(openrtm_network_camera::panasonic::PanasonicNetworkCamera::w320x240, openrtm_network_camera::panasonic::PanasonicNetworkCamera::Quality(10), &length);
   if (HasFatalFailure()) {
@@ -278,7 +279,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidImageQualityTest) {
 }
 // 引数異常 フォーカス
 TEST_F(PanasonicNetworkCameraTest, invalidFocusTest) {
-  client.setCamera("127.0.0.1", "109");
+  client.setCamera("127.0.0.1", "29");
   client.adjustFocus(openrtm_network_camera::panasonic::PanasonicNetworkCamera::FocusType(10));
   if (HasFatalFailure()) {
     FAIL();
@@ -286,7 +287,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidFocusTest) {
 }
 // 引数異常 ホワイトバランス
 TEST_F(PanasonicNetworkCameraTest, invalidWhiteBalanceTest) {
-  client.setCamera("127.0.0.1", "110");
+  client.setCamera("127.0.0.1", "30");
   client.setWhiteBalance(openrtm_network_camera::panasonic::PanasonicNetworkCamera::WhiteBalance(10));
   if (HasFatalFailure()) {
     FAIL();
@@ -294,7 +295,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidWhiteBalanceTest) {
 }
 // 引数異常 明るさ
 TEST_F(PanasonicNetworkCameraTest, invalidBrightnessTest) {
-  client.setCamera("127.0.0.1", "111");
+  client.setCamera("127.0.0.1", "31");
   client.adjustBrightness(openrtm_network_camera::panasonic::PanasonicNetworkCamera::BrightnessType(10));
   if (HasFatalFailure()) {
     FAIL();
@@ -302,7 +303,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidBrightnessTest) {
 }
 // 引数異常 設置タイプ
 TEST_F(PanasonicNetworkCameraTest, invalidSetupTypeTest) {
-  client.setCamera("127.0.0.1", "112");
+  client.setCamera("127.0.0.1", "32");
   client.setSetupType(openrtm_network_camera::panasonic::PanasonicNetworkCamera::SetupType(10));
   if (HasFatalFailure()) {
     FAIL();
@@ -311,7 +312,7 @@ TEST_F(PanasonicNetworkCameraTest, invalidSetupTypeTest) {
 
 // レスポンス異常, Return: -1
 TEST_F(PanasonicNetworkCameraTest, responseErrorReturnNegativeTest) {
-  client.setCamera("127.0.0.1", "113");
+  client.setCamera("127.0.0.1", "33");
   client.movePanLeft();
   if (HasFatalFailure()) {
     FAIL();
@@ -320,7 +321,7 @@ TEST_F(PanasonicNetworkCameraTest, responseErrorReturnNegativeTest) {
 }
 // レスポンス異常, statuscode: 401
 TEST_F(PanasonicNetworkCameraTest, responseError401Test) {
-  client.setCamera("127.0.0.1", "114");
+  client.setCamera("127.0.0.1", "34");
   client.movePanLeft();
   if (HasFatalFailure()) {
     FAIL();
@@ -329,7 +330,7 @@ TEST_F(PanasonicNetworkCameraTest, responseError401Test) {
 }
 // レスポンス異常, statuscode: -1
 TEST_F(PanasonicNetworkCameraTest, responseErrorStatusCodeNegativeTest) {
-  client.setCamera("127.0.0.1", "115");
+  client.setCamera("127.0.0.1", "35");
   client.movePanLeft();
   if (HasFatalFailure()) {
     FAIL();

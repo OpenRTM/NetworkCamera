@@ -37,12 +37,8 @@ void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const c
   ASSERT_EQ(std::string("127.0.0.1"), host);
 
   // ポート番号からテスト番号を取得
-  // テスト番号＝ポート番号－８０
   std::stringstream ss(port);
   ss >> test_type;
-  test_type -= 80;
-  ASSERT_LE(1, test_type);
-  ASSERT_GE(115, test_type);
 
   std::cout << "test type:" << test_type << std::endl;
 
