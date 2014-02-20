@@ -9,37 +9,51 @@ namespace openrtm_network_camera {
 namespace utility {
 
 namespace {
-  const std::string testType1 = "127.0.0.1"; // 標準, 200 応答
-  const std::string testType2 = "127.0.0.2"; // 認証指定あり
-  const std::string testType3 = "127.0.0.3"; // タイムアウト指定あり
-  const std::string testType4 = "127.0.0.4"; // 204
-  const std::string testType5 = "127.0.0.5"; // 401
-  const std::string testType6 = "127.0.0.6"; // 例外発生
-
   int test_type = 0;
 
+  // テスト1, Content-Lengthヘッダなし
   const std::string response1 = "HTTP/1.0 200 OK\r\n"
                                 "Content-type: text/plain\r\n"
                                 "\r\n"
                                 "Return: 0\r\n";
+
+  // テスト2, 正しいヘッダ
   const std::string response2 = "HTTP/1.0 200 OK\r\n"
-                                "Content-type: text/plain\r\n"
-                                "Content-length: 11\r\n"
+                                "Content-Type: text/plain\r\n"
+                                "Content-Length: 11\r\n"
                                 "\r\n"
                                 "Return: 0\r\n";
+  // テスト3, ヘッダ名が小文字
   const std::string response3 = "HTTP/1.0 200 OK\r\n"
                                 "Content-type: text/plain\r\n"
                                 "Content-length: 11\r\n"
                                 "\r\n"
                                 "Return: 0\r\n";
-  const std::string response4 = "HTTP/1.0 204 No Content\r\n"
+
+  //const std::string response4 = "";
+
+  // テスト5, Content-Length < 実際のコンテンツサイズ
+  const std::string response5 = "HTTP/1.0 200 OK\r\n"
+                                "Content-type: text/plain\r\n"
+                                "Content-length: 4\r\n"
+                                "\r\n"
+                                "Return: 0\r\n";
+  // テスト6, Content-Length > 実際のコンテンツサイズ
+  const std::string response6 = "HTTP/1.0 200 OK\r\n"
+                                "Content-type: text/plain\r\n"
+                                "Content-length: 20\r\n"
+                                "\r\n"
+                                "Return: 0\r\n";
+  // テスト7, status code 204
+  const std::string response7 = "HTTP/1.0 204 No Content\r\n"
                                 "Content-length: 0\r\n"
                                 "Date: Tue, 18 Feb 2014 08:28:14 GMT\r\n"
                                 "Server: Boa/0.94.14rc21\r\n"
                                 "Accept-Ranges: bytes\r\n"
                                 "Connection: Keep-Alive\r\n"
                                 "\r\n";
-  const std::string response5 = "HTTP/1.0 401 Unauthorized\r\n"
+  // テスト8, status code 401
+  const std::string response8 = "HTTP/1.0 401 Unauthorized\r\n"
                                 "\r\n";
 
   std::string response;
@@ -55,29 +69,30 @@ TimeoutBlockingClient::~TimeoutBlockingClient() {
 }
 
 void TimeoutBlockingClient::connect(const std::string& host, const std::string& service, boost::posix_time::time_duration timeout) {
-  ASSERT_EQ(std::string("80"), service);
+  ASSERT_EQ(std::string("127.0.0.1"), host);
 
-  // ホスト名で応答内容を変更する
-  if (testType1 == host) {
-    test_type = 1;
+  // ポート番号よりテスト番号を取得する
+  std::stringstream ss(service);
+  ss >> test_type;
+
+  switch(test_type) {
+  case 1:
+  case 2:
+  case 4:
+  case 5:
+  case 6:
+  case 7:
+  case 8:
     ASSERT_EQ(60, timeout.total_seconds());
-  } else if (testType2 == host) {
-    test_type = 2;
-    ASSERT_EQ(60, timeout.total_seconds());
-  } else if (testType3 == host) {
-    test_type = 3;
+    break;
+  case 3:
     ASSERT_EQ(10, timeout.total_seconds());
-  } else if (testType4 == host) {
-    test_type = 4;
-    ASSERT_EQ(60, timeout.total_seconds());
-  } else if (testType5 == host) {
-    test_type = 5;
-    ASSERT_EQ(60, timeout.total_seconds());
-  } else if (testType6 == host) {
-    test_type = 6;
+    break;
+  case 9:
     std::cout << "exception throws from stub.\n";
     throw std::exception("exception throws from stub connect");
-  } else {
+    break;
+  default:
     FAIL();
   }
 }
@@ -135,28 +150,10 @@ void TimeoutBlockingClient::write(boost::asio::streambuf& buf, boost::posix_time
   std::getline(is, request);
   ASSERT_EQ(std::string("GET /test HTTP/1.0\r"), request);
 
-  std::string host;
-  switch(test_type) {
-  case 1:
-    host = testType1;
-    break;
-  case 2:
-    host = testType2;
-    break;
-  case 3:
-    host = testType3;
-    break;
-  case 4:
-    host = testType4;
-    break;
-  case 5:
-    host = testType5;
-    break;
-  default:
-    FAIL();
-  }
+  std::ostringstream os;
+  os << test_type;
   std::getline(is, request);
-  ASSERT_EQ(std::string("Host: ") + host + ":80\r", request);
+  ASSERT_EQ(std::string("Host: 127.0.0.1:" + os.str() + "\r"), request);
 
   std::getline(is, request);
   ASSERT_EQ(std::string("Accept: */*\r"), request);
@@ -164,7 +161,7 @@ void TimeoutBlockingClient::write(boost::asio::streambuf& buf, boost::posix_time
   std::getline(is, request);
   ASSERT_EQ(std::string("User-Agent: OpenRTM-NetworkCamera-HttpClient\r"), request);
 
-  if (test_type == 2) {
+  if (2 == test_type) {
     std::getline(is, request);
     ASSERT_EQ(std::string("Authorization: Basic dXNlcjpwYXNzd29yZA==\r"), request); // user:passwordのbase64エンコーディング
   }
@@ -173,7 +170,7 @@ void TimeoutBlockingClient::write(boost::asio::streambuf& buf, boost::posix_time
   ASSERT_EQ(std::string("Connection: close\r"), request);
 
   // タイムアウト時間の確認
-  if (test_type == 3) {
+  if (3 == test_type) {
     ASSERT_EQ(10, timeout.total_seconds());
   } else {
     ASSERT_EQ(60, timeout.total_seconds());
@@ -193,10 +190,19 @@ void TimeoutBlockingClient::write(boost::asio::streambuf& buf, boost::posix_time
     response = response3;
     break;
   case 4:
-    response = response4;
+    //response = response4;
     break;
   case 5:
     response = response5;
+    break;
+  case 6:
+    response = response6;
+    break;
+  case 7:
+    response = response7;
+    break;
+  case 8:
+    response = response8;
     break;
   default:
     FAIL();
