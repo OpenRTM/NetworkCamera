@@ -36,9 +36,6 @@ void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const c
 
   ASSERT_EQ(std::string("127.0.0.1"), host);
 
-  // 一回のテスト中の呼び出し回数, フォーカス制御の場合２回呼ぶため
-//  static int request = 0;
-
   // ポート番号からテスト番号を取得
   std::stringstream ss(port);
   ss >> test_type;
@@ -132,6 +129,7 @@ void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const c
     break;
   case 25:
     {
+      // 一回のテスト中の呼び出し回数, フォーカス制御の場合２回呼ぶため
       static int request = 0;
       if (0 == request) {
         ASSERT_STREQ("/command/ptzf.cgi?move=near,1", p_path_name);
@@ -145,6 +143,7 @@ void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const c
     break;
   case 26:
     {
+      // 一回のテスト中の呼び出し回数, フォーカス制御の場合２回呼ぶため
       static int request = 0;
       if (0 == request) {
         ASSERT_STREQ("/command/ptzf.cgi?move=far,1", p_path_name);
@@ -158,6 +157,7 @@ void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const c
     break;
   case 27:
     {
+      // 一回のテスト中の呼び出し回数, フォーカス制御の場合２回呼ぶため
       static int request = 0;
       if (0 == request) {
         ASSERT_STREQ("/command/ptzf.cgi?move=onepushaf,1", p_path_name);
@@ -231,6 +231,7 @@ void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const c
   case 49:
     // case 27 と検証対象は同じだが、呼び出し回数を記録する必要があるのでケースを分ける
     {
+      // 一回のテスト中の呼び出し回数, フォーカス制御の場合２回呼ぶため
       static int request = 0;
       if (0 == request) {
         ASSERT_STREQ("/command/ptzf.cgi?move=onepushaf,1", p_path_name);
