@@ -144,6 +144,9 @@ void HttpClient::doGet(const char* p_host_name, const char* p_path_name, const c
   case 34:
   case 35:
     break;
+  case 36:
+    ASSERT_STREQ("/SnapshotJPEG?Resolution=160x120&Quality=Standard", p_path_name);
+    break;
   default:
     FAIL();
   }
@@ -175,7 +178,7 @@ const char* const* HttpClient::getHeaders(int* p_size) {
 const char* HttpClient::getContents() const {
   if (21 == test_type) {
     return "Return: home\r\n";
-  } else if (22 <= test_type && test_type < 28) {
+  } else if ((22 <= test_type && test_type < 28) || (36 == test_type)) {
     return "there is a image contents.\r\n";
   } else if (33 == test_type) {
     return "Return: -1\r\n";
@@ -186,7 +189,7 @@ const char* HttpClient::getContents() const {
 const char* HttpClient::getContentType() const {
   if ((16 <= test_type && test_type <= 18) || (31 == test_type)){
     return "text/html";
-  } else if (22 <= test_type && test_type <= 28) {
+  } else if ((22 <= test_type && test_type <= 28) || (36 == test_type)){
     return "image/jpeg";
   }
   return "text/plain";
@@ -195,7 +198,7 @@ const char* HttpClient::getContentType() const {
 size_t HttpClient::getContentLength() const {
   if (21 == test_type) {
     return 14;
-  } else if (22 <= test_type && test_type < 28) {
+  } else if ((22 <= test_type && test_type < 28) || (36 == test_type)) {
     return 28;
   } else if (33 == test_type) {
     return 12;

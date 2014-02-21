@@ -48,6 +48,8 @@ public:
 // 33         | レスポンス異常, 前回呼び出し結果（失敗）, Return: -1
 // 34         | レスポンス異常, 前回呼び出し結果（失敗）, statuscode: 401
 // 35         | レスポンス異常, 前回呼び出し結果（失敗）, statuscode: -1
+//
+// 36         | サイズ  160x120, 画質Standard
 
 // パン
 TEST_F(PanasonicNetworkCameraTest, panLeftTest) {
@@ -341,6 +343,16 @@ TEST_F(PanasonicNetworkCameraTest, responseErrorStatusCodeNegativeTest) {
 // カメラ指定なしでの呼び出し
 TEST_F(PanasonicNetworkCameraTest, noCameraSettingTest) {
   client.movePanLeft();
+  if (HasFatalFailure()) {
+    FAIL();
+  }
+}
+
+// 解像度160x120
+TEST_F(PanasonicNetworkCameraTest, getImage160x120Test) {
+  client.setCamera("127.0.0.1", "36");
+  int length;
+  client.getImage(openrtm_network_camera::panasonic::PanasonicNetworkCamera::w160x120, openrtm_network_camera::panasonic::PanasonicNetworkCamera::Standard, &length);
   if (HasFatalFailure()) {
     FAIL();
   }
