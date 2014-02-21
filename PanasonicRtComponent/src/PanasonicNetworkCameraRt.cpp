@@ -332,12 +332,18 @@ void PanasonicNetworkCameraRt::procPtz() {
   if (false == m_ptzIn.isNew()) {
     return;
   }
-  m_ptz.data = m_ptzIn.read();
+  m_ptzIn.read();
 
   if (3 != m_ptz.data.length()) {
     RTC_WARN_STR("data from ptz InPort is invalid. TimedShortSeq must be length 3, but not.");
     return;
   }
+  std::stringstream ss;
+  for (size_t i = 0; i < m_ptz.data.length()-1; ++i) {
+    ss << m_ptz.data[i] << ",";
+  }
+  ss << m_ptz.data[m_ptz.data.length()-1];
+  RTC_INFO_STR("recieve ptz command: " + ss.str());
 
   // パン
   const int data_pan = m_ptz.data[0];
@@ -372,7 +378,11 @@ void PanasonicNetworkCameraRt::procFocus() {
   if (false == m_focusIn.isNew()) {
     return;
   }
-  m_focus.data = m_focusIn.read();
+  m_focusIn.read();
+
+  std::stringstream ss;
+  ss << m_focus.data;
+  RTC_INFO_STR("recieve focus command: " + ss.str());
 
   if (0 > m_focus.data) {
     m_camera.adjustFocus(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Near);
@@ -386,7 +396,11 @@ void PanasonicNetworkCameraRt::procBrightness() {
   if (false == m_brightnessIn.isNew()) {
     return;
   }
-  m_brightness.data = m_brightnessIn.read();
+  m_brightnessIn.read();
+
+  std::stringstream ss;
+  ss << m_brightness.data;
+  RTC_INFO_STR("recieve brightnes command: " + ss.str());
 
   if (0 > m_brightness.data) {
     m_camera.adjustBrightness(openrtm_network_camera::panasonic::PanasonicNetworkCamera::Darker);
