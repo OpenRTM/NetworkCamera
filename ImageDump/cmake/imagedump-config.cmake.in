@@ -1,0 +1,54 @@
+# ImageDump CMake config file
+#
+# This file sets the following variables:
+# ImageDump_FOUND - Always TRUE.
+# ImageDump_INCLUDE_DIRS - Directories containing the ImageDump include files.
+# ImageDump_IDL_DIRS - Directories containing the ImageDump IDL files.
+# ImageDump_LIBRARIES - Libraries needed to use ImageDump.
+# ImageDump_DEFINITIONS - Compiler flags for ImageDump.
+# ImageDump_VERSION - The version of ImageDump found.
+# ImageDump_VERSION_MAJOR - The major version of ImageDump found.
+# ImageDump_VERSION_MINOR - The minor version of ImageDump found.
+# ImageDump_VERSION_REVISION - The revision version of ImageDump found.
+# ImageDump_VERSION_CANDIDATE - The candidate version of ImageDump found.
+
+message(STATUS "Found ImageDump-@PROJECT_VERSION@")
+set(ImageDump_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(ImageDump_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(ImageDump_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(ImageDump_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(ImageDump_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(ImageDump_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(ImageDump_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(ImageDump_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(ImageDump_VERSION @PROJECT_VERSION@)
+set(ImageDump_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(ImageDump_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(ImageDump_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(ImageDump_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
