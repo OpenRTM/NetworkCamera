@@ -1,4 +1,4 @@
-// -*- C++ -*-
+ï»¿// -*- C++ -*-
 /*!
  * @file  ImageDump.cpp
  * @brief ModuleDescription
@@ -123,7 +123,7 @@ RTC::ReturnCode_t ImageDump::onExecute(RTC::UniqueId ec_id)
   if (m_imageIn.isNew()) {
     m_imageIn.read();
 
-    // æ“¾‰æ‘œƒtƒH[ƒ}ƒbƒg‚ÌŠm”F
+    // å–å¾—ç”»åƒãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®ç¢ºèª
     const std::string format(m_image.format);
     if ("RAW" == format) {
       std::cout << "RAW data format\n";
@@ -138,7 +138,7 @@ RTC::ReturnCode_t ImageDump::onExecute(RTC::UniqueId ec_id)
       return RTC::RTC_OK;
     }
 
-    // ‰æ‘œ‚ğƒtƒ@ƒCƒ‹‚Öƒ_ƒ“ƒv
+    // ç”»åƒã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã¸ãƒ€ãƒ³ãƒ—
     size_t len = m_image.pixels.length();
     if (0 < outFilename.size() && 0 < len) {
       std::basic_ofstream<unsigned char> outfile(outFilename, std::ios::out|std::ios::binary|std::ios::trunc);

@@ -1,4 +1,4 @@
-// -*- C++ -*-
+ï»¿// -*- C++ -*-
 /*!
  * @file  ptzfb_test.cpp
  * @brief ModuleDescription
@@ -128,7 +128,7 @@ RTC::ReturnCode_t ptzfb_test::onExecute(RTC::UniqueId ec_id)
     return RTC::RTC_OK;
   };
 
-  // ‹ó”’‚Å•ªŠ„
+  // ç©ºç™½ã§åˆ†å‰²
   std::vector<std::string> commands;
 
   std::istringstream iss(order);
@@ -147,13 +147,13 @@ RTC::ReturnCode_t ptzfb_test::onExecute(RTC::UniqueId ec_id)
     std::cout << "number of commands: " << commands.size() << std::endl;
   }
 
-  // p, t, z, f, b ‚É‘Î‰
+  // p, t, z, f, b ã«å¯¾å¿œ
   bool isOrdered[5] = {false, false, false, false, false};
   int commandsVal[5] = {0, 0, 0, 0, 0};
 
   for (size_t i = 0; i < commands.size(); ++i) {
     std::string c = commands.at(i);
-    // ”’l‚ª‚È‚¢‚Ì‚Í³‚µ‚¢ƒRƒ}ƒ“ƒh‚Å‚Í‚È‚¢
+    // æ•°å€¤ãŒãªã„ã®ã¯æ­£ã—ã„ã‚³ãƒãƒ³ãƒ‰ã§ã¯ãªã„
     if (1 >= c.size()) {
       std::cout << "invalid commands: " << c << std::endl;
       continue;
@@ -184,9 +184,9 @@ RTC::ReturnCode_t ptzfb_test::onExecute(RTC::UniqueId ec_id)
     std::cout << "order [" << i << "]: " << isOrdered[i] << ", val: " << commandsVal[i] << std::endl;
   }
 
-  // OutPort ‚Ö‘‚«‚İ
+  // OutPort ã¸æ›¸ãè¾¼ã¿
 
-  // ƒpƒ“Eƒ`ƒ‹ƒgEƒY[ƒ€
+  // ãƒ‘ãƒ³ãƒ»ãƒãƒ«ãƒˆãƒ»ã‚ºãƒ¼ãƒ 
   m_ptz.data.length(3);
   for (size_t i = 0; i < 3; ++i) {
     if (isOrdered[i]) {
@@ -195,7 +195,7 @@ RTC::ReturnCode_t ptzfb_test::onExecute(RTC::UniqueId ec_id)
       m_ptz.data[i] = 0;
     }
   }
-  // ƒz[ƒ€ƒ|ƒWƒVƒ‡ƒ“•œ‹A‚Í“Á•Êˆµ‚¢
+  // ãƒ›ãƒ¼ãƒ ãƒã‚¸ã‚·ãƒ§ãƒ³å¾©å¸°ã¯ç‰¹åˆ¥æ‰±ã„
   if (0 == m_ptz.data[0] && 0 == m_ptz.data[1] && 0 == m_ptz.data[2]) {
     if (isOrdered[0] && isOrdered[1] && isOrdered[2]) {
       m_ptzOut.write();
@@ -208,13 +208,13 @@ RTC::ReturnCode_t ptzfb_test::onExecute(RTC::UniqueId ec_id)
     }
   }
 
-  // ƒtƒH[ƒJƒX
+  // ãƒ•ã‚©ãƒ¼ã‚«ã‚¹
   if (isOrdered[3]) {
     m_focus.data = commandsVal[3];
     m_focusOut.write();
     std::cout << "focus command send\n";
   }
-  // –¾‚é‚³
+  // æ˜ã‚‹ã•
   if (isOrdered[4]) {
     m_brightness.data = commandsVal[4];
     m_brightnessOut.write();

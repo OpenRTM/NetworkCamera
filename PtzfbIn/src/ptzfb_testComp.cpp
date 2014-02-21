@@ -1,4 +1,4 @@
-// -*- C++ -*-
+﻿// -*- C++ -*-
 /*!
  * @file ptzfb_testComp.cpp
  * @brief Standalone component
