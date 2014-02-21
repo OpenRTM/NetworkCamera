@@ -52,7 +52,7 @@ static const char* panasonicnetworkcamerart_spec[] =
     // Constraints
     "conf.__constraints__.imageFormat", "(JPEG,RAW)",
     "conf.__constraints__.imageQuality", "1<=x<=10",
-    "conf.__constraints__.imageSize", "(192x144,320x240,640x480,1280x960,1280x1024)",
+    "conf.__constraints__.imageSize", "(160x120,192x144,320x240,640x480,1280x960,1280x1024)",
     "conf.__constraints__.whiteBalance", "(auto,indoor,fluorescent_white,fluorescent_day,outdoor,hold)",
     "conf.__constraints__.setupType", "(ceiling,desktop)",
     ""
@@ -296,7 +296,9 @@ const char* PanasonicNetworkCameraRt::getCameraImage(int* p_length) {
   using openrtm_network_camera::panasonic::PanasonicNetworkCamera;
 
   PanasonicNetworkCamera::Resolution resolution;
-  if ("192x144" == m_imageSize) {
+  if ("160x120" == m_imageSize) {
+    resolution = PanasonicNetworkCamera::w160x120;
+  } else if ("192x144" == m_imageSize) {
     resolution = PanasonicNetworkCamera::w192x144;
   } else if ("320x240" == m_imageSize) {
     resolution = PanasonicNetworkCamera::w320x240;

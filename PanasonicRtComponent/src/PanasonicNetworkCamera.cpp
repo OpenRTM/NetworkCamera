@@ -84,6 +84,9 @@ const char* PanasonicNetworkCamera::getImage(const Resolution resolution, const 
   std::string path(API_PATH);
 
   switch(resolution) {
+  case w160x120:
+    path += "160x120";
+    break;
   case w192x144:
     path += "192x144";
     break;
