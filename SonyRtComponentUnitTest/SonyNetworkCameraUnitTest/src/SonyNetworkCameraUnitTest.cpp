@@ -582,3 +582,29 @@ TEST_F(SonyNetworkCameraTest, noCameraSettingTest) {
     FAIL();
   }
 }
+
+
+// 以下、formatDigitFill0Width2関数のテスト
+
+// １桁の正の数字
+TEST(formatDigitFill0Width2Test, positiveLessThan10Test) {
+  ASSERT_EQ(std::string("02"), openrtm_network_camera::sony::formatDigitFill0Width2(2));
+}
+// 2桁の正の数字
+TEST(formatDigitFill0Width2Test, positiveMoreThanEq10Test) {
+  ASSERT_EQ(std::string("18"), openrtm_network_camera::sony::formatDigitFill0Width2(18));
+}
+// ゼロ
+TEST(formatDigitFill0Width2Test, zeroTest) {
+  ASSERT_EQ(std::string("00"), openrtm_network_camera::sony::formatDigitFill0Width2(0));
+}
+// 本関数の処理対象外
+//
+// 3桁の正の数字
+TEST(formatDigitFill0Width2Test, positiveMoreThan100Test) {
+  ASSERT_EQ(std::string("100"), openrtm_network_camera::sony::formatDigitFill0Width2(100));
+}
+// 負の数字
+TEST(formatDigitFill0Width2Test, negativeNumberTest) {
+  ASSERT_EQ(std::string("-1"), openrtm_network_camera::sony::formatDigitFill0Width2(-1));
+}
