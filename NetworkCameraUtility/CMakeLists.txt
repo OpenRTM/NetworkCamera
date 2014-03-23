@@ -21,12 +21,6 @@ endif(WIN32)
 #add_definitions(-DNETWORKCAMERAUTILITY_EXPORTS)
 
 # Boost検索
-#
-# ライブラリが見つけられない場合のヒント
-set(BOOST_ROOT       "C:/Program Files (x86)/boost/boost_1_55_0/")
-set(BOOST_INCLUDEDIR "C:/Program Files (x86)/boost/boost_1_55_0/")
-set(BOOST_LIBRARYDIR "C:/Program Files (x86)/boost/boost_1_55_0/lib32-msvc-10.0")
-#
 # リンク対象のライブラリを指定しないと、ライブラリサーチパスが設定されない
 #find_package(Boost 1.55.0 REQUIRED)
 find_package(Boost 1.55.0 REQUIRED COMPONENTS serialization system)
@@ -48,9 +42,9 @@ add_library(NetworkCameraUtility SHARED ${TARGET_SORCES})
 GENERATE_EXPORT_HEADER(NetworkCameraUtility
   BASE_NAME         NetworkCameraUtility
   EXPORT_MACRO_NAME NETWORKCAMERAUTILITY_API
-  EXPORT_FILE_NAME  ${PROJECT_SOURCE_DIR}/include/utility_dll_defs.h
+  EXPORT_FILE_NAME  ../include/utility_dll_defs.h
   STATIC_DEFINE     NetworkCameraUtility_BUILT_AS_STATIC)
 
 # ライブラリの指定
-#target_link_libraries(NetworkCameraUtility ${Boost_LIBRARIES})
+target_link_libraries(NetworkCameraUtility ${Boost_LIBRARIES})
 

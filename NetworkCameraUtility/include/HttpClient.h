@@ -6,6 +6,7 @@
 #ifndef HTTP_CLIENT_H
 #define HTTP_CLIENT_H
 
+#include <stdio.h>
 #include "utility_dll_defs.h"
 
 /*!
